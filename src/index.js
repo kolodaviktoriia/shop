@@ -1,7 +1,8 @@
 import React from 'react';
 import express from 'express';
-import { renderToString } from 'react-dom/server';
-import App from './client/App.js';
+import { renderer } from './helpers/renderer.js';
+import { matchRoutes } from "react-router-dom";
+import { routes } from './client/routes/routes.js';
 
 
 const app = express();
@@ -9,24 +10,19 @@ const app = express();
 app.use(express.static('public'));
 
 app.get('*', (req, res) => {
-  const content = renderToString(<App />);
 
-  const html = `
-   <!DOCTYPE html>
-   <html>
-     <head>
-       <meta charset="utf-8" />
-       <title>Shop</title>
-       <link rel="stylesheet" href="/main.css" />
-     </head>
-     <body>
-       <div id="root">${content}</div>
-       <script src="/bundle.js"></script>
-     </body>
-   </html>
- `;
+  const matches = matchRoutes(routes, req.path) || [];
 
-  res.send(html);
+  const promises = matches.map(({ route }) => {
+    return route.loadData
+      ? route.loadData(store).catch(() => null)
+      : null;
+  });
+
+  Promise.all(promises).then(() => {
+    const content = renderer(req);
+    res.send(content);
+  });
 })
 
 app.listen(3000, () => {

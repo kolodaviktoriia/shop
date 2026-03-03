@@ -5,6 +5,7 @@ const Header = () => {
     return (
         <header>
             <NavLink to='/'>Home</NavLink>
+            <NavLink to='/product/123213'>Product</NavLink>
         </header >
     )
 }
