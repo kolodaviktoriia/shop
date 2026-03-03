@@ -1,21 +1,23 @@
 import React from 'react';
 import express from 'express';
 import { renderToString } from 'react-dom/server';
-import Landing from './client/pages/Landing.js';
+import App from './client/App.js';
+
 
 const app = express();
 
 app.use(express.static('public'));
 
 app.get('*', (req, res) => {
-    const content = renderToString(<Landing />);
+  const content = renderToString(<App />);
 
-    const html = `
+  const html = `
    <!DOCTYPE html>
    <html>
      <head>
        <meta charset="utf-8" />
        <title>Shop</title>
+       <link rel="stylesheet" href="/main.css" />
      </head>
      <body>
        <div id="root">${content}</div>
@@ -24,9 +26,9 @@ app.get('*', (req, res) => {
    </html>
  `;
 
-    res.send(html);
+  res.send(html);
 })
 
 app.listen(3000, () => {
-    console.log('Listening on port 3000');
+  console.log('Listening on port 3000');
 })
