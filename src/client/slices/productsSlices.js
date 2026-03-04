@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'; // ✅ make sure this is installed and latest
+import { createSlice } from '@reduxjs/toolkit';
 
 import { getCategoriesApi, getProductsApi } from '../api/productsApi.js';
 

@@ -5,11 +5,14 @@ import { renderer } from './helpers/renderer.js';
 import { matchRoutes } from "react-router-dom";
 import { routes } from './client/routes/routes.js';
 import { createStore } from './helpers/createStore.js';
-
+import apiRoutes from './server/routes/apiRoutes.js';
 
 const app = express();
 
 app.use(express.static('public'));
+app.use(express.json());
+
+app.use('/api', apiRoutes);
 
 app.get('*', (req, res) => {
   const store = createStore();

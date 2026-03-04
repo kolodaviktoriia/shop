@@ -7,8 +7,9 @@ const Landing = () => {
     const { products } = useSelector(state => state.products)
     return (
         <div className={styles.landing}>
-            {products?.map(({ title, imageUrl }) =>
-                <ProductItem title={title} imageUrl={imageUrl} />)}
+            {products?.map(({ id, title, imageUrl }) =>
+                (<ProductItem key={id} title={title} imageUrl={imageUrl} />)
+            )}
         </div>
     )
 }

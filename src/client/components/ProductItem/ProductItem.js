@@ -5,7 +5,9 @@ import * as styles from './ProductItem.module.scss';
 const ProductItem = ({ title, imageUrl }) => {
     return (
         <div className={styles.productItem}>
-            <img src={imageUrl} />
+            <div className={styles.wrapper}>
+                <img src={imageUrl} />
+            </div >
             <p>{title}</p>
         </div >
     )

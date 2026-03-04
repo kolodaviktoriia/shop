@@ -1,16 +1,12 @@
-import { supabase } from "./supabaseClient.js";
 
+const baseUrl = 'http://localhost:3000';
 
 export const getProductsApi = async () => {
-    const { data, error } = await supabase.from('products').select('*');
-    if (error) throw error;
-    return data;
+    const res = await fetch(baseUrl + '/api/products');
+    return res.json();
 };
 
 export const getCategoriesApi = async () => {
-    const { data, error } = await supabase
-        .from('categories')
-        .select('*')
-    if (error) throw error;
-    return data;
+    const res = await fetch(baseUrl + '/api/categories');
+    return res.json();
 };

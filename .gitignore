@@ -4,6 +4,7 @@
 # Build outputs
 /build/
 /public/bundle.js
+/public/main.css
 
 # Logs
 npm-debug.log*
