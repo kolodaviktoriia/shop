@@ -5,14 +5,14 @@ import baseConfig from './webpack.base.js';
 
 export default merge(baseConfig, {
     target: 'node',
-    entry: './src/index.js',       // your server entry
+    entry: './src/index.js',
     output: {
-        filename: 'bundle.mjs',      // ESM output
+        filename: 'bundle.mjs',
         path: path.resolve('./build'),
-        library: { type: 'module' }, // ✅ ESM
+        library: { type: 'module' },
     },
     externals: [webpackNodeExternals({ importType: 'module' })],
-    experiments: { outputModule: true }, // ✅ allows library type module
+    experiments: { outputModule: true },
     module: {
         rules: [
             {
@@ -20,7 +20,7 @@ export default merge(baseConfig, {
                 use: [
                     {
                         loader: 'css-loader',
-                        options: { modules: { exportOnlyLocals: true } } // SSR: class names only
+                        options: { modules: { exportOnlyLocals: true } }
                     },
                     'sass-loader'
                 ]

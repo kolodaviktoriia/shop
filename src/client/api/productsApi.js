@@ -1,5 +1,7 @@
-
-const baseUrl = 'http://localhost:3000';
+const baseUrl =
+    typeof window !== 'undefined'
+        ? ''
+        : process.env.BASE_URL || 'http://localhost:3000';
 
 export const getProductsApi = async () => {
     const res = await fetch(baseUrl + '/api/products');
