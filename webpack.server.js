@@ -1,14 +1,20 @@
 import path from 'path';
+import { fileURLToPath } from 'url';
 import { merge } from 'webpack-merge';
 import webpackNodeExternals from 'webpack-node-externals';
 import baseConfig from './webpack.base.js';
 
+// ESM replacement for __dirname
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 export default merge(baseConfig, {
     target: 'node',
+    mode: 'development',
     entry: './src/index.js',
     output: {
         filename: 'bundle.mjs',
-        path: path.resolve('./build'),
+        path: path.resolve(__dirname, 'build'),
         library: { type: 'module' },
     },
     externals: [webpackNodeExternals({ importType: 'module' })],
@@ -20,10 +26,18 @@ export default merge(baseConfig, {
                 use: [
                     {
                         loader: 'css-loader',
-                        options: { modules: { exportOnlyLocals: true } }
+                        options: { modules: { exportOnlyLocals: true } },
                     },
-                    'sass-loader'
-                ]
+                    {
+                        loader: 'sass-loader',
+                        options: {
+                            additionalData: `@use "/src/client/styles/variables.scss" as *; `,
+                            sassOptions: {
+                                includePaths: [path.resolve(__dirname, 'src/client/styles')],
+                            },
+                        },
+                    },
+                ],
             },
             {
                 test: /\.s[ac]ss$/i,
@@ -31,10 +45,18 @@ export default merge(baseConfig, {
                 use: [
                     {
                         loader: 'css-loader',
-                        options: { exportOnlyLocals: true }
+                        options: { exportOnlyLocals: true },
                     },
-                    'sass-loader'
-                ]
+                    {
+                        loader: 'sass-loader',
+                        options: {
+                            additionalData: `@use "/src/client/styles/variables.scss" as *; `,
+                            sassOptions: {
+                                includePaths: [path.resolve(__dirname, 'src/client/styles')],
+                            },
+                        },
+                    },
+                ],
             },
             {
                 test: /\.(js|jsx)$/,
@@ -42,12 +64,11 @@ export default merge(baseConfig, {
                 use: {
                     loader: 'babel-loader',
                     options: {
-                        presets: ['@babel/preset-env', '@babel/preset-react']
-                    }
-                }
-            }
-        ]
+                        presets: ['@babel/preset-env', '@babel/preset-react'],
+                    },
+                },
+            },
+        ],
     },
-    resolve: { extensions: ['.js', '.jsx'] },
-    mode: 'development',
+    resolve: { extensions: ['.js', '.jsx', '.scss', '.sass'] },
 });
