@@ -8,10 +8,12 @@ $accent-pink: #e0718b;
 $grey: #f5f5f6;
 
 $text-soft-grey: #605858;
-
+$text-button: #4e3844;
 $text-color: #221d1d;
 $text-font-public-sans: "Public Sans", sans-serif;
 $text-font-libre-sans: "Libre Franklin", sans-serif;
+$header-height: 20rem;
+$border-radius: 3px;
 
 @mixin link {
     font-family: $text-font-public-sans;
@@ -21,4 +23,24 @@ $text-font-libre-sans: "Libre Franklin", sans-serif;
     letter-spacing: 0.16em;
     text-transform: uppercase;
     color: $text-color;
+    cursor: pointer;
+}
+
+@mixin primary-button {
+    color: $text-button;
+    background-color: $dark-pink;
+    border-radius: $border-radius;
+    cursor: pointer;
+    font-weight: 600;
+    font-family: $text-font-public-sans;
+    font-size: 1.6rem;
+    letter-spacing: 0.08em;
+    padding: 1.6rem 1.8rem;
+    line-height: 20px;
+    text-transform: uppercase;
+    text-align: center;
+
+    &:hover {
+        opacity: 0.8;
+    }
 }

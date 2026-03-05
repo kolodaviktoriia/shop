@@ -1,0 +1,48 @@
+.heroSection {
+    background-color: $pink;
+    height: calc(100vh - $header-height);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .heroWrapper {
+        display: grid;
+        gap: 3rem;
+        grid-template-columns: 1fr 2.5fr;
+
+        .textWrapper {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 1.4rem;
+
+            h1 {
+                font-family: $text-font-libre-sans;
+                font-weight: 400;
+                font-size: 3rem;
+                text-transform: uppercase;
+            }
+
+            h2 {
+                font-family: $text-font-public-sans;
+                font-size: 1.6rem;
+                font-weight: 400;
+                line-height: 20px;
+                letter-spacing: 0.1em;
+                color: $text-soft-grey;
+            }
+        }
+
+        .imgWrapper {
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+            }
+        }
+    }
+}
