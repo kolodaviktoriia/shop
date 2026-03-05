@@ -2,13 +2,16 @@ import React from 'react';
 
 import * as styles from './ProductItem.module.scss';
 
-const ProductItem = ({ title, imageUrl }) => {
+const ProductItem = ({ title, imageUrl, price }) => {
     return (
         <div className={styles.productItem}>
             <div className={styles.wrapper}>
                 <img src={imageUrl} />
             </div >
-            <p>{title}</p>
+            <h3 className={styles.title}>{title}</h3>
+            <span className={styles.price}>
+                {price}
+            </span>
         </div >
     )
 }
