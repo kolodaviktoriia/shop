@@ -6,7 +6,7 @@ const InputField = ({ label, name, icon, ...props }) => {
     const inputRender = () => (
         <div className={styles.inputGroup}>
             <input name={name} placeholder=" " id={name} {...props} />
-            <label for={name} >{label}</label>
+            <label htmlFor={name} >{label}</label>
         </div>
     )
     return (icon ?

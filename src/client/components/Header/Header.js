@@ -28,7 +28,8 @@ const Header = () => {
             <nav className={styles.nav}>
                 <WidthWrapper className={styles.navWrapper}>
                     <NavLink to='/'>Home</NavLink>
-                    {categories.map(category => <NavLink to={`/ ${category.name}`} key={category.id}>{category.name}</NavLink>)}
+                    <NavLink to='/products/all'>All</NavLink>
+                    {categories.map(category => <NavLink to={`/products/${category.name}`} key={category.id}>{category.name}</NavLink>)}
                 </WidthWrapper>
             </nav>
 

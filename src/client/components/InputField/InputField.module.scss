@@ -2,6 +2,7 @@
     position: relative;
     background-color: $soft-pink;
     transition: 0.5s ease all;
+    border-radius: $border-radius;
 
     input {
         height: 6rem;
@@ -53,4 +54,6 @@
     gap: 1rem;
     background-color: $soft-pink;
     padding-left: 1rem;
+    border-radius: $border-radius;
+
 }
