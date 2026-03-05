@@ -3,6 +3,10 @@ import App from "../App.js";
 import Landing from "../pages/Landing/Landing.js";
 import Product from '../pages/Product/Product.js';
 import { fetchCategories, fetchProducts } from '../slices/productsSlices.js';
+import Products from '../pages/Products/Products.js';
+
+
+
 
 export const routes = [{
     element: <App />,
@@ -20,8 +24,11 @@ export const routes = [{
         {
             element: <Product />,
             path: '/product/:id',
-            exact: true
-        }
+        },
+        {
+            element: <Products />,
+            path: '/products/:id',
+        },
     ]
 
 }]
