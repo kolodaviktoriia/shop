@@ -27,7 +27,8 @@ html {
 }
 
 body {
-    color: black;
+    color: $text-color;
+    font-size: 1.2rem;
     line-height: 1.5;
     overflow-x: hidden;
 }

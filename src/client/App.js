@@ -1,6 +1,6 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import Header from "./components/Header.js";
+import Header from "./components/Header/Header.js";
 import * as styles from './App.module.scss';
 
 const App = () => {

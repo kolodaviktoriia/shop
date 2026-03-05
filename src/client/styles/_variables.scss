@@ -1,3 +1,24 @@
-$primary-pink: #ff8ecf;
-$soft-pink: #ffd6ec;
-$accent-peach: #ffb7a5;
+$primary-pink: #f9e2e8;
+$pink: #fff3f3;
+$soft-pink: #f9f8f9;
+$dark-pink: #F4C6CF;
+
+$accent-pink: #e0718b;
+
+$grey: #f5f5f6;
+
+$text-soft-grey: #605858;
+
+$text-color: #221d1d;
+$text-font-public-sans: "Public Sans", sans-serif;
+$text-font-libre-sans: "Libre Franklin", sans-serif;
+
+@mixin link {
+    font-family: $text-font-public-sans;
+    font-size: 1.2rem;
+    font-weight: 400;
+    line-height: 20px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: $text-color;
+}

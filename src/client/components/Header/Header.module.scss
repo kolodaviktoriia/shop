@@ -1,0 +1,52 @@
+.header {
+
+    .bar {
+        min-height: 2rem;
+    }
+
+    .infoBar {
+        height: 3rem;
+        background-color: $primary-pink;
+    }
+
+    .barWrapper {
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        text-align: center;
+
+        h2 {
+            font-family: $text-font-libre-sans;
+            font-weight: 400;
+            font-size: 4rem;
+            text-transform: uppercase;
+        }
+
+        .userBar {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 1rem;
+        }
+    }
+
+    .nav {
+        background-color: $soft-pink;
+
+        .navWrapper {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+        }
+    }
+
+    .icon {
+        stroke: $text-color;
+        height: 2.4rem;
+    }
+}
