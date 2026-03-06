@@ -2,7 +2,6 @@ import React from 'react';
 import * as styles from './Categories.module.scss';
 import { useSelector } from 'react-redux';
 import WidthWrapper from '../WidthWrapper/WidthWrapper.js';
-import ButtonLink from '../ButtonLink/ButtonLink.js';
 import { useNavigate } from 'react-router-dom';
 
 const Categories = () => {
@@ -11,6 +10,7 @@ const Categories = () => {
     const handleClick = (category) => {
         navigate(`/products/${category}`);
     }
+
     return (
         <WidthWrapper className={styles.categories}>
             {categories?.map(({ name, description, imageUrl, id }) =>
