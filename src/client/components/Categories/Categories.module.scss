@@ -1,0 +1,47 @@
+.categories {
+    display: grid;
+    cursor: pointer;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 2rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+
+    .category {
+        background-color: $primary-pink;
+
+        .textWrapper {
+            padding: 1rem;
+
+            .title {
+                @include main-text;
+                font-size: 2rem;
+            }
+
+            .description {
+                @include sub-text;
+                font-size: 1.4rem;
+                line-height: 20px;
+            }
+        }
+
+
+        img {
+            width: 100%;
+            aspect-ratio: 5/4;
+            object-fit: cover;
+        }
+
+        &:nth-child(1),
+        &:nth-child(2),
+        &:nth-child(3) {
+            grid-column: span 2;
+        }
+
+
+        &:nth-child(4),
+        &:nth-child(5) {
+            grid-column: span 3;
+        }
+
+    }
+}
