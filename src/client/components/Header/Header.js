@@ -4,9 +4,8 @@ import WidthWrapper from '../WidthWrapper/WidthWrapper.js';
 import { useSelector } from 'react-redux';
 import { MagnifyingGlassIcon, ShoppingBagIcon, UserIcon, HeartIcon } from '@heroicons/react/24/outline';
 import InputField from '../InputField/InputField.js';
-
+import Logo from '../Logo/Logo.js';
 import * as styles from './Header.module.scss';
-import { Link } from 'react-router-dom';
 
 const Header = () => {
     const { categories, collections } = useSelector(store => store.products);
@@ -20,7 +19,7 @@ const Header = () => {
             <div className={styles.infoBar}></div>
             <WidthWrapper className={styles.barWrapper}>
                 <InputField label='Search' value={search} name='search' onChange={handleSearch} icon={<MagnifyingGlassIcon className={styles.icon} />} />
-                <Link to='/' className={styles.logo}>Blush & Blossom</Link>
+                <Logo />
                 <div className={styles.userBar}>
                     <NavLinkCustom to='/user'><UserIcon className={styles.icon} /></NavLinkCustom>
                     <NavLinkCustom to='/favorites'><HeartIcon className={styles.icon} /></NavLinkCustom>

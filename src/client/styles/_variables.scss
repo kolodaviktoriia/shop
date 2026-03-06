@@ -15,6 +15,7 @@ $text-font-public-sans: "Public Sans", sans-serif;
 $text-font-libre-sans: "Libre Franklin", sans-serif;
 $header-height: 20rem;
 $border-radius: 3px;
+$max-width: 140rem;
 
 @mixin link {
     font-family: $text-font-public-sans;

@@ -1,0 +1,27 @@
+.link {
+    @include link;
+    color: $text-soft-grey;
+    text-transform: none;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1.4rem;
+
+
+    &:hover {
+        opacity: 0.8;
+    }
+}
+
+.iconLink {
+    @include link;
+    color: $text-color;
+    text-transform: none;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 2.8rem;
+
+
+    &:hover {
+        opacity: 0.8;
+    }
+}

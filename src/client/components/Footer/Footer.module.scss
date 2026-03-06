@@ -1,0 +1,59 @@
+.footer {
+    background-color: $grey;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .navGrid {
+        padding: 4rem 0;
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr) auto;
+        gap: 2rem;
+
+        .nav {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            justify-content: start;
+            align-items: flex-start;
+
+            .title {
+                @include main-text;
+                font-size: 1.6rem;
+            }
+        }
+
+        .socialsWrapper {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            flex-direction: column;
+
+            .logo {
+                font-size: 2.8rem;
+            }
+
+            .socials {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 0.5rem;
+            }
+        }
+
+    }
+
+    .copyrightWrapper {
+        padding: 2rem 0;
+        background-color: white;
+
+        .copyright {
+            text-align: center;
+            @include sub-text;
+        }
+    }
+}
