@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
-import NavLink from '../NavLink/NavLink.js';
-import * as styles from './Header.module.scss';
+import NavLinkCustom from '../NavLinkCustom/NavLinkCustom.js';
 import WidthWrapper from '../WidthWrapper/WidthWrapper.js';
 import { useSelector } from 'react-redux';
 import { MagnifyingGlassIcon, ShoppingBagIcon, UserIcon, HeartIcon } from '@heroicons/react/24/outline';
 import InputField from '../InputField/InputField.js';
 
+import * as styles from './Header.module.scss';
+
 const Header = () => {
-    const { categories } = useSelector(store => store.products);
+    const { categories, collections } = useSelector(store => store.products);
     const [search, setSearch] = useState('');
     const handleSearch = (e) => {
         e.preventDefault();
@@ -20,16 +21,17 @@ const Header = () => {
                 <InputField label='Search' value={search} name='search' onChange={handleSearch} icon={<MagnifyingGlassIcon className={styles.icon} />} />
                 <h2 className={styles.logo}>Blush & Blossom</h2>
                 <div className={styles.userBar}>
-                    <NavLink to='/user'><UserIcon className={styles.icon} /></NavLink>
-                    <NavLink to='/favorites'><HeartIcon className={styles.icon} /></NavLink>
-                    <NavLink to='/cart'><ShoppingBagIcon className={styles.icon} /></NavLink>
+                    <NavLinkCustom to='/user'><UserIcon className={styles.icon} /></NavLinkCustom>
+                    <NavLinkCustom to='/favorites'><HeartIcon className={styles.icon} /></NavLinkCustom>
+                    <NavLinkCustom to='/cart'><ShoppingBagIcon className={styles.icon} /></NavLinkCustom>
                 </div>
             </WidthWrapper>
             <nav className={styles.nav}>
                 <WidthWrapper className={styles.navWrapper}>
-                    <NavLink to='/'>Home</NavLink>
-                    <NavLink to='/products/all'>All</NavLink>
-                    {categories.map(category => <NavLink to={`/products/${category.name}`} key={category.id}>{category.name}</NavLink>)}
+                    <NavLinkCustom to='/'>Home</NavLinkCustom>
+                    <NavLinkCustom to='/products/all'>All</NavLinkCustom>
+                    {categories.map(category => <NavLinkCustom to={`/products/${category.name}`} key={category.id}>{category.name}</NavLinkCustom>)}
+                    {collections.map(category => <NavLinkCustom to={`/products/${category.name}`} key={category.id}>{category.name}</NavLinkCustom>)}
                 </WidthWrapper>
             </nav>
 
