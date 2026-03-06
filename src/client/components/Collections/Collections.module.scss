@@ -1,0 +1,56 @@
+.collections {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+    cursor: pointer;
+
+
+    .collection {
+        background-color: $white-pink;
+        display: grid;
+        grid-template-columns: 1.35fr 1fr;
+
+
+
+        img {
+            margin: 4rem 0;
+            width: 100%;
+        }
+
+        .textWrapper {
+            margin: auto;
+            max-width: 40rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+
+            .title {
+                @include main-text;
+                font-size: 4rem;
+            }
+
+            .description {
+                @include sub-text;
+                font-size: 1.6rem;
+                line-height: 24px;
+            }
+        }
+
+        &:nth-child(even) {
+            grid-template-columns: 1fr 1.35fr;
+
+            .textWrapper {
+                order: 1;
+            }
+
+            img {
+                order: 2;
+            }
+        }
+    }
+
+
+
+}
