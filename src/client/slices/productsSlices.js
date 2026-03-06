@@ -1,12 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { getCategoriesApi, getProductsApi } from '../api/productsApi.js';
+import { getCategoriesApi, getCollectionsApi, getProductsApi } from '../api/productsApi.js';
 
 const productsSlice = createSlice({
     name: 'products',
     initialState: {
         categories: [],
         products: [],
+        collections: []
     },
     reducers: {
         setCategories(state, action) {
@@ -14,6 +15,9 @@ const productsSlice = createSlice({
         },
         setProducts(state, action) {
             state.products = action.payload;
+        },
+        setCollections(state, action) {
+            state.collections = action.payload;
         },
     },
 });
@@ -29,4 +33,9 @@ export const fetchProducts = () => async (dispatch) => {
 export const fetchCategories = () => async (dispatch) => {
     const data = await getCategoriesApi();
     dispatch(productsSlice.actions.setCategories(data));
+};
+
+export const fetchCollections = () => async (dispatch) => {
+    const data = await getCollectionsApi();
+    dispatch(productsSlice.actions.setCollections(data));
 };

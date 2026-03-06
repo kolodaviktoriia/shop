@@ -14,3 +14,11 @@ export const getCategoriesApi = async () => {
     if (error) throw error;
     return data;
 };
+
+export const getCollectionsApi = async () => {
+    const { data, error } = await supabase
+        .from('collections')
+        .select('*')
+    if (error) throw error;
+    return data;
+};

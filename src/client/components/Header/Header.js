@@ -31,7 +31,7 @@ const Header = () => {
                     <NavLinkCustom to='/'>Home</NavLinkCustom>
                     <NavLinkCustom to='/products/all'>All</NavLinkCustom>
                     {categories.map(category => <NavLinkCustom to={`/products/${category.name}`} key={category.id}>{category.name}</NavLinkCustom>)}
-                    {collections.map(category => <NavLinkCustom to={`/products/${category.name}`} key={category.id}>{category.name}</NavLinkCustom>)}
+                    {collections.map(collection => <NavLinkCustom to={`/collection/${collection.name}`} key={collection.id}>{collection.name}</NavLinkCustom>)}
                 </WidthWrapper>
             </nav>
 

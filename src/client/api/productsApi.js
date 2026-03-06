@@ -12,3 +12,8 @@ export const getCategoriesApi = async () => {
     const res = await fetch(baseUrl + '/api/categories');
     return res.json();
 };
+
+export const getCollectionsApi = async () => {
+    const res = await fetch(baseUrl + '/api/collections');
+    return res.json();
+};
