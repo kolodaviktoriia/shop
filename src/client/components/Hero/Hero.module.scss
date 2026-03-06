@@ -17,19 +17,14 @@
             gap: 1.4rem;
 
             h1 {
-                font-family: $text-font-libre-sans;
-                font-weight: 400;
+                @include main-text;
                 font-size: 3rem;
-                text-transform: uppercase;
             }
 
             h2 {
-                font-family: $text-font-public-sans;
+                @include sub-text;
                 font-size: 1.6rem;
-                font-weight: 400;
                 line-height: 20px;
-                letter-spacing: 0.1em;
-                color: $text-soft-grey;
             }
         }
 

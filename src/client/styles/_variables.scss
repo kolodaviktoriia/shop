@@ -44,3 +44,16 @@ $border-radius: 3px;
         opacity: 0.8;
     }
 }
+
+@mixin sub-text {
+    font-family: $text-font-public-sans;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    color: $text-soft-grey;
+}
+
+@mixin main-text {
+    font-family: $text-font-libre-sans;
+    font-weight: 400;
+    text-transform: uppercase;
+}
