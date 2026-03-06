@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import NavLink from '../NavLink/NavLink.js';
 import * as styles from './InputField.module.scss';
 
 const InputField = ({ label, name, icon, ...props }) => {
