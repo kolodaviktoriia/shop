@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-
 import { getCategoriesApi, getCollectionsApi, getProductsApi } from '../api/productsApi.js';
 
 const productsSlice = createSlice({
@@ -25,8 +24,8 @@ const productsSlice = createSlice({
 export const productsReducer = productsSlice.reducer;
 
 
-export const fetchProducts = () => async (dispatch) => {
-    const data = await getProductsApi();
+export const fetchProducts = (filter) => async (dispatch) => {
+    const data = await getProductsApi(filter);
     dispatch(productsSlice.actions.setProducts(data));
 };
 

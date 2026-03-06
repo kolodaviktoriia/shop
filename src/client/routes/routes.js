@@ -6,11 +6,11 @@ import { fetchCategories, fetchCollections, fetchProducts } from '../slices/prod
 import Products from '../pages/Products/Products.js';
 import Collection from '../pages/Collection/Collection.js';
 
+
 export const routes = [{
     element: <App />,
     path: '/',
     loadData: (store) => Promise.all([
-        store.dispatch(fetchProducts()),
         store.dispatch(fetchCategories()),
         store.dispatch(fetchCollections()),
     ]),
@@ -20,17 +20,20 @@ export const routes = [{
             path: '/',
             exact: true
         },
+
         {
             element: <Product />,
             path: '/product/:id',
         },
+
         {
             element: <Products />,
-            path: '/products/:id',
+            path: '/products/:id'
         },
         {
             element: <Collection />,
             path: '/collection/:id',
+
         },
     ]
 

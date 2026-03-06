@@ -1,12 +1,13 @@
 import express from 'express';
 import { getCategoriesApi, getCollectionsApi, getProductsApi } from '../api/productsApi.js';
+import { filter } from 'compression';
 
 const router = express.Router();
 
 
 router.get('/products', async (req, res) => {
     try {
-        const data = await getProductsApi();
+        const data = await getProductsApi(req.query);
         res.json(data);
     } catch (error) {
         res.status(500).json({ error: error.message });

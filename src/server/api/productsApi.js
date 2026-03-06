@@ -1,9 +1,27 @@
 import { supabase } from "./supabaseClient.js";
 
 
-export const getProductsApi = async () => {
-    const { data, error } = await supabase.from('products').select('*');
+export const getProductsApi = async (filter = {}) => {
+    const { category, collection, search } = filter;
+
+    let query = supabase
+        .from('products')
+        .select(
+            `
+      *,
+      categories(name),
+      collections(name)
+    `,
+            { count: 'exact' }
+        );
+
+    if (category) query = query.eq('categoryId', category);
+    if (collection) query = query.eq('collectionId', collection);
+    if (search) query = query.ilike('name', `%${search}%`);
+
+    const { data, error } = await query;
     if (error) throw error;
+
     return data;
 };
 
