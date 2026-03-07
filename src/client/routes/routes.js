@@ -7,6 +7,7 @@ import Products from '../pages/Products/Products.js';
 import Collection from '../pages/Collection/Collection.js';
 import Search from '../pages/Search/Search.js';
 import Cart from '../pages/Cart/Cart.js';
+import Login from '../pages/Login/Login.js';
 
 
 export const routes = [{
@@ -46,6 +47,11 @@ export const routes = [{
         {
             element: <Cart />,
             path: '/cart',
+
+        },
+        {
+            element: <Login />,
+            path: '/login',
 
         },
     ]

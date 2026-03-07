@@ -47,6 +47,15 @@
     }
 }
 
+.error {
+    margin-top: 2rem;
+    font-family: $text-font-public-sans;
+    color: $accent-pink;
+    font-size: 1.2rem;
+    pointer-events: none;
+    transition: 0.3s ease all;
+}
+
 .inputWrapper {
     display: flex;
     align-items: center;
