@@ -2,7 +2,7 @@ import React from 'react';
 import App from "../App.js";
 import Landing from "../pages/Landing/Landing.js";
 import Product from '../pages/Product/Product.js';
-import { fetchCategories, fetchCollections } from '../slices/productsSlices.js';
+import { fetchCategories, fetchCollections, fetchProduct } from '../slices/productsSlices.js';
 import Products from '../pages/Products/Products.js';
 import Collection from '../pages/Collection/Collection.js';
 import Search from '../pages/Search/Search.js';
@@ -25,8 +25,9 @@ export const routes = [{
         {
             element: <Product />,
             path: '/product/:id',
-        },
+            loadData: (store, params) => store.dispatch(fetchProduct(params.id))
 
+        },
         {
             element: <Products />,
             path: '/products/:id'

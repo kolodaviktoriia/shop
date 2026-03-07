@@ -25,6 +25,22 @@ export const getProductsApi = async (filter = {}) => {
     return data;
 };
 
+export const getProductApi = async (id) => {
+    const { data, error } = await supabase
+        .from('products')
+        .select(
+            `
+      *,
+      categories(name),
+      collections(name)
+    `)
+        .eq('id', id)
+        .single();
+
+    if (error) throw error;
+    return data;
+};
+
 export const getCategoriesApi = async () => {
     const { data, error } = await supabase
         .from('categories')

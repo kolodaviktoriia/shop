@@ -1,9 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getCategoriesApi, getCollectionsApi, getProductsApi } from '../api/productsApi.js';
+import { getCategoriesApi, getCollectionsApi, getProductApi, getProductsApi } from '../api/productsApi.js';
 
 const productsSlice = createSlice({
     name: 'products',
     initialState: {
+        product: undefined,
         categories: [],
         products: [],
         collections: []
@@ -15,26 +16,39 @@ const productsSlice = createSlice({
         setProducts(state, action) {
             state.products = action.payload;
         },
+        setProduct(state, action) {
+            state.product = action.payload;
+        },
+        clearProduct(state) {
+            state.product = undefined;
+        },
         setCollections(state, action) {
             state.collections = action.payload;
         },
     },
 });
 
+export const { clearProduct, setProducts, setProduct, setCategories, setCollections } = productsSlice.actions;
+
 export const productsReducer = productsSlice.reducer;
 
 
 export const fetchProducts = (filter) => async (dispatch) => {
     const data = await getProductsApi(filter);
-    dispatch(productsSlice.actions.setProducts(data));
+    dispatch(setProducts(data));
+};
+
+export const fetchProduct = (id) => async (dispatch) => {
+    const data = await getProductApi(id);
+    dispatch(setProduct(data));
 };
 
 export const fetchCategories = () => async (dispatch) => {
     const data = await getCategoriesApi();
-    dispatch(productsSlice.actions.setCategories(data));
+    dispatch(setCategories(data));
 };
 
 export const fetchCollections = () => async (dispatch) => {
     const data = await getCollectionsApi();
-    dispatch(productsSlice.actions.setCollections(data));
+    dispatch(setCollections(data));
 };

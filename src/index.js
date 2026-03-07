@@ -18,9 +18,9 @@ app.get('*', (req, res) => {
   const store = createStore();
   const matches = matchRoutes(routes, req.path) || [];
 
-  const promises = matches.map(({ route }) => {
+  const promises = matches.map(({ route, params }) => {
     return route.loadData
-      ? route.loadData(store).catch(() => null)
+      ? route.loadData(store, params).catch(() => null)
       : null;
   });
 

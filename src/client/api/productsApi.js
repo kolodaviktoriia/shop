@@ -10,6 +10,11 @@ export const getProductsApi = async (filter) => {
     return res.data;
 };
 
+export const getProductApi = async (id) => {
+    const res = await axios.get(baseUrl + `/api/product/${id}`);
+    return res.data;
+};
+
 export const getCategoriesApi = async () => {
     const res = await axios.get(baseUrl + '/api/categories');
     return res.data;
