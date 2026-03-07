@@ -1,53 +1,46 @@
-import React, { useState } from 'react';
-import WidthWrapper from '../WidthWrapper/WidthWrapper.js';
+import React from 'react';
 import { useSelector } from 'react-redux';
-
-import * as styles from './Footer.module.scss';
+import WidthWrapper from '../WidthWrapper/WidthWrapper.js';
 import LinkSecondary from '../LinkSecondary/LinkSecondary.js';
 import Logo from '../Logo/Logo.js';
 
-const footerData = {
-    brand: {
-        name: "Blush & Bloom",
-        description:
-            "Cute cosmetics inspired by nature. Discover skincare, makeup, and beauty treats made to help your natural glow shine.",
-    },
+import * as styles from './Footer.module.scss';
 
-    navigation: {
-        shop: [
-        ],
-        collections: [],
-        help: [
-            { label: "Contact Us", link: "/contact" },
-            { label: "Shipping & Delivery", link: "/shipping" },
-            { label: "Returns", link: "/returns" },
-            { label: "FAQ", link: "/faq" },
-        ],
 
-        company: [
-            { label: "About Us", link: "/about" },
-            { label: "Our Ingredients", link: "/ingredients" },
-            { label: "Sustainability", link: "/sustainability" },
-            { label: "Privacy Policy", link: "/privacy" },
-            { label: "Terms of Service", link: "/terms" },
-        ],
-    }
-    ,
-    copyright: "© 2026 Blush & Bloom. All rights reserved.",
-};
-const capitalize = (word) => word.substring(0, 1).toUpperCase() + word.substring(1)
+const navigation = {
+    shop: [
+    ],
+    collections: [],
+    help: [
+        { label: "Contact Us", link: "/contact" },
+        { label: "Shipping & Delivery", link: "/shipping" },
+        { label: "Returns", link: "/returns" },
+        { label: "FAQ", link: "/faq" },
+    ],
+
+    company: [
+        { label: "About Us", link: "/about" },
+        { label: "Our Ingredients", link: "/ingredients" },
+        { label: "Sustainability", link: "/sustainability" },
+        { label: "Privacy Policy", link: "/privacy" },
+        { label: "Terms of Service", link: "/terms" },
+    ],
+}
+
+const capitalize = (word) => word.substring(0, 1).toUpperCase() + word.substring(1);
+
 const Footer = () => {
     const { categories, collections } = useSelector(store => store.products);
-    footerData.navigation.shop = categories.map(category => ({
+    navigation.shop = categories.map(category => ({
         label: capitalize(category.name), link: `/${category.name}`
     }))
-    footerData.navigation.collections = collections.map(collection => ({
+    navigation.collections = collections.map(collection => ({
         label: capitalize(collection.name), link: `/ ${collection.name}`
     }))
     return (
         <footer className={styles.footer}>
             <WidthWrapper className={styles.navGrid}>
-                {Object.entries(footerData.navigation).map(([key, nav]) =>
+                {Object.entries(navigation).map(([key, nav]) =>
                     <div key={key} className={styles.nav}>
                         <h3 className={styles.title}>
                             {key}
@@ -80,7 +73,7 @@ const Footer = () => {
             <div className={styles.copyrightWrapper}>
                 <WidthWrapper>
                     <p className={styles.copyright}>
-                        {footerData.copyright}
+                        © 2026 Blush & Bloom. All rights reserved.
                     </p></WidthWrapper>
             </div>
         </footer >
