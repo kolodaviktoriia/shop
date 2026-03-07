@@ -46,36 +46,34 @@ const Footer = () => {
     }))
     return (
         <footer className={styles.footer}>
-            <WidthWrapper>
-                <div className={styles.infoBar}></div>
-                <div className={styles.navGrid}>
-                    {Object.entries(footerData.navigation).map(([key, nav]) =>
-                        <div key={key} className={styles.nav}>
-                            <h3 className={styles.title}>
-                                {key}
-                            </h3>
-                            {nav.map(({ label, link }) => <LinkSecondary to={link} key={link} >{label}</LinkSecondary>)}
-                        </div>
-                    )}
-                    <div className={styles.socialsWrapper}>
-                        <Logo className={styles.logo} />
-                        <div className={styles.socials}>
-                            <LinkSecondary to='https://tiktok.com' isIcon>
-                                <ion-icon name="logo-tiktok"></ion-icon>
-                            </LinkSecondary>
-                            <LinkSecondary to='https://instagram.com' isIcon>
-                                <ion-icon name="logo-instagram"></ion-icon>
-                            </LinkSecondary>
-                            <LinkSecondary to='https://pinterest.com' isIcon>
-                                <ion-icon name="logo-pinterest"></ion-icon>
-                            </LinkSecondary>
-                            <LinkSecondary to='https://facebook.com' isIcon>
-                                <ion-icon name="logo-facebook"></ion-icon>
-                            </LinkSecondary>
-                            <LinkSecondary to='https://linkedin.com' isIcon>     <ion-icon name="logo-linkedin"></ion-icon>
-                            </LinkSecondary>
+            <WidthWrapper className={styles.navGrid}>
+                {Object.entries(footerData.navigation).map(([key, nav]) =>
+                    <div key={key} className={styles.nav}>
+                        <h3 className={styles.title}>
+                            {key}
+                        </h3>
+                        {nav.map(({ label, link }) => <LinkSecondary to={link} key={link} >{label}</LinkSecondary>)}
+                    </div>
+                )}
+                <div className={styles.socialsWrapper}>
+                    <Logo className={styles.logo} />
+                    <div className={styles.socials}>
+                        <LinkSecondary to='https://tiktok.com' isIcon>
+                            <ion-icon name="logo-tiktok"></ion-icon>
+                        </LinkSecondary>
+                        <LinkSecondary to='https://instagram.com' isIcon>
+                            <ion-icon name="logo-instagram"></ion-icon>
+                        </LinkSecondary>
+                        <LinkSecondary to='https://pinterest.com' isIcon>
+                            <ion-icon name="logo-pinterest"></ion-icon>
+                        </LinkSecondary>
+                        <LinkSecondary to='https://facebook.com' isIcon>
+                            <ion-icon name="logo-facebook"></ion-icon>
+                        </LinkSecondary>
+                        <LinkSecondary to='https://linkedin.com' isIcon>
+                            <ion-icon name="logo-linkedin"></ion-icon>
+                        </LinkSecondary>
 
-                        </div>
                     </div>
                 </div>
             </WidthWrapper>

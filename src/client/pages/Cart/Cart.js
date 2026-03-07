@@ -4,6 +4,7 @@ import WidthWrapper from '../../components/WidthWrapper/WidthWrapper.js';
 import ProductCartItem from '../../components/ProductCartItem /ProductCartItem.js';
 import ButtonLink from '../../components/ButtonLink/ButtonLink.js';
 
+import Button from '../../components/Button/Button.js';
 import * as styles from './Cart.module.scss';
 
 const Cart = () => {
@@ -15,7 +16,6 @@ const Cart = () => {
             {items.length === 0 ?
                 <WidthWrapper className={styles.emptyWrapper}>
                     <div className={styles.emptyCart}>
-
                         <h2 className={styles.title}>Your Bag Is Empty</h2>
                         <p className={styles.subtitle}>Looking for items you added previously? Then log in to see them!</p>
                         <ButtonLink to='/login' >Sign in</ButtonLink>
