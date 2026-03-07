@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import ProductsList from '../../components/ProductsList/ProductsList.js';
 import WidthWrapper from '../../components/WidthWrapper/WidthWrapper.js';
 import { useSearchParams } from 'react-router-dom';
-import { fetchProducts } from '../../slices/productsSlices.js';
+import { fetchProducts } from '../../slices/productsSlice.js';
 import SectionHeader from '../../components/SectionHeader/SectionHeader.js';
 
 

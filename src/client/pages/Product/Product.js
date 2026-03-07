@@ -1,15 +1,19 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import * as styles from './Product.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { clearProduct, fetchProduct } from '../../slices/productsSlices.js';
+import { clearProduct, fetchProduct } from '../../slices/productsSlice.js';
 import WidthWrapper from '../../components/WidthWrapper/WidthWrapper.js';
 import Button from '../../components/Button/Button.js';
+import { addItem } from '../../slices/cartSlice.js';
+import AmountField from '../../components/AmountField/AmountField.js';
 
 const Product = () => {
     const { id } = useParams();
     const dispatch = useDispatch();
     const { product } = useSelector(state => state.products);
+
+    const [quantity, setQuantity] = useState(1);
 
     useEffect(() => {
         dispatch(fetchProduct(id));
@@ -18,8 +22,16 @@ const Product = () => {
 
     }, [id, dispatch]);
 
+    const handleAddToBag = (e) => {
+        e.preventDefault();
+        dispatch(addItem({ ...product, quantity }))
+        setQuantity(1);
+    }
+
     if (!product) return <div></div>;
+
     const { imageUrl, price, description, title, ingredients, categories, collection } = product;
+
     return (
         <div className={styles.product}>
             <WidthWrapper className={styles.wrapper}>
@@ -46,9 +58,11 @@ const Product = () => {
                     <p className={styles.description}>
                         {ingredients?.join(', ')}
                     </p>
-
-                    <Button>Add to Bag</Button>
-
+                    <AmountField className={styles.amount} value={quantity}
+                        handleMinus={() => setQuantity(prev => prev - 1)}
+                        handlePlus={() => setQuantity(prev => prev + 1)}
+                    />
+                    <Button onClick={handleAddToBag}>Add to Bag</Button>
                     <Button secondary>Add to Favorite</Button>
                 </div>
             </WidthWrapper>

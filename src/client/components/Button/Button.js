@@ -4,7 +4,7 @@ import * as styles from './Button.module.scss';
 
 const Button = ({ children, secondary = false, ...props }) => {
     return (
-        <button className={secondary ? styles.btnSecondary : styles.btn}>{children}</button>
+        <button className={secondary ? styles.btnSecondary : styles.btn} {...props}>{children}</button>
     )
 }
 

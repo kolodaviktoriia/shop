@@ -1,5 +1,6 @@
 .navLink {
     @include link;
+    position: relative;
     text-decoration: none;
     display: inline-block;
     padding: 1.5rem 0;

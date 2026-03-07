@@ -63,4 +63,23 @@
         stroke: $text-color;
         height: 2.4rem;
     }
+
+    .quantity {
+        z-index: 10;
+        position: absolute;
+        bottom: 3px;
+        right: -5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        width: 24px;
+        height: 24px;
+        background-color: $dark-pink;
+        font-family: $text-font-libre-sans;
+        color: $text-button;
+        border-radius: 50%;
+        font-size: 10px;
+        font-weight: 600;
+    }
 }

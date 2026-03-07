@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import ProductsList from '../../components/ProductsList/ProductsList.js';
 import WidthWrapper from '../../components/WidthWrapper/WidthWrapper.js';
 import SectionHeader from '../../components/SectionHeader/SectionHeader.js';
-import { fetchProducts } from '../../slices/productsSlices.js';
+import { fetchProducts } from '../../slices/productsSlice.js';
 
 import * as styles from './Collection.module.scss';
 

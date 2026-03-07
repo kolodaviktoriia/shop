@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import NavLinkCustom from '../NavLinkCustom/NavLinkCustom.js';
 import WidthWrapper from '../WidthWrapper/WidthWrapper.js';
 import { useSelector } from 'react-redux';
@@ -6,10 +7,10 @@ import { MagnifyingGlassIcon, ShoppingBagIcon, UserIcon, HeartIcon } from '@hero
 import InputField from '../InputField/InputField.js';
 import Logo from '../Logo/Logo.js';
 import * as styles from './Header.module.scss';
-import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
     const { categories, collections } = useSelector(store => store.products);
+    const { quantity } = useSelector(store => store.cart);
     const [search, setSearch] = useState('');
 
     const navigate = useNavigate();
@@ -36,7 +37,10 @@ const Header = () => {
                 <div className={styles.userBar}>
                     <NavLinkCustom to='/user'><UserIcon className={styles.icon} /></NavLinkCustom>
                     <NavLinkCustom to='/favorites'><HeartIcon className={styles.icon} /></NavLinkCustom>
-                    <NavLinkCustom to='/cart'><ShoppingBagIcon className={styles.icon} /></NavLinkCustom>
+                    <NavLinkCustom to='/cart'>
+                        <ShoppingBagIcon className={styles.icon} />
+                        {quantity > 0 ? <div className={styles.quantity}>{quantity}</div> : ''}
+                    </NavLinkCustom>
                 </div>
             </WidthWrapper>
             <nav className={styles.nav}>
