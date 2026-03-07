@@ -6,19 +6,32 @@ import { MagnifyingGlassIcon, ShoppingBagIcon, UserIcon, HeartIcon } from '@hero
 import InputField from '../InputField/InputField.js';
 import Logo from '../Logo/Logo.js';
 import * as styles from './Header.module.scss';
+import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
     const { categories, collections } = useSelector(store => store.products);
     const [search, setSearch] = useState('');
+
+    const navigate = useNavigate();
+
+
+    const handleSubmitSearch = (e) => {
+        e.preventDefault();
+        navigate(`/search?q=${encodeURIComponent(search)}`);
+
+    }
     const handleSearch = (e) => {
         e.preventDefault();
         setSearch(e.target.value);
     }
+
     return (
         <header className={styles.header}>
             <div className={styles.infoBar}></div>
             <WidthWrapper className={styles.barWrapper}>
-                <InputField label='Search' value={search} name='search' onChange={handleSearch} icon={<MagnifyingGlassIcon className={styles.icon} />} />
+                <form onSubmit={handleSubmitSearch}>
+                    <InputField label='Search' value={search} name='search' onChange={handleSearch} icon={<MagnifyingGlassIcon className={styles.icon} />} />
+                </form>
                 <Logo />
                 <div className={styles.userBar}>
                     <NavLinkCustom to='/user'><UserIcon className={styles.icon} /></NavLinkCustom>

@@ -17,7 +17,7 @@ export const getProductsApi = async (filter = {}) => {
 
     if (category) query = query.eq('categoryId', category);
     if (collection) query = query.eq('collectionId', collection);
-    if (search) query = query.ilike('name', `%${search}%`);
+    if (search) query = query.ilike('title', `%${search}%`);
 
     const { data, error } = await query;
     if (error) throw error;

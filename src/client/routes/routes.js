@@ -2,9 +2,10 @@ import React from 'react';
 import App from "../App.js";
 import Landing from "../pages/Landing/Landing.js";
 import Product from '../pages/Product/Product.js';
-import { fetchCategories, fetchCollections, fetchProducts } from '../slices/productsSlices.js';
+import { fetchCategories, fetchCollections } from '../slices/productsSlices.js';
 import Products from '../pages/Products/Products.js';
 import Collection from '../pages/Collection/Collection.js';
+import Search from '../pages/Search/Search.js';
 
 
 export const routes = [{
@@ -33,6 +34,11 @@ export const routes = [{
         {
             element: <Collection />,
             path: '/collection/:id',
+
+        },
+        {
+            element: <Search />,
+            path: '/search',
 
         },
     ]

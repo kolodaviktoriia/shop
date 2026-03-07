@@ -1,4 +1,6 @@
 .footer {
+    height: $footer-height;
+    overflow: hidden;
     background-color: $grey;
 
     display: flex;

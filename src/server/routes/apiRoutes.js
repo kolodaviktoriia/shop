@@ -1,6 +1,5 @@
 import express from 'express';
 import { getCategoriesApi, getCollectionsApi, getProductsApi } from '../api/productsApi.js';
-import { filter } from 'compression';
 
 const router = express.Router();
 
