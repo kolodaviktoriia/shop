@@ -6,6 +6,7 @@ import { fetchCategories, fetchCollections, fetchProduct } from '../slices/produ
 import Products from '../pages/Products/Products.js';
 import Collection from '../pages/Collection/Collection.js';
 import Search from '../pages/Search/Search.js';
+import Cart from '../pages/Cart/Cart.js';
 
 
 export const routes = [{
@@ -40,6 +41,11 @@ export const routes = [{
         {
             element: <Search />,
             path: '/search',
+
+        },
+        {
+            element: <Cart />,
+            path: '/cart',
 
         },
     ]
