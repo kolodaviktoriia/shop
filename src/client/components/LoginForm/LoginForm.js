@@ -3,13 +3,15 @@ import InputField from '../InputField/InputField.js';
 import * as styles from './LoginForm.module.scss';
 import Button from '../Button/Button.js';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { loginUser } from '../../slices/userSlice.js';
 
 const LoginForm = ({ navigateTo }) => {
     const navigate = useNavigate();
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
     const [errors, setErrors] = useState({});
-
+    const dispatch = useDispatch();
     const validate = () => {
         let valid = true;
         const newErrors = { email: '', password: '' };
@@ -37,6 +39,7 @@ const LoginForm = ({ navigateTo }) => {
     const handleLogin = (e) => {
         e.preventDefault();
         if (!validate()) return;
+        dispatch(loginUser(email, password));
         navigate(navigateTo ?? '/profile')
 
     }

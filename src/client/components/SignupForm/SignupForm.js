@@ -3,6 +3,8 @@ import InputField from '../InputField/InputField.js';
 import * as styles from './SignupForm.module.scss';
 import Button from '../Button/Button.js';
 import { useNavigate } from 'react-router-dom';
+import { signupUser } from '../../slices/userSlice.js';
+import { useDispatch } from 'react-redux';
 
 
 const initialState = {
@@ -17,7 +19,7 @@ const SignupForm = ({ navigateTo }) => {
     const navigate = useNavigate();
     const [formValues, setFormValues] = useState(initialState);
     const [errors, setErrors] = useState({});
-
+    const dispatch = useDispatch();
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormValues(prev => ({ ...prev, [name]: value }));
@@ -53,6 +55,7 @@ const SignupForm = ({ navigateTo }) => {
     const handleLogin = (e) => {
         e.preventDefault();
         if (!validate()) return;
+        dispatch(signupUser(formValues));
         navigate(navigateTo ?? '/profile')
 
     }

@@ -1,0 +1,16 @@
+.profile {
+    .profileWrapper {
+        display: grid;
+        grid-template-columns: 0.6fr 1fr;
+        gap: 8rem;
+
+        .navigation {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .info {
+            display: flex;
+        }
+    }
+}

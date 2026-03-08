@@ -1,0 +1,1 @@
+export const getToken = (req) => req.cookies['sb-access-token'];

@@ -1,0 +1,22 @@
+.loginGrid {
+    .title {
+        @include main-text;
+        font-size: 2.2rem;
+        margin-top: 4rem;
+    }
+
+    .wrapper {
+        display: grid;
+        grid-template-columns: 1fr 3px 1fr;
+        gap: 8rem;
+
+        margin-top: 4rem;
+        margin-bottom: 4rem;
+
+        .divider {
+            height: 100%;
+            border-left: 1px solid $accent-pink;
+            border-right: 1px solid $accent-pink;
+        }
+    }
+}

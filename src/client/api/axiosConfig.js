@@ -1,15 +1,38 @@
 import axios from "axios";
 
-const baseUrl =
-    typeof window !== "undefined"
-        ? ""
-        : process.env.BASE_URL || "http://localhost:3000";
+let cookieStore = null;
 
-const api = axios.create({
-    baseURL: baseUrl,
+const isBrowser = typeof window !== "undefined";
+
+export const api = axios.create({
+    baseURL: isBrowser ? "" : process.env.BASE_URL || "http://localhost:3000",
+    withCredentials: true,
 });
 
-export const getData = async (url, config = {}) => {
-    const { data } = await api.get(url, config);
+
+api.interceptors.request.use((config) => {
+    if (!isBrowser && cookieStore) {
+        config.headers.cookie = cookieStore;
+    }
+    return config;
+});
+
+
+export const setServerCookies = (cookie) => {
+    cookieStore = cookie;
+};
+
+export const clearServerCookies = () => {
+    cookieStore = null;
+};
+
+export const getData = async (url) => {
+    const { data } = await api.get(url);
+    return data;
+};
+
+export const postData = async (url, payload) => {
+    console.log('payload', payload);
+    const { data } = await api.post(url, payload);
     return data;
 };

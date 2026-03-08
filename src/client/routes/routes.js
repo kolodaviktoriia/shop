@@ -8,12 +8,15 @@ import Collection from '../pages/Collection/Collection.js';
 import Search from '../pages/Search/Search.js';
 import Cart from '../pages/Cart/Cart.js';
 import Login from '../pages/Login/Login.js';
+import { fetchCurrentUser } from '../slices/userSlice.js';
+import Profile from '../pages/Profile/Profile.js';
 
 
 export const routes = [{
     element: <App />,
     path: '/',
     loadData: (store) => Promise.all([
+        store.dispatch(fetchCurrentUser()),
         store.dispatch(fetchCategories()),
         store.dispatch(fetchCollections()),
     ]),
@@ -28,7 +31,6 @@ export const routes = [{
             element: <Product />,
             path: '/product/:id',
             loadData: (store, params) => store.dispatch(fetchProduct(params.id))
-
         },
         {
             element: <Products />,
@@ -43,6 +45,11 @@ export const routes = [{
             element: <Search />,
             path: '/search',
 
+        },
+        {
+            element: <Profile />,
+            path: '/profile',
+            loadData: (store) => store.dispatch(fetchCurrentUser())
         },
         {
             element: <Cart />,
