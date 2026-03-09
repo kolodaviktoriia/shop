@@ -4,7 +4,7 @@ import * as styles from './ProductCartItem.module.scss';
 import { useNavigate } from 'react-router-dom';
 import AmountField from '../AmountField/AmountField.js';
 import { useDispatch } from 'react-redux';
-import { deleteItemAndSync, removeItem, removeItemAndSync } from '../../slices/cartSlice.js';
+import { addItemAndSync, deleteItemAndSync, removeItemAndSync } from '../../slices/cartSlice.js';
 
 const ProductCartItem = ({ product }) => {
     const { title, imageUrl, price, id, quantity } = product;
