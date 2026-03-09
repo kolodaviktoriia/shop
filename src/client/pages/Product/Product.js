@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 import { clearProduct, fetchProduct } from '../../slices/productsSlice.js';
 import WidthWrapper from '../../components/WidthWrapper/WidthWrapper.js';
 import Button from '../../components/Button/Button.js';
-import { addItem } from '../../slices/cartSlice.js';
+import { addItemAndSync } from '../../slices/cartSlice.js';
 import AmountField from '../../components/AmountField/AmountField.js';
 
 const Product = () => {
@@ -24,7 +24,7 @@ const Product = () => {
 
     const handleAddToBag = (e) => {
         e.preventDefault();
-        dispatch(addItem({ ...product, quantity }))
+        dispatch(addItemAndSync({ ...product, quantity }))
         setQuantity(1);
     }
 

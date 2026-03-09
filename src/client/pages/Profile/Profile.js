@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import Button from '../../components/Button/Button.js';
 import * as styles from './Profile.module.scss';
 import { logoutUser } from '../../slices/userSlice.js';
-import { useNavigate } from 'react-router-dom';
 import WidthWrapper from '../../components/WidthWrapper/WidthWrapper.js';
 import LoginGrid from '../../components/LoginGrid/LoginGrid.js';
 
@@ -11,8 +10,6 @@ const Profile = () => {
     const { user } = useSelector(store => store.user);
 
     const dispatch = useDispatch();
-    const navigate = useNavigate();
-
 
     const handleLogout = () => {
         dispatch(logoutUser());

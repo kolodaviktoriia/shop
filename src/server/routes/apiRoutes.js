@@ -3,6 +3,7 @@ import { getCategoriesApi, getCollectionsApi, getProductApi, getProductsApi } fr
 import { getProfile, getUserApi, loginApi, logoutApi, signupApi } from '../api/userApi.js';
 import { getToken } from '../helpers/getToken.js';
 import { setCookie } from '../helpers/setCookie.js';
+import { getCartApi, saveCartApi } from '../api/cartApi.js';
 
 const router = express.Router();
 
@@ -46,11 +47,13 @@ router.get('/collections', async (req, res) => {
 
 router.post('/logout', async (req, res) => {
     try {
-        const token = getToken(req);
 
+        const token = await getToken(req, res);
         if (!token) return res.status(400).json({ error: 'No session token found' });
 
-        res.clearCookie('sb-access-token');
+        res.clearCookie('sb-access-token', { httpOnly: true, sameSite: 'lax', secure: process.env.NODE_ENV === 'production' });
+        res.clearCookie('sb-refresh-token', { httpOnly: true, sameSite: 'lax', secure: process.env.NODE_ENV === 'production' });
+
         res.json({ message: 'Logged out successfully' });
     } catch (err) {
         res.status(500).json({ error: err.message });
@@ -99,13 +102,45 @@ router.post('/signup', async (req, res) => {
 
 router.get('/user', async (req, res) => {
     try {
-        const token = getToken(req);
+        const token = await getToken(req, res);
         if (!token) return res.status(400).json({ error: 'No session token found' });
 
         const user = await getUserApi(token);
         const profile = await getProfile(user.id);
         res.json({
             user: profile
+        });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
+router.get('/cart', async (req, res) => {
+    try {
+        const token = await getToken(req, res);
+        if (!token) return res.status(400).json({ error: 'No session token found' });
+
+        const user = await getUserApi(token);
+
+        const items = await getCartApi(user.id);
+        res.json({
+            items
+        });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
+router.post('/cart', async (req, res) => {
+    try {
+
+        const token = await getToken(req, res);
+        if (!token) return res.status(400).json({ error: 'No session token found' });
+
+        const user = await getUserApi(token);
+        const items = await saveCartApi(user.id, req.body.items);
+        res.json({
+            items
         });
     } catch (err) {
         res.status(500).json({ error: err.message });

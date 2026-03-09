@@ -4,7 +4,7 @@ import * as styles from './ProductCartItem.module.scss';
 import { useNavigate } from 'react-router-dom';
 import AmountField from '../AmountField/AmountField.js';
 import { useDispatch } from 'react-redux';
-import { addItem, deleteItem, removeItem } from '../../slices/cartSlice.js';
+import { deleteItemAndSync, removeItem, removeItemAndSync } from '../../slices/cartSlice.js';
 
 const ProductCartItem = ({ product }) => {
     const { title, imageUrl, price, id, quantity } = product;
@@ -16,13 +16,13 @@ const ProductCartItem = ({ product }) => {
         navigate(`/product/${id}`)
     }
     const handleDelete = () => {
-        dispatch(deleteItem({ ...product }));
+        dispatch(deleteItemAndSync({ ...product }));
     }
     const handleMinus = () => {
-        dispatch(removeItem({ ...product }));
+        dispatch(removeItemAndSync({ ...product }));
     }
     const handlePlus = () => {
-        dispatch(addItem({ ...product, quantity: 1 }));
+        dispatch(addItemAndSync({ ...product, quantity: 1 }));
     }
 
     return (

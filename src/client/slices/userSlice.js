@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { getCurrentUserApi, loginApi, logoutApi, signupApi } from '../api/usersApi.js';
+import { clearCart, fetchCart } from './cartSlice.js';
 
 const userSlice = createSlice({
     name: 'user',
@@ -27,6 +28,7 @@ export const loginUser = (email, password) => async (dispatch) => {
     try {
         const data = await loginApi(email, password);
         dispatch(setUser(data.user));
+        dispatch(fetchCart());
     } catch (err) {
         dispatch(setError(err.message));
     } finally {
@@ -39,6 +41,7 @@ export const logoutUser = () => async (dispatch) => {
     try {
         await logoutApi();
         dispatch(clearUser());
+        dispatch(clearCart());
     } catch (err) {
         dispatch(setError(err.message));
     } finally {
@@ -51,6 +54,7 @@ export const fetchCurrentUser = () => async (dispatch) => {
     try {
         const data = await getCurrentUserApi();
         dispatch(setUser(data.user || null));
+        dispatch(fetchCart());
     } catch (err) {
         dispatch(setError(err.message));
     } finally {
@@ -64,6 +68,7 @@ export const signupUser = (userData) => async (dispatch) => {
     try {
         const data = await signupApi(userData);
         dispatch(setUser(data.user || null));
+        dispatch(fetchCart());
     } catch (err) {
         dispatch(setError(err.message));
     } finally {
