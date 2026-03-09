@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { updateCartApi, getCartApi } from '../api/cartApi.js';
 
 const initialOrder = {
-    address: {},
+    address: null,
     totalPrice: null,
     shippingPrice: null,
     itemsPrice: null,
@@ -19,7 +19,7 @@ const ordersSlice = createSlice({
     },
     reducers: {
         addAddress: (state, action) => {
-            state.currentOrder.address = action.payload.address;
+            state.currentOrder.address = action.payload;
         },
         initCurrentOrder: (state, action) => {
             state.currentOrder.items = action.payload.items;

@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 import { addItemAndSync, deleteItemAndSync, removeItemAndSync } from '../../slices/cartSlice.js';
 import { displayPrice } from '../../helpers/priceConverters.js';
 
-const ProductCartItem = ({ product }) => {
+const ProductCartItem = ({ product, isOrder = false }) => {
     const { title, imageUrl, price, id, quantity } = product;
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -33,11 +33,16 @@ const ProductCartItem = ({ product }) => {
             </div >
             <div className={styles.textWrapper}>
                 <h3 className={styles.title}>{title}</h3>
-                <span className={styles.price}>
+                {isOrder ?
+                    <span className={styles.price}>
+                        {quantity} x {displayPrice(price)}
+                    </span>
+                    : ''}
+                <span className={styles.mainPrice}>
                     {displayPrice(quantity * price)}
                 </span>
             </div>
-            <AmountField value={quantity} handleMinus={handleMinus} handlePlus={handlePlus} handleDelete={handleDelete} small className={styles.amount} />
+            {isOrder ? '' : <AmountField value={quantity} handleMinus={handleMinus} handlePlus={handlePlus} handleDelete={handleDelete} small className={styles.amount} />}
         </div >
     )
 }

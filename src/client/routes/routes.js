@@ -12,6 +12,7 @@ import { fetchCurrentUser } from '../slices/userSlice.js';
 import Profile from '../pages/Profile/Profile.js';
 import Checkout from '../pages/Checkout/Checkout.js';
 import Address from '../pages/Address/Address.js';
+import Payment from '../pages/Payment/Payment.js';
 
 
 export const routes = [{
@@ -75,6 +76,11 @@ export const routes = [{
                 {
                     element: <Address />,
                     path: 'address',
+
+                },
+                {
+                    element: <Payment />,
+                    path: 'payment',
 
                 },
 

@@ -3,11 +3,16 @@ import * as styles from './Address.module.scss';
 import AddressForm from '../../components/AddressForm/AddressForm.js';
 import WidthWrapper from '../../components/WidthWrapper/WidthWrapper.js';
 import { useOutletContext } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { addAddress } from '../../slices/ordersSlice.js';
 
 const Address = () => {
     const { setStep } = useOutletContext();
+    const dispatch = useDispatch();
 
     const handleForm = (formValues) => {
+        console.log('values', formValues);
+        dispatch(addAddress(formValues));
         setStep(cur => cur + 1);
     }
 
