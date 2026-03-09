@@ -9,13 +9,14 @@ const steps = ['login', 'address', 'payment', 'confirmation'];
 const Checkout = () => {
     const [step, setStep] = useState(0);
     const { user } = useSelector(store => store.user);
+    const { items, address } = useSelector(store => store.orders.currentOrder);
 
     const navigate = useNavigate();
-
     useEffect(() => {
         if (step === 0 && user) setStep(cur => cur + 1);
         navigate(steps[step])
-    }, [step, user, navigate])
+        if (!items || items.length === 0) navigate('/cart');
+    }, [step, user, navigate, items])
 
     return (
         <div className={styles.checkout}>

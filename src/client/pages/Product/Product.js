@@ -7,6 +7,7 @@ import WidthWrapper from '../../components/WidthWrapper/WidthWrapper.js';
 import Button from '../../components/Button/Button.js';
 import { addItemAndSync } from '../../slices/cartSlice.js';
 import AmountField from '../../components/AmountField/AmountField.js';
+import { displayPrice } from '../../helpers/priceConverters.js';
 
 const Product = () => {
     const { id } = useParams();
@@ -48,7 +49,7 @@ const Product = () => {
                     </h2>
 
                     <h2 className={styles.price}>
-                        {price} €
+                        {displayPrice(price)}
                     </h2>
                     <h3 className={styles.subTitle}>About this product:</h3>
                     <p className={styles.description}>

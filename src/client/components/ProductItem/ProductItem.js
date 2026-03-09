@@ -2,6 +2,7 @@ import React from 'react';
 
 import * as styles from './ProductItem.module.scss';
 import { useNavigate } from 'react-router-dom';
+import { displayPrice } from '../../helpers/priceConverters.js';
 
 const ProductItem = ({ title, imageUrl, price, id }) => {
     const navigate = useNavigate();
@@ -16,7 +17,7 @@ const ProductItem = ({ title, imageUrl, price, id }) => {
             </div >
             <h3 className={styles.title}>{title}</h3>
             <span className={styles.price}>
-                {price} €
+                {displayPrice(price)}
             </span>
         </div >
     )

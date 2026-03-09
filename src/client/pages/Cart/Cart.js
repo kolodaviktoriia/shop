@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import WidthWrapper from '../../components/WidthWrapper/WidthWrapper.js';
 import ProductCartItem from '../../components/ProductCartItem /ProductCartItem.js';
 import ButtonLink from '../../components/ButtonLink/ButtonLink.js';
@@ -8,16 +8,28 @@ import Button from '../../components/Button/Button.js';
 import { useNavigate } from 'react-router-dom';
 
 import * as styles from './Cart.module.scss';
+import { initCurrentOrder } from '../../slices/ordersSlice.js';
+import { displayPrice } from '../../helpers/priceConverters.js';
 
 const Cart = () => {
     const { items } = useSelector(store => store.cart);
-    const subtotal = items.reduce((acc, cur) => acc + cur.price * cur.quantity, 0);
-    const shipping = subtotal > 50 ? 0 : 10;
+    const itemsPrice = items.reduce(
+        (acc, item) => acc + item.price * item.quantity,
+        0
+    );
+    const shippingPrice = itemsPrice > 5000 ? 0 : 1000;
+    const totalPrice = itemsPrice + shippingPrice;
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const handleCheckout = () => {
+        dispatch(initCurrentOrder({
+            items,
+            totalPrice,
+            shippingPrice,
+            itemsPrice,
+        }));
         navigate('/checkout');
-
     }
     return (
         <div className={styles.cart}>
@@ -41,16 +53,16 @@ const Cart = () => {
                         <div className={styles.details}>
                             <div className={styles.summaryRow}>
                                 <span className={styles.summarySpan}>Subtotal</span>
-                                <span className={styles.amount}>{subtotal} €</span>
+                                <span className={styles.amount}>{displayPrice(itemsPrice)}</span>
                             </div>
                             <div className={styles.summaryRow}>
                                 <span className={styles.summarySpan}>Shipping</span>
-                                <span className={styles.amount}>{shipping} €</span>
+                                <span className={styles.amount}>{displayPrice(shippingPrice)}</span>
                             </div>
                             <div className={styles.divider}></div>
                             <div className={styles.summaryRow}>
                                 <span className={styles.totalTitle}>Total</span>
-                                <span className={styles.amount}>{(subtotal + shipping).toFixed(2)} €</span>
+                                <span className={styles.amount}>{displayPrice(totalPrice)}</span>
                             </div>
                             <Button className={styles.btn} onClick={handleCheckout}>Continue to checkout</Button>
                             <div className={styles.infoWrapper}> <span className={styles.icon} ><ion-icon name="information-circle-outline"></ion-icon></span>

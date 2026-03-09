@@ -1,0 +1,1 @@
+export const displayPrice = (price) => `${(price / 100).toFixed(2)}  €`;

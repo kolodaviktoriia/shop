@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import AmountField from '../AmountField/AmountField.js';
 import { useDispatch } from 'react-redux';
 import { addItemAndSync, deleteItemAndSync, removeItemAndSync } from '../../slices/cartSlice.js';
+import { displayPrice } from '../../helpers/priceConverters.js';
 
 const ProductCartItem = ({ product }) => {
     const { title, imageUrl, price, id, quantity } = product;
@@ -33,7 +34,7 @@ const ProductCartItem = ({ product }) => {
             <div className={styles.textWrapper}>
                 <h3 className={styles.title}>{title}</h3>
                 <span className={styles.price}>
-                    {(quantity * price).toFixed(2)} €
+                    {displayPrice(quantity * price)}
                 </span>
             </div>
             <AmountField value={quantity} handleMinus={handleMinus} handlePlus={handlePlus} handleDelete={handleDelete} small className={styles.amount} />

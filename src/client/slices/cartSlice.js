@@ -65,7 +65,6 @@ const syncCart = (action, payload) => async (dispatch, getState) => {
         dispatch(setCartError(null));
         try {
             const cart = getState().cart.items;
-            console.log('cartSync', cart);
             await updateCartApi(cart);
         } catch (err) {
             dispatch(setCartError(err.message));
