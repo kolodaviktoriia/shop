@@ -10,6 +10,8 @@ import Cart from '../pages/Cart/Cart.js';
 import Login from '../pages/Login/Login.js';
 import { fetchCurrentUser } from '../slices/userSlice.js';
 import Profile from '../pages/Profile/Profile.js';
+import Checkout from '../pages/Checkout/Checkout.js';
+import Address from '../pages/Address/Address.js';
 
 
 export const routes = [{
@@ -59,6 +61,24 @@ export const routes = [{
         {
             element: <Login />,
             path: '/login',
+
+        },
+        {
+            element: <Checkout />,
+            path: '/checkout',
+            children: [
+                {
+                    element: <Login />,
+                    path: 'login',
+
+                },
+                {
+                    element: <Address />,
+                    path: 'address',
+
+                },
+
+            ]
 
         },
     ]
