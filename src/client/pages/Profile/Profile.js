@@ -22,7 +22,12 @@ const Profile = () => {
                     <Button onClick={handleLogout}>Log out</Button>
                 </div>
                 <div className={styles.info}>
-                    <h2>Hello,{user?.firstName} {user?.lastName}!</h2>
+                    <h2 className={styles.title}>Hello, {user?.firstName} {user?.lastName}!</h2>
+                    <div className={styles.main}>
+                        <h3 className={styles.subTitle}>My personal data</h3>
+                        <span className={styles.infoText}>{user?.firstName} {user?.lastName}</span>
+                        <span className={styles.infoText}>{user?.email}</span>
+                    </div>
                 </div>
             </WidthWrapper>
         </div >
