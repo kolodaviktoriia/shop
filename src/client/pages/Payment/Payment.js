@@ -2,14 +2,15 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import WidthWrapper from '../../components/WidthWrapper/WidthWrapper.js';
 import ProductCartItem from '../../components/ProductCartItem /ProductCartItem.js';
-import ButtonLink from '../../components/ButtonLink/ButtonLink.js';
+
 
 import Button from '../../components/Button/Button.js';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import * as styles from './Payment.module.scss';
 import { initCurrentOrder } from '../../slices/ordersSlice.js';
 import { displayPrice } from '../../helpers/priceConverters.js';
+import PayPal from '../../components/Paypal/PayPal.js';
 
 const Payment = () => {
     const { items, totalPrice, itemsPrice, shippingPrice, address } = useSelector(store => store.orders?.currentOrder);
@@ -77,7 +78,7 @@ const Payment = () => {
                         <span className={styles.totalTitle}>Total</span>
                         <span className={styles.amount}>{displayPrice(totalPrice)}</span>
                     </div>
-                    <Button className={styles.btn} onClick={handlePayment}>Continue to payment</Button>
+                    <PayPal />
                 </div>
             </WidthWrapper>
         </div >

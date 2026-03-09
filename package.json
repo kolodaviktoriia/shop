@@ -18,6 +18,9 @@
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
+    "@paypal/checkout-server-sdk": "^1.0.3",
+    "@paypal/paypal-server-sdk": "^2.2.0",
+    "@paypal/react-paypal-js": "^9.0.1",
     "@reduxjs/toolkit": "^2.11.2",
     "@supabase/ssr": "^0.9.0",
     "@supabase/supabase-js": "^2.98.0",

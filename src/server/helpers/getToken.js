@@ -1,6 +1,6 @@
 
 import { setCookie } from './setCookie.js';
-import { supabase } from '../api/supabaseClient.js';
+import { supabase } from '../supabaseApi/supabaseClient.js';
 
 export const getToken = async (req, res) => {
     let accessToken = req.cookies['sb-access-token'];

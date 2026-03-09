@@ -31,7 +31,7 @@ export const getData = async (url) => {
     return data;
 };
 
-export const postData = async (url, payload) => {
+export const postData = async (url, payload = {}) => {
     const { data } = await api.post(url, payload);
     return data;
 };

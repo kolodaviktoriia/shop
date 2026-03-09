@@ -1,9 +1,11 @@
 import express from 'express';
-import { getCategoriesApi, getCollectionsApi, getProductApi, getProductsApi } from '../api/productsApi.js';
-import { getProfile, getUserApi, loginApi, logoutApi, signupApi } from '../api/userApi.js';
+import { getCategoriesApi, getCollectionsApi, getProductApi, getProductsApi } from '../supabaseApi/productsApi.js';
+import { getProfile, getUserApi, loginApi, logoutApi, signupApi } from '../supabaseApi/userApi.js';
 import { getToken } from '../helpers/getToken.js';
 import { setCookie } from '../helpers/setCookie.js';
-import { getCartApi, saveCartApi } from '../api/cartApi.js';
+import { getCartApi, saveCartApi } from '../supabaseApi/cartApi.js';
+import { captureOrderApi, createOrderApi } from '../supabaseApi/ordersApi.js';
+import { client, OrdersCaptureRequest, OrdersCreateRequest } from '../paypal.js';
 
 const router = express.Router();
 
@@ -146,6 +148,49 @@ router.post('/cart', async (req, res) => {
         res.status(500).json({ error: err.message });
     }
 });
+
+router.post("/orders", async (req, res) => {
+    const request = new OrdersCreateRequest();
+
+    request.requestBody({
+        intent: 'CAPTURE',
+        purchase_units: [{ amount: { currency_code: 'EUR', value: '1.00' } }]
+    });
+
+    try {
+        const token = await getToken(req, res);
+        if (!token) return res.status(400).json({ error: 'No session token found' });
+
+        const user = await getUserApi(token);
+        const order = await client.execute(request);
+
+        await createOrderApi(
+            user.id,
+            req.body.order,
+            order.result.id,
+            order.result.purchase_units?.[0]?.amount?.value,
+            order.result
+        );
+        res.json({ id: order.result.id });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+
+});
+
+router.post("/orders/:orderID/capture", async (req, res) => {
+    console.log('capture')
+    const orderID = req.params.orderID;
+    const request = new OrdersCaptureRequest(orderID);
+    try {
+        const capture = await client.execute(request);
+        await captureOrderApi(orderID, capture, capture.result.status);
+        res.json({ id: capture.result.id, status: capture.result.status });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
 
 
 
