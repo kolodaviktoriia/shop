@@ -52,7 +52,30 @@ export const getOrderApi = async (userId, orderId) => {
 };
 
 export const createOrderApi = async (userId, order, paypalOrderId, jsonResponse) => {
+
     const { address, ...orderData } = order;
+
+
+    const { data: existingUserAddresses, error: fetchError } = await supabase
+        .from("addresses")
+        .select("*")
+        .eq("userId", userId)
+        .limit(1);
+
+    if (fetchError) {
+        throw fetchError;
+    }
+
+    if (!existingUserAddresses || existingUserAddresses.length === 0) {
+        const { error: addAddressError } = await supabase
+            .from("addresses")
+            .insert([{ ...address, userId }]);
+
+        if (addAddressError) {
+            throw addAddressError;
+        }
+    }
+
     const { data, error: addressError } = await supabase.from("orderAddresses").insert([
         { ...address }
     ]).select();

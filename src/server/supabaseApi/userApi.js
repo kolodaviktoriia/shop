@@ -40,10 +40,18 @@ export const signupApi = async (email, password, firstName, lastName) => {
 export const getProfile = async (userId) => {
     const { data, error } = await supabase
         .from('profiles')
-        .select('*')
+        .select('*, addresses(*)')
         .eq('id', userId)
         .single();
 
     if (error) throw error;
-    return data;
+
+    const profileWithAddress = {
+        ...data,
+        address: data.addresses?.[0] || null
+    };
+
+    delete profileWithAddress.addresses;
+
+    return profileWithAddress;
 }

@@ -22,8 +22,8 @@ const AddressForm = ({ onSubmit }) => {
 
     useEffect(() => {
         if (user) {
-            const { firstName, lastName } = user;
-            setFormValues({ ...initialState, firstName, lastName });
+            const { firstName, lastName, address } = user;
+            setFormValues(address ? { ...initialState, firstName, lastName, ...address } : { ...initialState, firstName, lastName });
         }
     }, [user])
 
