@@ -13,7 +13,7 @@ import Spinner from '../../components/Spinner/Spinner.js';
 const Product = () => {
     const { id } = useParams();
     const dispatch = useDispatch();
-    const { product } = useSelector(state => state.products);
+    const { product, loading } = useSelector(state => state.products);
 
     const [quantity, setQuantity] = useState(1);
 

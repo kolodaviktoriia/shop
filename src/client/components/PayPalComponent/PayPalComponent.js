@@ -52,7 +52,7 @@ const PayPalComponent = ({ handlePayment }) => {
                         `${errorDetail.description} (${orderData.debug_id})`
                     );
                 } else {
-                    handlePayment();
+                    handlePayment(orderData.orderId);
                 }
             } catch (error) {
                 console.error(error);

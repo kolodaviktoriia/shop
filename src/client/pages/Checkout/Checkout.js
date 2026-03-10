@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import WidthWrapper from '../../components/WidthWrapper/WidthWrapper.js';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate, useParams } from 'react-router-dom';
 
 import * as styles from './Checkout.module.scss';
 
@@ -11,12 +11,13 @@ const Checkout = () => {
     const [step, setStep] = useState(0);
     const { user } = useSelector(store => store.user);
     const { items } = useSelector(store => store.orders.currentOrder);
-
+    const { id } = useParams();
+    const isConfirmation = id && step === 3;
     const navigate = useNavigate();
     useEffect(() => {
         if (step === 0 && user) setStep(cur => cur + 1);
-        navigate(steps[step])
-        if (!items || items.length === 0) navigate('/cart');
+        if (step !== 3) navigate(steps[step])
+        if (!items || items.length === 0 && !isConfirmation) navigate('/cart');
     }, [step, user, navigate, items])
 
     return (

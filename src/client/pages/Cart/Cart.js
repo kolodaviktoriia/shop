@@ -1,17 +1,19 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import WidthWrapper from '../../components/WidthWrapper/WidthWrapper.js';
 import ProductCartItem from '../../components/ProductCartItem /ProductCartItem.js';
 import ButtonLink from '../../components/ButtonLink/ButtonLink.js';
 
 import Button from '../../components/Button/Button.js';
-import { useNavigate } from 'react-router-dom';
 
-import * as styles from './Cart.module.scss';
 import { initCurrentOrder } from '../../slices/ordersSlice.js';
 import { displayPrice } from '../../helpers/priceConverters.js';
 
+import * as styles from './Cart.module.scss';
+
 const Cart = () => {
+    const { user } = useSelector(store => store.)
     const { items } = useSelector(store => store.cart);
     const itemsPrice = items.reduce(
         (acc, item) => acc + item.price * item.quantity,

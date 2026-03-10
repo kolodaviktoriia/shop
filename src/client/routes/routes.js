@@ -106,7 +106,7 @@ export const routes = [{
                 },
                 {
                     element: <Confirmation />,
-                    path: 'confirmation',
+                    path: 'confirmation/:id',
 
                 },
 

@@ -23,7 +23,33 @@ const AddressForm = ({ onSubmit }) => {
     useEffect(() => {
         if (user) {
             const { firstName, lastName, address } = user;
-            setFormValues(address ? { ...initialState, firstName, lastName, ...address } : { ...initialState, firstName, lastName });
+            if (address) {
+                const {
+                    firstName,
+                    lastName,
+                    street,
+                    houseNumber,
+                    postalCode,
+                    city,
+                    country,
+                    phone
+                } = address;
+
+                setFormValues({
+                    ...initialState, firstName, lastName, firstName,
+                    lastName,
+                    street,
+                    houseNumber,
+                    postalCode,
+                    city,
+                    country,
+                    phone
+                });
+            } else {
+                setFormValues(
+                    { ...initialState, firstName, lastName }
+                );
+            }
         }
     }, [user])
 

@@ -1,9 +1,18 @@
-import React from 'react';
-import WidthWrapper from '../../components/WidthWrapper/WidthWrapper.js';
-import * as styles from './Confirmation.module.scss';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import ButtonLink from '../../components/ButtonLink/ButtonLink.js';
+import WidthWrapper from '../../components/WidthWrapper/WidthWrapper.js';
+import { clearCartAndSync } from '../../slices/cartSlice.js';
+import { clearCurrentOrder } from '../../slices/ordersSlice.js';
+
+import * as styles from './Confirmation.module.scss';
 
 const Confirmation = () => {
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(clearCartAndSync());
+        dispatch(clearCurrentOrder());
+    }, [])
     return (
         <div className={styles.confirmation}>
             <WidthWrapper className={styles.wrapper}>

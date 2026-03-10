@@ -163,7 +163,6 @@ router.post("/orders", async (req, res) => {
 
         const user = await getUserApi(token);
         const order = await client.execute(request);
-
         const orderId = await createOrderApi(
             user.id,
             req.body.order,
@@ -207,6 +206,7 @@ router.get('/orders', async (req, res) => {
         res.status(500).json({ error: err.message });
     }
 });
+
 router.get('/orders/:id', async (req, res) => {
     try {
         const token = await getToken(req, res);
