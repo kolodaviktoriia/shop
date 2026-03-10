@@ -26,8 +26,8 @@ export const clearServerCookies = () => {
     cookieStore = null;
 };
 
-export const getData = async (url) => {
-    const { data } = await api.get(url);
+export const getData = async (url, config = {}) => {
+    const { data } = await api.get(url, config);
     return data;
 };
 

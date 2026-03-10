@@ -3,11 +3,12 @@ import * as styles from './Product.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { clearProduct, fetchProduct } from '../../slices/productsSlice.js';
+import { addItemAndSync } from '../../slices/cartSlice.js';
+import { displayPrice } from '../../helpers/priceConverters.js';
+import AmountField from '../../components/AmountField/AmountField.js';
 import WidthWrapper from '../../components/WidthWrapper/WidthWrapper.js';
 import Button from '../../components/Button/Button.js';
-import { addItemAndSync } from '../../slices/cartSlice.js';
-import AmountField from '../../components/AmountField/AmountField.js';
-import { displayPrice } from '../../helpers/priceConverters.js';
+import Spinner from '../../components/Spinner/Spinner.js';
 
 const Product = () => {
     const { id } = useParams();
@@ -18,7 +19,6 @@ const Product = () => {
 
     useEffect(() => {
         dispatch(fetchProduct(id));
-
         return () => dispatch(clearProduct())
 
     }, [id, dispatch]);
@@ -29,7 +29,7 @@ const Product = () => {
         setQuantity(1);
     }
 
-    if (!product) return <div></div>;
+    if (loading || !product) return <Spinner />;
 
     const { imageUrl, price, description, title, ingredients, categories, collection } = product;
 

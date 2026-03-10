@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import WidthWrapper from '../../components/WidthWrapper/WidthWrapper.js';
 import ProductCartItem from '../../components/ProductCartItem /ProductCartItem.js';
 import { displayPrice } from '../../helpers/priceConverters.js';
-import PayPalComponent from '../../components/PayPalComponent/PayPalComponent.js';
+
 import { fetchOrder } from '../../slices/ordersSlice.js';
 
 import * as styles from './Order.module.scss';
@@ -18,7 +18,7 @@ const Order = () => {
 
     const { selectedOrder: order, loading } = useSelector(store => store.orders);
 
-    if (!order || !order.address) return <></>;
+    if (loading || !order?.address) return <Spinner />;
     const { items, totalPrice, itemsPrice, shippingPrice, address } = order;
     const {
         firstName,

@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import * as styles from './Checkout.module.scss';
+import { useSelector } from 'react-redux';
 import WidthWrapper from '../../components/WidthWrapper/WidthWrapper.js';
 import { Outlet, useNavigate } from 'react-router-dom';
+
+import * as styles from './Checkout.module.scss';
 
 const steps = ['login', 'address', 'payment', 'confirmation'];
 
 const Checkout = () => {
     const [step, setStep] = useState(0);
     const { user } = useSelector(store => store.user);
-    const { items, address } = useSelector(store => store.orders.currentOrder);
+    const { items } = useSelector(store => store.orders.currentOrder);
 
     const navigate = useNavigate();
     useEffect(() => {

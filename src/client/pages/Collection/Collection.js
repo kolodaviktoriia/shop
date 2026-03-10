@@ -7,10 +7,11 @@ import SectionHeader from '../../components/SectionHeader/SectionHeader.js';
 import { fetchProducts } from '../../slices/productsSlice.js';
 
 import * as styles from './Collection.module.scss';
+import Spinner from '../../components/Spinner/Spinner.js';
 
 const Collection = () => {
     const { id } = useParams();
-    const { products, collections } = useSelector(state => state.products);
+    const { products, collections, loading } = useSelector(state => state.products);
     const collection = collections.find(col => col.name === id);
 
     const dispatch = useDispatch();
@@ -18,6 +19,7 @@ const Collection = () => {
         dispatch(fetchProducts({ collection: collection.id }));
     }, [id, dispatch]);
 
+    if (loading) return <Spinner />;
     return (
         <div className={styles.collection}>
             <WidthWrapper>

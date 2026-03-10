@@ -22,7 +22,9 @@ const Payment = () => {
     const handlePayment = () => {
         setStep(cur => cur + 1)
     }
-    if (!address) return <></>;
+
+    if (!address) return <Spinner />;
+
     const { firstName,
         lastName,
         street,

@@ -6,6 +6,7 @@ import WidthWrapper from '../../components/WidthWrapper/WidthWrapper.js';
 import { useSearchParams } from 'react-router-dom';
 import { fetchProducts } from '../../slices/productsSlice.js';
 import SectionHeader from '../../components/SectionHeader/SectionHeader.js';
+import Spinner from '../../components/Spinner/Spinner.js';
 
 
 
@@ -31,13 +32,15 @@ const Search = () => {
     const [searchParams] = useSearchParams();
     const query = searchParams.get('q');
     const dispatch = useDispatch();
-    const { products } = useSelector(state => state.products);
+    const { products, loading } = useSelector(state => state.products);
 
     useEffect(() => {
         dispatch(fetchProducts({ search: query }));
     }, [query, dispatch]);
+
     const { noResults, resultsFound } = searchPageContent;
 
+    if (loading) return <Spinner />;
     return (
         <div className={styles.search}>
             <WidthWrapper>

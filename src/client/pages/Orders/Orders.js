@@ -5,9 +5,10 @@ import { fetchOrders } from '../../slices/ordersSlice.js';
 import * as styles from './Orders.module.scss';
 import { displayPrice } from '../../helpers/priceConverters.js';
 import { useNavigate } from 'react-router-dom';
+import Spinner from '../../components/Spinner/Spinner.js';
 
 const Orders = () => {
-    const { orders } = useSelector(store => store.orders);
+    const { orders, loading } = useSelector(store => store.orders);
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -18,7 +19,7 @@ const Orders = () => {
     const handleClick = (id) => {
         navigate(id);
     }
-
+    if (loading) return <Spinner />;
     return (
         <div className={styles.orders}>
             <h2 className={styles.title}>Your Orders</h2>

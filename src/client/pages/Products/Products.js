@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import ProductsList from '../../components/ProductsList/ProductsList.js';
 import WidthWrapper from '../../components/WidthWrapper/WidthWrapper.js';
+import Spinner from '../../components/Spinner/Spinner.js';
 import SectionHeader from '../../components/SectionHeader/SectionHeader.js';
 import { fetchProducts } from '../../slices/productsSlice.js';
 
@@ -18,15 +19,16 @@ const allCategory = {
 const Products = () => {
     const { id } = useParams();
     const dispatch = useDispatch();
-    const { products, categories } = useSelector(state => state.products);
+    const { products, categories, loading } = useSelector(state => state.products);
 
     const category =
         categories.find(cat => cat.name === id) ?? allCategory;
+
     useEffect(() => {
         dispatch(fetchProducts({ category: category.id }));
     }, [id, dispatch]);
 
-
+    if (loading) return <Spinner />;
     return (
         <div className={styles.products}>
             <WidthWrapper>

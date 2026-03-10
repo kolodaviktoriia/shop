@@ -7,7 +7,9 @@ const productsSlice = createSlice({
         product: undefined,
         categories: [],
         products: [],
-        collections: []
+        collections: [],
+        loading: false,
+        error: null
     },
     reducers: {
         setCategories(state, action) {
@@ -25,23 +27,49 @@ const productsSlice = createSlice({
         setCollections(state, action) {
             state.collections = action.payload;
         },
+        setProductsLoading: (state, action) => {
+            state.loading = action.payload;
+        },
+        setProductsError: (state, action) => {
+            state.error = action.payload;
+        },
     },
 });
 
-export const { clearProduct, setProducts, setProduct, setCategories, setCollections } = productsSlice.actions;
+export const { clearProduct, setProducts, setProduct, setCategories, setCollections, setProductsLoading, setProductsError } = productsSlice.actions;
 
 export const productsReducer = productsSlice.reducer;
 
-
 export const fetchProducts = (filter) => async (dispatch) => {
-    const data = await getProductsApi(filter);
-    dispatch(setProducts(data));
+    dispatch(setProductsLoading(true));
+    dispatch(setProductsError(null));
+
+    try {
+        const data = await getProductsApi(filter);
+        dispatch(setProducts(data));
+    }
+    catch (err) {
+        dispatch(setProductsError(err.message));
+    } finally {
+        dispatch(setProductsLoading(false));
+    };
 };
 
 export const fetchProduct = (id) => async (dispatch) => {
-    const data = await getProductApi(id);
-    dispatch(setProduct(data));
+    dispatch(setProductsLoading(true));
+    dispatch(setProductsError(null));
+
+    try {
+        const data = await getProductApi(id);
+        dispatch(setProduct(data));
+    }
+    catch (err) {
+        dispatch(setProductsError(err.message));
+    } finally {
+        dispatch(setProductsLoading(false));
+    };
 };
+
 
 export const fetchCategories = () => async (dispatch) => {
     const data = await getCategoriesApi();

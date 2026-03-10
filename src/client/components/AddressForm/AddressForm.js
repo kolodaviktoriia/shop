@@ -25,7 +25,7 @@ const AddressForm = ({ onSubmit }) => {
             const { firstName, lastName } = user;
             setFormValues({ ...initialState, firstName, lastName });
         }
-    }, [])
+    }, [user])
 
     const handleChange = (e) => {
         const { name, value } = e.target;

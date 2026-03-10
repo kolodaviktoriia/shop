@@ -1,21 +1,25 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import Button from '../../components/Button/Button.js';
-import * as styles from './Profile.module.scss';
+import { Outlet } from 'react-router-dom';
 import { logoutUser } from '../../slices/userSlice.js';
+import Button from '../../components/Button/Button.js';
 import WidthWrapper from '../../components/WidthWrapper/WidthWrapper.js';
 import LoginGrid from '../../components/LoginGrid/LoginGrid.js';
 import ButtonLink from '../../components/ButtonLink/ButtonLink.js';
-import { Outlet } from 'react-router-dom';
+import Spinner from '../../components/Spinner/Spinner.js';
+
+import * as styles from './Profile.module.scss';
 
 const Profile = () => {
-    const { user } = useSelector(store => store.user);
+    const { user, loading } = useSelector(store => store.user);
 
     const dispatch = useDispatch();
 
     const handleLogout = () => {
         dispatch(logoutUser());
     }
+
+    if (loading) return <Spinner />;
 
     return user ? (
         <div className={styles.profile}>
