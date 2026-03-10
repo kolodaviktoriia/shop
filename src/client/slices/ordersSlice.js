@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { updateCartApi, getCartApi } from '../api/cartApi.js';
+import { getOrderApi, getOrdersApi } from '../api/ordersApi.js';
 
 const initialOrder = {
     address: null,
@@ -8,6 +8,7 @@ const initialOrder = {
     itemsPrice: null,
     items: [],
 }
+
 const ordersSlice = createSlice({
     name: 'orders',
     initialState: {
@@ -32,10 +33,10 @@ const ordersSlice = createSlice({
             state.currentOrder = initialOrder;
         },
         setSelectedOrder: (state, action) => {
-            state.selectedOrder = action.payload.selectedOrder;
+            state.selectedOrder = action.payload;
         },
         setOrders: (state, action) => {
-            state.orders = action.payload.orders;
+            state.orders = action.payload;
         },
         setOrderLoading: (state, action) => {
             state.loading = action.payload;
@@ -50,3 +51,33 @@ export const { addAddress, initCurrentOrder, clearCurrentOrder, setSelectedOrder
 
 export const ordersReducer = ordersSlice.reducer;
 
+export const fetchOrders = () => async (dispatch) => {
+    dispatch(setOrderLoading(true));
+    dispatch(setOrderError(null));
+
+    try {
+        const data = await getOrdersApi();
+
+        dispatch(setOrders(data.orders));
+    }
+    catch (err) {
+        dispatch(setOrderError(err.message));
+    } finally {
+        dispatch(setOrderLoading(false));
+    };
+};
+
+export const fetchOrder = (id) => async (dispatch) => {
+    dispatch(setOrderLoading(true));
+    dispatch(setOrderError(null));
+
+    try {
+        const data = await getOrderApi(id);
+        dispatch(setSelectedOrder(data.order));
+    }
+    catch (err) {
+        dispatch(setOrderError(err.message));
+    } finally {
+        dispatch(setOrderLoading(false));
+    };
+};

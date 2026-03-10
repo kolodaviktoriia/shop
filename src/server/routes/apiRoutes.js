@@ -4,7 +4,7 @@ import { getProfile, getUserApi, loginApi, logoutApi, signupApi } from '../supab
 import { getToken } from '../helpers/getToken.js';
 import { setCookie } from '../helpers/setCookie.js';
 import { getCartApi, saveCartApi } from '../supabaseApi/cartApi.js';
-import { captureOrderApi, createOrderApi } from '../supabaseApi/ordersApi.js';
+import { captureOrderApi, createOrderApi, getOrderApi, getOrdersApi } from '../supabaseApi/ordersApi.js';
 import { client, OrdersCaptureRequest, OrdersCreateRequest } from '../paypal.js';
 
 const router = express.Router();
@@ -192,6 +192,36 @@ router.post("/orders/:orderID/capture", async (req, res) => {
 });
 
 
+router.get('/orders', async (req, res) => {
+    try {
+        const token = await getToken(req, res);
+        if (!token) return res.status(400).json({ error: 'No session token found' });
+
+        const user = await getUserApi(token);
+
+        const orders = await getOrdersApi(user.id);
+        res.json({
+            orders
+        });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+router.get('/orders/:id', async (req, res) => {
+    try {
+        const token = await getToken(req, res);
+        if (!token) return res.status(400).json({ error: 'No session token found' });
+
+        const user = await getUserApi(token);
+
+        const order = await getOrderApi(user.id, req.params.id);
+        res.json({
+            order
+        });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
 
 
 export default router;

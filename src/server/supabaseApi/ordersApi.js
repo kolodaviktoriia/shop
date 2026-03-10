@@ -4,7 +4,7 @@ import { supabase } from "./supabaseClient.js";
 export const getOrdersApi = async (userId) => {
     const { data, error } = await supabase
         .from('orders')
-        .select('items, id, createdAt')
+        .select(' id, status, createdAt, totalPrice')
         .eq('userId', userId)
 
     if (error) {
@@ -16,18 +16,39 @@ export const getOrdersApi = async (userId) => {
 };
 
 
-export const getOrderApi = async (userId) => {
-    const { data, error } = await supabase
+export const getOrderApi = async (userId, orderId) => {
+    const { data: order, error: orderError } = await supabase
         .from('orders')
-        .select('items, id, createdAt')
+        .select('id, createdAt, totalPrice, shippingPrice, itemsPrice, items, deliveryAddressId')
         .eq('userId', userId)
+        .eq('id', orderId)
+        .single();
 
-    if (error) {
-        if (error.code === 'PGRST116') return [];
-        throw error;
+    if (orderError) {
+        if (orderError.code === 'PGRST116') return null;
+        throw orderError;
     }
 
-    return data;
+    if (!order) return null;
+
+    let address = null;
+
+    if (order.deliveryAddressId) {
+        const { data: addr, error: addrError } = await supabase
+            .from('orderAddresses')
+            .select('firstName, lastName, street, houseNumber, postalCode, city, country, phone')
+            .eq('id', order.deliveryAddressId)
+            .single();
+
+        if (addrError && addrError.code !== 'PGRST116') throw addrError;
+        address = addr || null;
+    }
+
+    order.address = address;
+
+    delete order.deliveryAddressId;
+
+    return order;
 };
 
 export const createOrderApi = async (userId, order, paypalOrderId, jsonResponse) => {

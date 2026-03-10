@@ -1,9 +1,11 @@
 .profile {
     margin: 2rem;
+    min-height: calc(100vh - $header-height - $footer-height);
 
     .profileWrapper {
         display: grid;
         grid-template-columns: 0.6fr 1fr;
+        align-items: start;
         gap: 8rem;
 
         .navigation {

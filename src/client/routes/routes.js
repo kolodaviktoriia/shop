@@ -15,6 +15,8 @@ import Address from '../pages/Address/Address.js';
 import Payment from '../pages/Payment/Payment.js';
 import Confirmation from '../pages/Confirmation/Confirmation.js';
 import ProfileDetails from '../pages/ProfileDetails/ProfileDetails.js';
+import Orders from '../pages/Orders/Orders.js';
+import Order from '../pages/Order/Order.js';
 
 
 export const routes = [{
@@ -61,6 +63,16 @@ export const routes = [{
                     path: 'details',
 
                 },
+
+                {
+                    element: <Orders />,
+                    path: 'orders',
+                },
+                {
+                    element: <Order />,
+                    path: 'orders/:id',
+                },
+
             ]
         },
         {
