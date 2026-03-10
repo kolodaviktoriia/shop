@@ -3,13 +3,13 @@ import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { useSelector } from "react-redux";
 import { captureOrderApi, createOrderApi } from "../../api/ordersApi.js";
 
-const PayPalComponent = () => {
-    const { currentOrder: order } = useSelector(store => store.orders)
+const PayPalComponent = ({ handlePayment }) => {
+    const { currentOrder: order } = useSelector(store => store.orders);
 
     const initialOptions = {
-        currency: "EUR",
+        currency: 'EUR',
         "client-id":
-            "Abp1MF1Uw3Ij-dJHA6oqIBRrDWez_2el1hnILz0-J5yZOkYNNxQmL07rbycHkOk45QaH_dE6GnDzfCEY",
+            "Ab7GY2KlVbm8FkhbnscnFM5v3evrZLQj4L2ZRw6xwbHRfq8KDDHTbsQ0WKBreHosn--hrHti1F5CgOb3",
         intent: "capture",
         commit: true,
         components: "buttons",
@@ -20,7 +20,6 @@ const PayPalComponent = () => {
     const handleCreateOrder = async () => {
         try {
             const orderData = await createOrderApi(order);
-            console.log('handleCreateOrde', orderData);
 
             if (orderData.id) {
                 return orderData.id;
@@ -43,8 +42,7 @@ const PayPalComponent = () => {
     const handleApprove =
         async (data, actions) => {
             try {
-                const orderData = await captureOrderApi(data.id);
-                console.log('captureOrde', orderData);
+                const orderData = await captureOrderApi(data.orderID);
                 const errorDetail = orderData?.details?.[0];
 
                 if (errorDetail?.issue === "INSTRUMENT_DECLINED") {
@@ -54,17 +52,7 @@ const PayPalComponent = () => {
                         `${errorDetail.description} (${orderData.debug_id})`
                     );
                 } else {
-                    const transaction =
-                        orderData.purchase_units[0].payments
-                            .captures[0];
-                    setMessage(
-                        `Transaction ${transaction.status}: ${transaction.id}. See console for all available details`
-                    );
-                    console.log(
-                        "Capture result",
-                        orderData,
-                        JSON.stringify(orderData, null, 2)
-                    );
+                    handlePayment();
                 }
             } catch (error) {
                 console.error(error);

@@ -154,7 +154,7 @@ router.post("/orders", async (req, res) => {
 
     request.requestBody({
         intent: 'CAPTURE',
-        purchase_units: [{ amount: { currency_code: 'EUR', value: '1.00' } }]
+        purchase_units: [{ amount: { currency_code: 'EUR', value: (req.body.order.totalPrice / 100).toFixed(2) } }]
     });
 
     try {
@@ -164,14 +164,13 @@ router.post("/orders", async (req, res) => {
         const user = await getUserApi(token);
         const order = await client.execute(request);
 
-        await createOrderApi(
+        const orderId = await createOrderApi(
             user.id,
             req.body.order,
             order.result.id,
-            order.result.purchase_units?.[0]?.amount?.value,
             order.result
         );
-        res.json({ id: order.result.id });
+        res.json({ id: order.result.id, orderId });
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
@@ -179,13 +178,14 @@ router.post("/orders", async (req, res) => {
 });
 
 router.post("/orders/:orderID/capture", async (req, res) => {
-    console.log('capture')
     const orderID = req.params.orderID;
     const request = new OrdersCaptureRequest(orderID);
     try {
         const capture = await client.execute(request);
-        await captureOrderApi(orderID, capture, capture.result.status);
-        res.json({ id: capture.result.id, status: capture.result.status });
+
+        const orderId = await captureOrderApi(orderID, capture, capture.result.status);
+
+        res.json({ id: capture.result.id, status: capture.result.status, orderId });
     } catch (err) {
         res.status(500).json({ error: err.message });
     }

@@ -3,16 +3,17 @@ import App from "../App.js";
 import Landing from "../pages/Landing/Landing.js";
 import Product from '../pages/Product/Product.js';
 import { fetchCategories, fetchCollections, fetchProduct } from '../slices/productsSlice.js';
+import { fetchCurrentUser } from '../slices/userSlice.js';
 import Products from '../pages/Products/Products.js';
 import Collection from '../pages/Collection/Collection.js';
 import Search from '../pages/Search/Search.js';
 import Cart from '../pages/Cart/Cart.js';
 import Login from '../pages/Login/Login.js';
-import { fetchCurrentUser } from '../slices/userSlice.js';
 import Profile from '../pages/Profile/Profile.js';
 import Checkout from '../pages/Checkout/Checkout.js';
 import Address from '../pages/Address/Address.js';
 import Payment from '../pages/Payment/Payment.js';
+import Confirmation from '../pages/Confirmation/Confirmation.js';
 
 
 export const routes = [{
@@ -81,6 +82,11 @@ export const routes = [{
                 {
                     element: <Payment />,
                     path: 'payment',
+
+                },
+                {
+                    element: <Confirmation />,
+                    path: 'confirmation',
 
                 },
 

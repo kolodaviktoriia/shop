@@ -30,7 +30,7 @@ export const getOrderApi = async (userId) => {
     return data;
 };
 
-export const createOrderApi = async (userId, order, paypalOrderId, amount, jsonResponse) => {
+export const createOrderApi = async (userId, order, paypalOrderId, jsonResponse) => {
     const { address, ...orderData } = order;
     const { data, error: addressError } = await supabase.from("orderAddresses").insert([
         { ...address }
@@ -39,32 +39,36 @@ export const createOrderApi = async (userId, order, paypalOrderId, amount, jsonR
     if (addressError) {
         throw addressError;
     }
-    const { error } = await supabase.from("orders").insert([
+    const { data: orderInsertData, error } = await supabase.from("orders").insert([
         {
             ...orderData,
             paypalOrderId,
             deliveryAddressId: data[0].id,
             userId,
             status: "pending",
-            totalPrice: amount,
             rawPaypalResponse: jsonResponse
         }
-    ]);
+    ]).select();
 
     if (error) {
         throw error;
     }
+    return orderInsertData[0].id;
 };
 
 export const captureOrderApi = async (orderId, jsonResponse, status) => {
-    const { error } = await supabase
+    const { data, error } = await supabase
         .from("orders")
         .update({
-            status,
+            status: String(status).toLowerCase(),
             captureResponse: jsonResponse
         })
-        .eq("paypalOrderId", orderId);
+        .eq("paypalOrderId", orderId)
+        .select();
+
     if (error) {
         throw error;
     }
+
+    return data?.[0]?.id;
 };

@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { initCurrentOrder } from '../../slices/ordersSlice.js';
+import { useSelector } from 'react-redux';
+import { useNavigate, useOutletContext } from 'react-router-dom';
 import { displayPrice } from '../../helpers/priceConverters.js';
 
 import PayPalComponent from '../../components/PayPalComponent/PayPalComponent.js';
@@ -10,23 +9,18 @@ import ProductCartItem from '../../components/ProductCartItem /ProductCartItem.j
 import * as styles from './Payment.module.scss';
 
 const Payment = () => {
+    const { setStep } = useOutletContext();
     const { items, totalPrice, itemsPrice, shippingPrice, address } = useSelector(store => store.orders?.currentOrder);
 
     const navigate = useNavigate();
-    const dispatch = useDispatch();
 
     useEffect(() => {
         if (!items && items.length === 0 || !totalPrice || !address) navigate('/cart');
     }, [items, totalPrice, address]);
 
+
     const handlePayment = () => {
-        dispatch(initCurrentOrder({
-            items,
-            totalPrice,
-            shippingPrice,
-            itemsPrice,
-        }));
-        navigate('/checkout');
+        setStep(cur => cur + 1)
     }
     if (!address) return <></>;
     const { firstName,
@@ -75,7 +69,7 @@ const Payment = () => {
                         <span className={styles.totalTitle}>Total</span>
                         <span className={styles.amount}>{displayPrice(totalPrice)}</span>
                     </div>
-                    <PayPalComponent />
+                    <PayPalComponent handlePayment={handlePayment} />
                 </div>
             </WidthWrapper>
         </div >

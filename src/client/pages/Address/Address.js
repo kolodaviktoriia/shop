@@ -11,7 +11,6 @@ const Address = () => {
     const dispatch = useDispatch();
 
     const handleForm = (formValues) => {
-        console.log('values', formValues);
         dispatch(addAddress(formValues));
         setStep(cur => cur + 1);
     }
