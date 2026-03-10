@@ -3,12 +3,7 @@ import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { useSelector } from "react-redux";
 import { captureOrderApi, createOrderApi } from "../../api/ordersApi.js";
 
-
-function Message({ content }) {
-    return <p>{content}</p>;
-}
-
-const PayPal = () => {
+const PayPalComponent = () => {
     const { currentOrder: order } = useSelector(store => store.orders)
 
     const initialOptions = {
@@ -94,4 +89,4 @@ const PayPal = () => {
     );
 }
 
-export default PayPal;
+export default PayPalComponent;

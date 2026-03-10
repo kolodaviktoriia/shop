@@ -31,7 +31,7 @@ const Checkout = () => {
                                 </div>
                                 <span className={styles.label}>{label}</span>
                             </div>
-                            {index !== steps.length - 1 ? <div className={`${styles.connector} ${index === step ? styles.activeConnector : ''} ${index < step ? styles.completedConnector : ''}`}></div> : undefined}
+                            {index !== steps.length - 1 ? <div className={`${styles.connector}  ${index < step ? styles.completedConnector : ''}`}></div> : undefined}
                         </React.Fragment>
                     ))}
                 </div >

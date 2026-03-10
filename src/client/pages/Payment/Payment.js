@@ -1,16 +1,13 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import WidthWrapper from '../../components/WidthWrapper/WidthWrapper.js';
-import ProductCartItem from '../../components/ProductCartItem /ProductCartItem.js';
-
-
-import Button from '../../components/Button/Button.js';
 import { useNavigate } from 'react-router-dom';
-
-import * as styles from './Payment.module.scss';
 import { initCurrentOrder } from '../../slices/ordersSlice.js';
 import { displayPrice } from '../../helpers/priceConverters.js';
-import PayPal from '../../components/Paypal/PayPal.js';
+import PayPalButtons from '../../components/PayPalButtons/PayPalButtons.js';
+
+import WidthWrapper from '../../components/WidthWrapper/WidthWrapper.js';
+import ProductCartItem from '../../components/ProductCartItem /ProductCartItem.js';
+import * as styles from './Payment.module.scss';
 
 const Payment = () => {
     const { items, totalPrice, itemsPrice, shippingPrice, address } = useSelector(store => store.orders?.currentOrder);
