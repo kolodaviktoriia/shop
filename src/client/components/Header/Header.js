@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { MagnifyingGlassIcon, ShoppingBagIcon, UserIcon, HeartIcon } from '@heroicons/react/24/outline';
 import NavLinkCustom from '../NavLinkCustom/NavLinkCustom.js';
 import WidthWrapper from '../WidthWrapper/WidthWrapper.js';
-import { useSelector } from 'react-redux';
-import { MagnifyingGlassIcon, ShoppingBagIcon, UserIcon, HeartIcon } from '@heroicons/react/24/outline';
 import InputField from '../InputField/InputField.js';
 import Logo from '../Logo/Logo.js';
 import * as styles from './Header.module.scss';
@@ -19,6 +19,7 @@ const Header = () => {
     const handleSubmitSearch = (e) => {
         e.preventDefault();
         navigate(`/search?q=${encodeURIComponent(search)}`);
+        setSearch('');
 
     }
     const handleSearch = (e) => {
