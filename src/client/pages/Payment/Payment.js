@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { initCurrentOrder } from '../../slices/ordersSlice.js';
 import { displayPrice } from '../../helpers/priceConverters.js';
-import PayPalButtons from '../../components/PayPalButtons/PayPalButtons.js';
 
 import WidthWrapper from '../../components/WidthWrapper/WidthWrapper.js';
 import ProductCartItem from '../../components/ProductCartItem /ProductCartItem.js';
