@@ -11,20 +11,20 @@ const navigation = {
     shop: [
     ],
     collections: [],
-    help: [
-        { label: "Contact Us", link: "/contact" },
-        { label: "Shipping & Delivery", link: "/shipping" },
-        { label: "Returns", link: "/returns" },
-        { label: "FAQ", link: "/faq" },
-    ],
+    // help: [
+    //     { label: "Contact Us", link: "/contact" },
+    //     { label: "Shipping & Delivery", link: "/shipping" },
+    //     { label: "Returns", link: "/returns" },
+    //     { label: "FAQ", link: "/faq" },
+    // ],
 
-    company: [
-        { label: "About Us", link: "/about" },
-        { label: "Our Ingredients", link: "/ingredients" },
-        { label: "Sustainability", link: "/sustainability" },
-        { label: "Privacy Policy", link: "/privacy" },
-        { label: "Terms of Service", link: "/terms" },
-    ],
+    // company: [
+    //     { label: "About Us", link: "/about" },
+    //     { label: "Our Ingredients", link: "/ingredients" },
+    //     { label: "Sustainability", link: "/sustainability" },
+    //     { label: "Privacy Policy", link: "/privacy" },
+    //     { label: "Terms of Service", link: "/terms" },
+    // ],
 }
 
 const capitalize = (word) => word.substring(0, 1).toUpperCase() + word.substring(1);
@@ -73,8 +73,16 @@ const Footer = () => {
             <div className={styles.copyrightWrapper}>
                 <WidthWrapper>
                     <p className={styles.copyright}>
-                        © 2026 Blush & Bloom. All rights reserved.
-                    </p></WidthWrapper>
+                        © 2026 Blush & Bloom. All rights reserved. Designed and developed by <a
+                            href="https://www.viktoriia-koloda.com/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={styles.authorLink}
+                        >
+                            Viktoriia Koloda
+                        </a> as a portfolio project for demonstration purposes only. The shop and products are fictional. All code and content may not be copied, reproduced, or used without permission.
+                    </p>
+                </WidthWrapper>
             </div>
         </footer >
     )

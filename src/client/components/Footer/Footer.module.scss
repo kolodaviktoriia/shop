@@ -53,7 +53,8 @@
         padding: 2rem 0;
         background-color: white;
 
-        .copyright {
+        .copyright,
+        .authorLink {
             text-align: center;
             @include sub-text;
         }
