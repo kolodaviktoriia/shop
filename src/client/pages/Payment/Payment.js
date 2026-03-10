@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { initCurrentOrder } from '../../slices/ordersSlice.js';
 import { displayPrice } from '../../helpers/priceConverters.js';
 
+import PayPalComponent from '../../components/PayPalComponent/PayPalComponent.js';
 import WidthWrapper from '../../components/WidthWrapper/WidthWrapper.js';
 import ProductCartItem from '../../components/ProductCartItem /ProductCartItem.js';
 import * as styles from './Payment.module.scss';
@@ -74,7 +75,7 @@ const Payment = () => {
                         <span className={styles.totalTitle}>Total</span>
                         <span className={styles.amount}>{displayPrice(totalPrice)}</span>
                     </div>
-                    <PayPal />
+                    <PayPalComponent />
                 </div>
             </WidthWrapper>
         </div >
