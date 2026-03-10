@@ -13,7 +13,7 @@ const ProfileDetails = () => {
                 <span className={styles.infoText}>{user?.firstName} {user?.lastName}</span>
                 <span className={styles.infoText}>{user?.email}</span>
                 {address ? <>  <h3 className={styles.subTitle}>My shipping details</h3>
-                    <div className={styles.delivery}>
+                    <div>
                         <p className={styles.infoText}>{address.firstName} {address.lastName}</p>
                         <p className={styles.infoText}>{address.street} {address.houseNumber}</p>
                         <p className={styles.infoText}>{address.postalCode} {address.city}</p>
