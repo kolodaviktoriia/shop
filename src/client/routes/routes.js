@@ -14,6 +14,7 @@ import Checkout from '../pages/Checkout/Checkout.js';
 import Address from '../pages/Address/Address.js';
 import Payment from '../pages/Payment/Payment.js';
 import Confirmation from '../pages/Confirmation/Confirmation.js';
+import ProfileDetails from '../pages/ProfileDetails/ProfileDetails.js';
 
 
 export const routes = [{
@@ -53,7 +54,14 @@ export const routes = [{
         {
             element: <Profile />,
             path: '/profile',
-            loadData: (store) => store.dispatch(fetchCurrentUser())
+            loadData: (store) => store.dispatch(fetchCurrentUser()),
+            children: [
+                {
+                    element: <ProfileDetails />,
+                    path: 'details',
+
+                },
+            ]
         },
         {
             element: <Cart />,

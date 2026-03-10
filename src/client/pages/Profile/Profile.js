@@ -5,6 +5,8 @@ import * as styles from './Profile.module.scss';
 import { logoutUser } from '../../slices/userSlice.js';
 import WidthWrapper from '../../components/WidthWrapper/WidthWrapper.js';
 import LoginGrid from '../../components/LoginGrid/LoginGrid.js';
+import ButtonLink from '../../components/ButtonLink/ButtonLink.js';
+import { Outlet } from 'react-router-dom';
 
 const Profile = () => {
     const { user } = useSelector(store => store.user);
@@ -19,15 +21,12 @@ const Profile = () => {
         <div className={styles.profile}>
             <WidthWrapper className={styles.profileWrapper}>
                 <div className={styles.navigation}>
+                    <ButtonLink to='/profile/details'>Profile</ButtonLink>
+                    <ButtonLink to='/profile/orders'>Orders</ButtonLink>
                     <Button onClick={handleLogout}>Log out</Button>
                 </div>
                 <div className={styles.info}>
-                    <h2 className={styles.title}>Hello, {user?.firstName} {user?.lastName}!</h2>
-                    <div className={styles.main}>
-                        <h3 className={styles.subTitle}>My personal data</h3>
-                        <span className={styles.infoText}>{user?.firstName} {user?.lastName}</span>
-                        <span className={styles.infoText}>{user?.email}</span>
-                    </div>
+                    <Outlet />
                 </div>
             </WidthWrapper>
         </div >

@@ -40,7 +40,7 @@ const LoginForm = ({ navigateTo }) => {
         e.preventDefault();
         if (!validate()) return;
         dispatch(loginUser(email, password));
-        navigate(navigateTo ?? '/profile')
+        navigate(navigateTo ?? '/profile/details')
 
     }
 

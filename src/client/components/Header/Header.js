@@ -35,7 +35,7 @@ const Header = () => {
                 </form>
                 <Logo />
                 <div className={styles.userBar}>
-                    <NavLinkCustom to='/profile'><UserIcon className={styles.icon} /></NavLinkCustom>
+                    <NavLinkCustom to='/profile/details'><UserIcon className={styles.icon} /></NavLinkCustom>
                     <NavLinkCustom to='/favorites'><HeartIcon className={styles.icon} /></NavLinkCustom>
                     <NavLinkCustom to='/cart'>
                         <ShoppingBagIcon className={styles.icon} />

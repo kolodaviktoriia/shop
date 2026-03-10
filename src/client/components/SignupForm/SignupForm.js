@@ -56,7 +56,7 @@ const SignupForm = ({ navigateTo }) => {
         e.preventDefault();
         if (!validate()) return;
         dispatch(signupUser(formValues));
-        navigate(navigateTo ?? '/profile')
+        navigate(navigateTo ?? '/profile/details')
 
     }
 
