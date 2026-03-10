@@ -1,5 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { getOrderApi, getOrdersApi } from '../api/ordersApi.js';
+import { notify } from '../components/Toaster/Toaster.js';
+
 
 const initialOrder = {
     address: null,
@@ -61,7 +63,8 @@ export const fetchOrders = () => async (dispatch) => {
         dispatch(setOrders(data.orders));
     }
     catch (err) {
-        dispatch(setOrderError(err.message));
+        notify.error(err?.response.data?.message || err.message);
+        dispatch(setOrderError(err?.response.data?.message || err.message));
     } finally {
         dispatch(setOrderLoading(false));
     };
@@ -76,7 +79,8 @@ export const fetchOrder = (id) => async (dispatch) => {
         dispatch(setSelectedOrder(data.order));
     }
     catch (err) {
-        dispatch(setOrderError(err.message));
+        notify.error(err?.response.data?.message || err.message);
+        dispatch(setOrderError(err?.response.data?.message || err.message));
     } finally {
         dispatch(setOrderLoading(false));
     };

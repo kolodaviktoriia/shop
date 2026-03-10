@@ -23,15 +23,16 @@ const Product = () => {
 
     }, [id, dispatch]);
 
-    const handleAddToBag = (e) => {
-        e.preventDefault();
-        dispatch(addItemAndSync({ ...product, quantity }))
-        setQuantity(1);
-    }
 
     if (loading || !product) return <Spinner />;
 
     const { imageUrl, price, description, title, ingredients, categories, collection } = product;
+
+    const handleAddToBag = (e) => {
+        e.preventDefault();
+        dispatch(addItemAndSync({ ...product, quantity }, 'Great choice! Added to your cart 🛍️'))
+        setQuantity(1);
+    }
 
     return (
         <div className={styles.product}>

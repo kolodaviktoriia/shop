@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { getCategoriesApi, getCollectionsApi, getProductApi, getProductsApi } from '../api/productsApi.js';
+import { notify } from '../components/Toaster/Toaster.js';
 
 const productsSlice = createSlice({
     name: 'products',
@@ -49,7 +50,8 @@ export const fetchProducts = (filter) => async (dispatch) => {
         dispatch(setProducts(data));
     }
     catch (err) {
-        dispatch(setProductsError(err.message));
+        notify.error(err?.response.data?.message || err.message);
+        dispatch(setProductsError(err?.response.data?.message || err.message));
     } finally {
         dispatch(setProductsLoading(false));
     };
@@ -64,7 +66,8 @@ export const fetchProduct = (id) => async (dispatch) => {
         dispatch(setProduct(data));
     }
     catch (err) {
-        dispatch(setProductsError(err.message));
+        notify.error(err?.response.data?.message || err.message);
+        dispatch(setProductsError(err?.response.data?.message || err.message));
     } finally {
         dispatch(setProductsLoading(false));
     };

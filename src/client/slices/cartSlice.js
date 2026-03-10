@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { updateCartApi, getCartApi } from '../api/cartApi.js';
+import { notify } from '../components/Toaster/Toaster.js';
 
 const cartSlice = createSlice({
     name: 'cart',
@@ -56,7 +57,7 @@ export const { addItem, removeItem, deleteItem, clearCart, setCartLoading,
 export const cartReducer = cartSlice.reducer;
 
 
-const syncCart = (action, payload) => async (dispatch, getState) => {
+const syncCart = (action, payload, successMessage) => async (dispatch, getState) => {
     const user = getState().user?.user;
     dispatch(action(payload));
 
@@ -66,8 +67,12 @@ const syncCart = (action, payload) => async (dispatch, getState) => {
         try {
             const cart = getState().cart.items;
             await updateCartApi(cart);
+            if (successMessage) {
+                notify.success(successMessage);
+            }
         } catch (err) {
-            dispatch(setCartError(err.message));
+            notify.error(err?.response.data?.message || err.message);
+            dispatch(setCartError(err?.response.data?.message || err.message));
         } finally {
             dispatch(setCartLoading(false));
         }
@@ -75,7 +80,7 @@ const syncCart = (action, payload) => async (dispatch, getState) => {
 };
 
 
-export const addItemAndSync = (payload) => syncCart(addItem, payload);
+export const addItemAndSync = (payload, successMessage) => syncCart(addItem, payload, successMessage);
 export const removeItemAndSync = (payload) => syncCart(removeItem, payload);
 export const deleteItemAndSync = (payload) => syncCart(deleteItem, payload);
 export const clearCartAndSync = () => syncCart(clearCart);
@@ -103,7 +108,8 @@ export const fetchCart = () => async (dispatch, getState) => {
         await updateCartApi(newCart);
 
     } catch (err) {
-        dispatch(setCartError(err.message));
+        notify.error(err?.response.data?.message || err.message);
+        dispatch(setCartError(err?.response.data?.message || err.message));
     } finally {
         dispatch(setCartLoading(false));
     }

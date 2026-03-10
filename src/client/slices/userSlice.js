@@ -1,6 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { getCurrentUserApi, loginApi, logoutApi, signupApi } from '../api/usersApi.js';
 import { clearCart, fetchCart } from './cartSlice.js';
+import { notify } from '../components/Toaster/Toaster.js';
+
 
 const userSlice = createSlice({
     name: 'user',
@@ -30,7 +32,8 @@ export const loginUser = (email, password) => async (dispatch) => {
         dispatch(setUser(data.user));
         dispatch(fetchCart());
     } catch (err) {
-        dispatch(setError(err.message));
+        notify.error(err?.response.data?.message || err.message);
+        dispatch(setError(err?.response.data?.message || err.message));
     } finally {
         dispatch(setLoading(false));
     }
@@ -43,7 +46,8 @@ export const logoutUser = () => async (dispatch) => {
         dispatch(clearUser());
         dispatch(clearCart());
     } catch (err) {
-        dispatch(setError(err.message));
+        notify.error(err?.response.data?.message || err.message);
+        dispatch(setError(err?.response.data?.message || err.message));
     } finally {
         dispatch(setLoading(false));
     }
@@ -56,7 +60,8 @@ export const fetchCurrentUser = () => async (dispatch) => {
         dispatch(setUser(data.user || null));
         dispatch(fetchCart());
     } catch (err) {
-        dispatch(setError(err.message));
+        notify.error(err?.response.data?.message || err.message);
+        dispatch(setError(err?.response.data?.message || err.message));
     } finally {
         dispatch(setLoading(false));
     }
@@ -70,7 +75,8 @@ export const signupUser = (userData) => async (dispatch) => {
         dispatch(setUser(data.user || null));
         dispatch(fetchCart());
     } catch (err) {
-        dispatch(setError(err.message));
+        notify.error(err?.response.data?.message || err.message);
+        dispatch(setError(err?.response.data?.message || err.message));
     } finally {
         dispatch(setLoading(false));
     }
