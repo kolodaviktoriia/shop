@@ -3,11 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import WidthWrapper from '../../components/WidthWrapper/WidthWrapper.js';
 import ProductCartItem from '../../components/ProductCartItem /ProductCartItem.js';
+import Spinner from '../../components/Spinner/Spinner.js';
 import { displayPrice } from '../../helpers/priceConverters.js';
 
 import { fetchOrder } from '../../slices/ordersSlice.js';
 
 import * as styles from './Order.module.scss';
+
 
 const Order = () => {
     const { id } = useParams();
