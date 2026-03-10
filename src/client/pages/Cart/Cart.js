@@ -13,7 +13,7 @@ import { displayPrice } from '../../helpers/priceConverters.js';
 import * as styles from './Cart.module.scss';
 
 const Cart = () => {
-    const { user } = useSelector(store => store.)
+    const { user } = useSelector(store => store.user)
     const { items } = useSelector(store => store.cart);
     const itemsPrice = items.reduce(
         (acc, item) => acc + item.price * item.quantity,

@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useOutletContext } from 'react-router-dom';
 import { displayPrice } from '../../helpers/priceConverters.js';
 
+import Spinner from '../../components/Spinner/Spinner.js';
 import PayPalComponent from '../../components/PayPalComponent/PayPalComponent.js';
 import WidthWrapper from '../../components/WidthWrapper/WidthWrapper.js';
 import ProductCartItem from '../../components/ProductCartItem /ProductCartItem.js';
@@ -19,8 +20,9 @@ const Payment = () => {
     }, [items, totalPrice, address]);
 
 
-    const handlePayment = () => {
-        setStep(cur => cur + 1)
+    const handlePayment = (id) => {
+        setStep(cur => cur + 1);
+        navigate(`/checkout/confirmation/${id}`);
     }
 
     if (!address) return <Spinner />;
