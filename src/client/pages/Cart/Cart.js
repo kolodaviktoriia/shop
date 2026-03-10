@@ -39,8 +39,14 @@ const Cart = () => {
                 <WidthWrapper className={styles.emptyWrapper}>
                     <div className={styles.emptyCart}>
                         <h2 className={styles.title}>Your Bag Is Empty</h2>
-                        <p className={styles.subtitle}>Looking for items you added previously? Then log in to see them!</p>
-                        <ButtonLink to='/login' >Sign in</ButtonLink>
+                        {user ? <>
+                            <p className={styles.subtitle}>Nothing here yet? Let’s find something you’ll love!</p>
+                            <ButtonLink to='/' >Continue Shopping</ButtonLink>
+                        </> : <>
+                            <p className={styles.subtitle}>Looking for items you added previously? Then log in to see them!</p>
+                            <ButtonLink to='/login' >Sign in</ButtonLink>
+                        </>
+                        }
                     </div>
                 </WidthWrapper> : <>
                     <WidthWrapper>
