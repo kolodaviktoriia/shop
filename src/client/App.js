@@ -5,6 +5,7 @@ import Header from "./components/Header/Header.js";
 import Footer from "./components/Footer/Footer.js";
 import Spinner from "./components/Spinner/Spinner.js";
 import Toaster from "./components/Toaster/Toaster.js";
+import ErrorBoundary from "./components/ErrorBoundary.js";
 import { fetchCurrentUser } from "./slices/userSlice.js";
 import * as styles from "./App.module.scss";
 
@@ -22,17 +23,18 @@ const App = () => {
         <div className={styles.appWrapper}>
             <Toaster />
             <Header />
+            <ErrorBoundary>
+                {loading ? (
+                    <Spinner />
+                ) : (
 
-            {loading ? (
-                <Spinner />
-            ) : (
-                <div
-                    className={`${styles.pageWrapper} ${hydrated ? styles.visible : ""}`}
-                >
-                    <Outlet />
-                </div>
-            )}
-
+                    <div
+                        className={`${styles.pageWrapper} ${hydrated ? styles.visible : ""}`}
+                    >
+                        <Outlet />
+                    </div>
+                )}
+            </ErrorBoundary>
             <Footer />
         </div>
     );

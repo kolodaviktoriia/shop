@@ -18,10 +18,12 @@ import ProfileDetails from '../pages/ProfileDetails/ProfileDetails.js';
 import Orders from '../pages/Orders/Orders.js';
 import Order from '../pages/Order/Order.js';
 import NotFound from '../pages/NotFound/NotFound.js';
+import ErrorHandler from '../pages/ErrorHandler/ErrorHandler.js';
 
 
 export const routes = [{
     element: <App />,
+    errorElement: <ErrorHandler />,
     path: '/',
     loadData: (store) => Promise.all([
         store.dispatch(fetchCategories()),
