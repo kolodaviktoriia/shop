@@ -37,7 +37,9 @@ const Header = () => {
                 <Logo />
                 <div className={styles.userBar}>
                     <NavLinkCustom to='/profile/details'><UserIcon className={styles.icon} /></NavLinkCustom>
-                    <NavLinkCustom to='/favorites'><HeartIcon className={styles.icon} /></NavLinkCustom>
+                    <NavLinkCustom to='/profile/favorites'>
+                        <HeartIcon className={styles.icon} />
+                    </NavLinkCustom>
                     <NavLinkCustom to='/cart'>
                         <ShoppingBagIcon className={styles.icon} />
                         {quantity > 0 ? <div className={styles.quantity}>{quantity}</div> : ''}

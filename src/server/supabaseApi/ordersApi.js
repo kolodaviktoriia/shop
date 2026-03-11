@@ -6,6 +6,7 @@ export const getOrdersApi = async (userId) => {
         .from('orders')
         .select(' id, status, createdAt, totalPrice')
         .eq('userId', userId)
+        .order('createdAt', { ascending: false });
 
     if (error) {
         if (error.code === 'PGRST116') return [];

@@ -102,10 +102,8 @@ export const fetchCart = (isCheckout = false) => async (dispatch, getState) => {
             await updateCartApi(newCart);
         }
     } catch (err) {
-        notify.error(err?.response?.data?.message || err.message);
         dispatch(setCartError(err?.response?.data?.message || err.message));
     } finally {
-        console.log('final');
         dispatch(setCartLoading(false));
     }
 };

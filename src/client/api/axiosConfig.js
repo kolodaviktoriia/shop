@@ -35,3 +35,8 @@ export const postData = async (url, payload = {}) => {
     const { data } = await api.post(url, payload);
     return data;
 };
+
+export const deleteData = async (url, config = {}) => {
+    const { data } = await api.delete(url, config);
+    return data;
+};

@@ -1,5 +1,5 @@
 import express from 'express';
-import { getCategoriesApi, getCollectionsApi, getProductApi, getProductsApi } from '../supabaseApi/productsApi.js';
+import { getCategoriesApi, getCollectionsApi, getProductApi, getProductsApi, getFavoritesApi, addFavoriteApi, deleteFavoriteApi, } from '../supabaseApi/productsApi.js';
 import { getProfile, getUserApi, loginApi, logoutApi, signupApi } from '../supabaseApi/userApi.js';
 import { getToken } from '../helpers/getToken.js';
 import { setCookie } from '../helpers/setCookie.js';
@@ -307,5 +307,61 @@ router.get('/orders/:id', async (req, res) => {
     }
 });
 
+router.get('/favorites', async (req, res) => {
+    try {
+        const token = await getToken(req, res);
 
+        if (!token) {
+            return res.status(401).json({ message: 'Please log in to view your favorites.' });
+        }
+
+        const user = await getUserApi(token);
+
+        const favorites = await getFavoritesApi(user.id);
+
+        res.json({ favorites });
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: 'Failed to load favorites.' });
+    }
+});
+
+router.post('/favorites', async (req, res) => {
+    try {
+        const token = await getToken(req, res);
+
+        if (!token) {
+            return res.status(401).json({ message: 'Please log in to delete.' });
+        }
+        const user = await getUserApi(token);
+        const { id } = req.body;
+
+        await addFavoriteApi(user.id, id);
+
+        res.json({ message: 'Deleted successfully.' });
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: 'Failed to add favorite.' });
+    }
+});
+
+router.delete('/favorites/:id', async (req, res) => {
+    try {
+        const token = await getToken(req, res);
+
+        if (!token) {
+            return res.status(401).json({ message: 'Please log in to delete.' });
+        }
+
+        await deleteFavoriteApi(req.params.id);
+
+        res.json({ message: 'Deleted successfully.' });
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: 'Failed to delete favorite.' });
+    }
+});
 export default router;

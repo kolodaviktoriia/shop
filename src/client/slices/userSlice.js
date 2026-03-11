@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { getCurrentUserApi, loginApi, logoutApi, signupApi } from '../api/usersApi.js';
 import { clearCart, fetchCart } from './cartSlice.js';
 import { notify } from '../components/Toaster/Toaster.js';
+import { fetchFavorites, setFavorites } from './productsSlice.js';
 
 
 const userSlice = createSlice({
@@ -31,6 +32,8 @@ export const loginUser = (email, password, isCheckout = false) => async (dispatc
         const data = await loginApi(email, password);
         dispatch(setUser(data.user));
         dispatch(fetchCart(isCheckout));
+        dispatch(fetchFavorites());
+
     } catch (err) {
         notify.error(err?.response?.data?.message || err.message);
         dispatch(setError(err?.response?.data?.message || err.message));
@@ -45,6 +48,7 @@ export const logoutUser = () => async (dispatch) => {
         await logoutApi();
         dispatch(clearUser());
         dispatch(clearCart());
+        dispatch(setFavorites([]));
     } catch (err) {
         notify.error(err?.response?.data?.message || err.message);
         dispatch(setError(err?.response?.data?.message || err.message));
@@ -59,8 +63,8 @@ export const fetchCurrentUser = () => async (dispatch) => {
         const data = await getCurrentUserApi();
         dispatch(setUser(data.user || null));
         dispatch(fetchCart());
+        dispatch(fetchFavorites());
     } catch (err) {
-        notify.error(err?.response?.data?.message || err.message);
         dispatch(setError(err?.response?.data?.message || err.message));
     } finally {
         dispatch(setLoading(false));
@@ -74,6 +78,7 @@ export const signupUser = (userData, isCheckout = false) => async (dispatch) => 
         const data = await signupApi(userData);
         dispatch(setUser(data.user || null));
         dispatch(fetchCart(isCheckout));
+        dispatch(fetchFavorites());
     } catch (err) {
         notify.error(err?.response?.data?.message || err.message);
         dispatch(setError(err?.response?.data?.message || err.message));

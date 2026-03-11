@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import * as styles from './Product.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { clearProduct, fetchProduct } from '../../slices/productsSlice.js';
+import { addFavorite, clearProduct, fetchProduct, removeFavorite } from '../../slices/productsSlice.js';
 import { addItemAndSync } from '../../slices/cartSlice.js';
 import { displayPrice } from '../../helpers/priceConverters.js';
 import AmountField from '../../components/AmountField/AmountField.js';
@@ -13,7 +13,9 @@ import Spinner from '../../components/Spinner/Spinner.js';
 const Product = () => {
     const { id } = useParams();
     const dispatch = useDispatch();
-    const { product, loading } = useSelector(state => state.products);
+    const { product, loading, favorites } = useSelector(state => state.products);
+
+    const { user } = useSelector(state => state.user);
 
     const [quantity, setQuantity] = useState(1);
 
@@ -28,12 +30,20 @@ const Product = () => {
 
     const { imageUrl, price, description, title, ingredients, categories, collection } = product;
 
+    const favoriteId = favorites?.find(fav => fav.id === id)?.favoriteId ?? null;
     const handleAddToBag = (e) => {
         e.preventDefault();
         dispatch(addItemAndSync({ ...product, quantity }, 'Great choice! Added to your cart 🛍️'))
         setQuantity(1);
     }
-
+    const handleAddToFavorite = (e) => {
+        e.preventDefault();
+        dispatch(addFavorite(product.id))
+    }
+    const handleRemoveFromFavorite = (e) => {
+        e.preventDefault();
+        dispatch(removeFavorite(favoriteId))
+    }
     return (
         <div className={styles.product}>
             <WidthWrapper className={styles.wrapper}>
@@ -65,7 +75,12 @@ const Product = () => {
                         handlePlus={() => setQuantity(prev => prev + 1)}
                     />
                     <Button onClick={handleAddToBag}>Add to Bag</Button>
-                    <Button secondary>Add to Favorite</Button>
+                    {user ?
+                        favoriteId ?
+                            <Button secondary onClick={handleRemoveFromFavorite}>Remove from Favorite</Button>
+                            :
+                            <Button secondary onClick={handleAddToFavorite}>Add to Favorite</Button>
+                        : undefined}
                 </div>
             </WidthWrapper>
         </div>

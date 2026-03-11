@@ -17,6 +17,7 @@ import Confirmation from '../pages/Confirmation/Confirmation.js';
 import ProfileDetails from '../pages/ProfileDetails/ProfileDetails.js';
 import Orders from '../pages/Orders/Orders.js';
 import Order from '../pages/Order/Order.js';
+import Favorites from '../pages/Favorites/Favorites.js';
 import NotFound from '../pages/NotFound/NotFound.js';
 import ErrorHandler from '../pages/ErrorHandler/ErrorHandler.js';
 
@@ -65,7 +66,11 @@ export const routes = [{
                     path: 'details',
 
                 },
+                {
+                    element: <Favorites />,
+                    path: 'favorites',
 
+                },
                 {
                     element: <Orders />,
                     path: 'orders',

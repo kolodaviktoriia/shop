@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getCategoriesApi, getCollectionsApi, getProductApi, getProductsApi } from '../api/productsApi.js';
+import { deleteFavoritesApi, getCategoriesApi, getCollectionsApi, getFavoritesApi, getProductApi, getProductsApi, postFavoritesApi } from '../api/productsApi.js';
 import { notify } from '../components/Toaster/Toaster.js';
 
 const productsSlice = createSlice({
@@ -10,7 +10,8 @@ const productsSlice = createSlice({
         products: [],
         collections: [],
         loading: false,
-        error: null
+        error: null,
+        favorites: [],
     },
     reducers: {
         setCategories(state, action) {
@@ -34,12 +35,60 @@ const productsSlice = createSlice({
         setProductsError: (state, action) => {
             state.error = action.payload;
         },
+        setFavorites(state, action) {
+            state.favorites = action.payload;
+        }
     },
 });
 
-export const { clearProduct, setProducts, setProduct, setCategories, setCollections, setProductsLoading, setProductsError } = productsSlice.actions;
+export const { clearProduct, setProducts, setProduct, setCategories, setCollections, setProductsLoading, setProductsError,
+    setFavorites } = productsSlice.actions;
 
 export const productsReducer = productsSlice.reducer;
+
+export const fetchFavorites = (isUpdate) => async (dispatch) => {
+    if (isUpdate) {
+        try {
+            const { favorites } = await getFavoritesApi();
+            dispatch(setFavorites(favorites));
+        } catch (err) {
+            notify.error(err?.response?.data?.message || err.message);
+        }
+    } else {
+        dispatch(setProductsLoading(true));
+        dispatch(setProductsError(null));
+        try {
+            const { favorites } = await getFavoritesApi();
+            dispatch(setFavorites(favorites));
+        } catch (err) {
+            dispatch(setProductsError(err?.response?.data?.message || err.message));
+        } finally {
+            dispatch(setProductsLoading(false));
+        }
+    }
+
+};
+
+export const addFavorite = (id) => async (dispatch) => {
+    try {
+        await postFavoritesApi(id);
+        dispatch(fetchFavorites(true));
+        notify.success("This product is now one of your favorites 💕");
+    } catch (err) {
+        notify.error(err?.response?.data?.message || err.message);
+    }
+};
+
+export const removeFavorite = (id) => async (dispatch) => {
+    try {
+        await deleteFavoritesApi(id);
+
+        dispatch(fetchFavorites(true));
+        notify.success("Removed from your favorites ✨");
+    } catch (err) {
+        notify.error(err?.response?.data?.message || err.message);
+    }
+};
 
 export const fetchProducts = (filter) => async (dispatch) => {
     dispatch(setProductsLoading(true));

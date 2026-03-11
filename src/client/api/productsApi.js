@@ -1,4 +1,4 @@
-import { getData } from "./axiosConfig.js";
+import { deleteData, getData, postData } from "./axiosConfig.js";
 
 
 export const getProductsApi = (filter) =>
@@ -12,3 +12,13 @@ export const getCategoriesApi = () =>
 
 export const getCollectionsApi = () =>
     getData("/api/collections");
+
+export const getFavoritesApi = () =>
+    getData("/api/favorites");
+
+
+export const postFavoritesApi = (id) =>
+    postData("/api/favorites", { id });
+
+export const deleteFavoritesApi = (id) =>
+    deleteData(`/api/favorites/${id}`);
