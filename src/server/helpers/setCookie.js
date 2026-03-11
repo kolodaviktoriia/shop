@@ -4,7 +4,7 @@ export const setCookie = (res, data) => {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
         sameSite: 'lax',
-        maxAge: data.session.expires_in * 1000
+        maxAge: data.session.expires_in ? data.session.expires_in * 1000 : 0
     });
 
     res.cookie('sb-refresh-token', data.session.refresh_token, {

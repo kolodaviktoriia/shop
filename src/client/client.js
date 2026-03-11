@@ -8,15 +8,18 @@ import { productsReducer } from './slices/productsSlice.js';
 import { cartReducer } from './slices/cartSlice.js';
 import { userReducer } from './slices/userSlice.js';
 import { ordersReducer } from './slices/ordersSlice.js';
-
+import { HelmetProvider } from 'react-helmet-async';
 import './styles/global.scss';
 
+const helmetContext = {};
 const store = configureStore({ reducer: { products: productsReducer, cart: cartReducer, user: userReducer, orders: ordersReducer }, preloadedState: window.INITIAL_STATE, })
 hydrateRoot(
     document.getElementById('root'),
-    <Provider store={store}>
-        <BrowserRouter>
-            <RoutesRender />
-        </BrowserRouter>
-    </Provider>
+    <HelmetProvider context={helmetContext}>
+        <Provider store={store}>
+            <BrowserRouter>
+                <RoutesRender />
+            </BrowserRouter>
+        </Provider>
+    </HelmetProvider>
 );
