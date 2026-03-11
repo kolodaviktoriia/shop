@@ -59,11 +59,10 @@ export const fetchOrders = () => async (dispatch) => {
 
     try {
         const data = await getOrdersApi();
-
         dispatch(setOrders(data.orders));
     }
     catch (err) {
-        notify.error(err?.response.data?.message || err.message);
+        notify.error(err?.response?.data?.message || err.message);
         dispatch(setOrderError(err?.response.data?.message || err.message));
     } finally {
         dispatch(setOrderLoading(false));
@@ -79,7 +78,7 @@ export const fetchOrder = (id) => async (dispatch) => {
         dispatch(setSelectedOrder(data.order));
     }
     catch (err) {
-        notify.error(err?.response.data?.message || err.message);
+        notify.error(err?.response?.data?.message || err.message);
         dispatch(setOrderError(err?.response.data?.message || err.message));
     } finally {
         dispatch(setOrderLoading(false));

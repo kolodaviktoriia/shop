@@ -11,17 +11,11 @@ import * as styles from "./App.module.scss";
 const App = () => {
     const { loading } = useSelector(store => store.user);
     const dispatch = useDispatch();
-    const location = useLocation();
     const [hydrated, setHydrated] = useState(false);
 
     useEffect(() => {
         setHydrated(true);
-
-        const hasUserCookie = document.cookie
-            .split(";")
-            .some(cookie => cookie.trim().startsWith("sb-refresh-token="));
-
-        if (hasUserCookie) dispatch(fetchCurrentUser());
+        dispatch(fetchCurrentUser());
     }, [dispatch]);
 
     return (
@@ -33,7 +27,6 @@ const App = () => {
                 <Spinner />
             ) : (
                 <div
-                    key={location.pathname}
                     className={`${styles.pageWrapper} ${hydrated ? styles.visible : ""}`}
                 >
                     <Outlet />

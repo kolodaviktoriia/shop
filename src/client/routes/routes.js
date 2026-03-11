@@ -23,7 +23,6 @@ export const routes = [{
     element: <App />,
     path: '/',
     loadData: (store) => Promise.all([
-        store.dispatch(fetchCurrentUser()),
         store.dispatch(fetchCategories()),
         store.dispatch(fetchCollections()),
     ]),

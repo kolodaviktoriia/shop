@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import WidthWrapper from '../../components/WidthWrapper/WidthWrapper.js';
 import ProductCartItem from '../../components/ProductCartItem /ProductCartItem.js';
 import ButtonLink from '../../components/ButtonLink/ButtonLink.js';
-
+import Spinner from '../../components/Spinner/Spinner.js';
 import Button from '../../components/Button/Button.js';
 
 import { initCurrentOrder } from '../../slices/ordersSlice.js';
@@ -14,7 +14,7 @@ import * as styles from './Cart.module.scss';
 
 const Cart = () => {
     const { user } = useSelector(store => store.user)
-    const { items } = useSelector(store => store.cart);
+    const { items, loading } = useSelector(store => store.cart);
     const itemsPrice = items.reduce(
         (acc, item) => acc + item.price * item.quantity,
         0
@@ -33,6 +33,9 @@ const Cart = () => {
         }));
         navigate('/checkout');
     }
+
+    if (loading) return <Spinner />;
+
     return (
         <div className={styles.cart}>
             {items.length === 0 ?

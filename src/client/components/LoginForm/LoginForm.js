@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { loginUser } from '../../slices/userSlice.js';
 
-const LoginForm = ({ navigateTo }) => {
+const LoginForm = ({ navigateTo, onNavigate }) => {
     const navigate = useNavigate();
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
@@ -39,9 +39,9 @@ const LoginForm = ({ navigateTo }) => {
     const handleLogin = (e) => {
         e.preventDefault();
         if (!validate()) return;
-        dispatch(loginUser(email, password));
-        navigate(navigateTo ?? '/profile/details')
-
+        dispatch(loginUser(email, password, Boolean(onNavigate)));
+        if (onNavigate) onNavigate();
+        else navigate(navigateTo ?? '/profile/details')
     }
 
     return (

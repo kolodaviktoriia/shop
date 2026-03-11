@@ -50,8 +50,8 @@ export const fetchProducts = (filter) => async (dispatch) => {
         dispatch(setProducts(data));
     }
     catch (err) {
-        notify.error(err?.response.data?.message || err.message);
-        dispatch(setProductsError(err?.response.data?.message || err.message));
+        notify.error(err?.response?.data?.message || err.message);
+        dispatch(setProductsError(err?.response?.data?.message || err.message));
     } finally {
         dispatch(setProductsLoading(false));
     };
@@ -66,8 +66,8 @@ export const fetchProduct = (id) => async (dispatch) => {
         dispatch(setProduct(data));
     }
     catch (err) {
-        notify.error(err?.response.data?.message || err.message);
-        dispatch(setProductsError(err?.response.data?.message || err.message));
+        notify.error(err?.response?.data?.message || err.message);
+        dispatch(setProductsError(err?.response?.data?.message || err.message));
     } finally {
         dispatch(setProductsLoading(false));
     };

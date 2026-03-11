@@ -23,17 +23,17 @@ export const { setUser, setLoading, setError, clearUser } = userSlice.actions;
 export const userReducer = userSlice.reducer;
 
 
-export const loginUser = (email, password) => async (dispatch) => {
+export const loginUser = (email, password, isCheckout = false) => async (dispatch) => {
     dispatch(setLoading(true));
     dispatch(setError(null));
 
     try {
         const data = await loginApi(email, password);
         dispatch(setUser(data.user));
-        dispatch(fetchCart());
+        dispatch(fetchCart(isCheckout));
     } catch (err) {
-        notify.error(err?.response.data?.message || err.message);
-        dispatch(setError(err?.response.data?.message || err.message));
+        notify.error(err?.response?.data?.message || err.message);
+        dispatch(setError(err?.response?.data?.message || err.message));
     } finally {
         dispatch(setLoading(false));
     }
@@ -46,8 +46,8 @@ export const logoutUser = () => async (dispatch) => {
         dispatch(clearUser());
         dispatch(clearCart());
     } catch (err) {
-        notify.error(err?.response.data?.message || err.message);
-        dispatch(setError(err?.response.data?.message || err.message));
+        notify.error(err?.response?.data?.message || err.message);
+        dispatch(setError(err?.response?.data?.message || err.message));
     } finally {
         dispatch(setLoading(false));
     }
@@ -60,23 +60,23 @@ export const fetchCurrentUser = () => async (dispatch) => {
         dispatch(setUser(data.user || null));
         dispatch(fetchCart());
     } catch (err) {
-        notify.error(err?.response.data?.message || err.message);
-        dispatch(setError(err?.response.data?.message || err.message));
+        notify.error(err?.response?.data?.message || err.message);
+        dispatch(setError(err?.response?.data?.message || err.message));
     } finally {
         dispatch(setLoading(false));
     }
 };
 
-export const signupUser = (userData) => async (dispatch) => {
+export const signupUser = (userData, isCheckout = false) => async (dispatch) => {
     dispatch(setLoading(true));
     dispatch(setError(null));
     try {
         const data = await signupApi(userData);
         dispatch(setUser(data.user || null));
-        dispatch(fetchCart());
+        dispatch(fetchCart(isCheckout));
     } catch (err) {
-        notify.error(err?.response.data?.message || err.message);
-        dispatch(setError(err?.response.data?.message || err.message));
+        notify.error(err?.response?.data?.message || err.message);
+        dispatch(setError(err?.response?.data?.message || err.message));
     } finally {
         dispatch(setLoading(false));
     }

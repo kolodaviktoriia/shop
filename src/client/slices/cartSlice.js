@@ -57,60 +57,55 @@ export const { addItem, removeItem, deleteItem, clearCart, setCartLoading,
 export const cartReducer = cartSlice.reducer;
 
 
-const syncCart = (action, payload, successMessage) => async (dispatch, getState) => {
+const syncCart = (action, payload, successMessage = '') => async (dispatch, getState) => {
     const user = getState().user?.user;
     dispatch(action(payload));
 
     if (user) {
-        dispatch(setCartLoading(true));
-        dispatch(setCartError(null));
-        try {
-            const cart = getState().cart.items;
-            await updateCartApi(cart);
-            if (successMessage) {
-                notify.success(successMessage);
-            }
-        } catch (err) {
-            notify.error(err?.response.data?.message || err.message);
-            dispatch(setCartError(err?.response.data?.message || err.message));
-        } finally {
-            dispatch(setCartLoading(false));
+        const cart = getState().cart.items;
+        await updateCartApi(cart);
+        if (successMessage) {
+            notify.success(successMessage);
         }
     }
 };
 
 
-export const addItemAndSync = (payload, successMessage) => syncCart(addItem, payload, successMessage);
+export const addItemAndSync = (payload, successMessage = '') => syncCart(addItem, payload, successMessage);
 export const removeItemAndSync = (payload) => syncCart(removeItem, payload);
 export const deleteItemAndSync = (payload) => syncCart(deleteItem, payload);
 export const clearCartAndSync = () => syncCart(clearCart);
 
 
-export const fetchCart = () => async (dispatch, getState) => {
+export const fetchCart = (isCheckout = false) => async (dispatch, getState) => {
     dispatch(setCartLoading(true));
     dispatch(setCartError(null));
 
     try {
-        const { items } = await getCartApi();
-        const cart = getState().cart.items;
-        const newCart = [...items];
+        if (isCheckout) {
+            const cart = getState().cart.items;
+            await updateCartApi(cart);
+        } else {
+            const { items } = await getCartApi();
+            const cart = getState().cart.items;
+            const newCart = [...items];
 
-        cart?.forEach(item => {
-            const exists = newCart.find(i => i.id === item.id);
-            if (exists) {
-                exists.quantity += item.quantity;
-            } else {
-                newCart.push(item);
-            }
-        });
-
-        dispatch(setCart(newCart));
-        await updateCartApi(newCart);
-
+            cart?.forEach(item => {
+                const exists = newCart.find(i => i.id === item.id);
+                if (exists) {
+                    exists.quantity += item.quantity;
+                } else {
+                    newCart.push(item);
+                }
+            });
+            dispatch(setCart(newCart));
+            await updateCartApi(newCart);
+        }
     } catch (err) {
-        notify.error(err?.response.data?.message || err.message);
-        dispatch(setCartError(err?.response.data?.message || err.message));
+        notify.error(err?.response?.data?.message || err.message);
+        dispatch(setCartError(err?.response?.data?.message || err.message));
     } finally {
+        console.log('final');
         dispatch(setCartLoading(false));
     }
 };

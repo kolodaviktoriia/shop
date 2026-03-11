@@ -15,7 +15,7 @@ const initialState = {
     phone: '',
 };
 
-const SignupForm = ({ navigateTo }) => {
+const SignupForm = ({ navigateTo, onNavigate }) => {
     const navigate = useNavigate();
     const [formValues, setFormValues] = useState(initialState);
     const [errors, setErrors] = useState({});
@@ -55,8 +55,9 @@ const SignupForm = ({ navigateTo }) => {
     const handleLogin = (e) => {
         e.preventDefault();
         if (!validate()) return;
-        dispatch(signupUser(formValues));
-        navigate(navigateTo ?? '/profile/details')
+        dispatch(signupUser(formValues, Boolean(onNavigate)));
+        if (onNavigate) onNavigate();
+        else navigate(navigateTo ?? '/profile/details')
 
     }
 
