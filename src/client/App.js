@@ -23,18 +23,19 @@ const App = () => {
         <div className={styles.appWrapper}>
             <Toaster />
             <Header />
-            <ErrorBoundary>
-                {loading ? (
-                    <Spinner />
-                ) : (
+            <div
+                className={`${styles.pageWrapper} ${hydrated ? styles.visible : ""}`}
+            >
 
-                    <div
-                        className={`${styles.pageWrapper} ${hydrated ? styles.visible : ""}`}
-                    >
+                <ErrorBoundary>
+                    {loading ? (
+                        <Spinner />
+                    ) : (
                         <Outlet />
-                    </div>
-                )}
-            </ErrorBoundary>
+                    )}
+
+                </ErrorBoundary>
+            </div>
             <Footer />
         </div>
     );
