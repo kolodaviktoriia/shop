@@ -56,3 +56,41 @@ export const getCollectionsApi = async () => {
     if (error) throw error;
     return data;
 };
+
+export const getFavoritesApi = async (userId) => {
+    const { data, error } = await supabase
+        .from('favorites')
+        .select('id, products(*)')
+        .eq('userId', userId)
+        .order('createdAt', { ascending: false });
+
+    if (error) throw error;
+
+    const favorites = data.map(fav => ({ ...fav.products, favoriteId: fav.id }))
+    return favorites ?? [];
+};
+
+export const addFavoriteApi = async (userId, productId) => {
+    const { data, error } = await supabase
+        .from('favorites')
+        .upsert(
+            { userId, productId },
+            { onConflict: 'userId,productId' }
+        )
+        .select();
+
+    if (error) throw error;
+
+    return data;
+};
+
+export const deleteFavoriteApi = async (favoriteId) => {
+    const { data, error } = await supabase
+        .from('favorites')
+        .delete()
+        .eq('id', favoriteId)
+        .select();
+    if (error) throw error;
+
+    return data;
+};
