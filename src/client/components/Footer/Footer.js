@@ -73,7 +73,7 @@ const Footer = () => {
             <div className={styles.copyrightWrapper}>
                 <WidthWrapper>
                     <p className={styles.copyright}>
-                        © 2026 Blush & Bloom. All rights reserved. Designed and developed by <a
+                        © 2026 Blush & Blossom. All rights reserved. Designed and developed by <a
                             href="https://www.viktoriia-koloda.com/"
                             target="_blank"
                             rel="noopener noreferrer"

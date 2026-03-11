@@ -1,26 +1,47 @@
-import React, { useEffect } from "react";
-import { Outlet } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Outlet, useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import Header from "./components/Header/Header.js";
 import Footer from "./components/Footer/Footer.js";
 import Spinner from "./components/Spinner/Spinner.js";
-import { useDispatch, useSelector } from "react-redux";
+import Toaster from "./components/Toaster/Toaster.js";
 import { fetchCurrentUser } from "./slices/userSlice.js";
+import * as styles from "./App.module.scss";
 
 const App = () => {
     const { loading } = useSelector(store => store.user);
     const dispatch = useDispatch();
+    const location = useLocation();
+    const [hydrated, setHydrated] = useState(false);
 
     useEffect(() => {
-        dispatch(fetchCurrentUser());
-    }, [dispatch])
+        setHydrated(true);
 
-    if (loading) return <Spinner />;
+        const hasUserCookie = document.cookie
+            .split(";")
+            .some(cookie => cookie.trim().startsWith("sb-refresh-token="));
+
+        if (hasUserCookie) dispatch(fetchCurrentUser());
+    }, [dispatch]);
+
     return (
-        <div >
+        <div className={styles.appWrapper}>
+            <Toaster />
             <Header />
-            <Outlet />
+
+            {loading ? (
+                <Spinner />
+            ) : (
+                <div
+                    key={location.pathname}
+                    className={`${styles.pageWrapper} ${hydrated ? styles.visible : ""}`}
+                >
+                    <Outlet />
+                </div>
+            )}
+
             <Footer />
-        </div >
+        </div>
     );
 };
 

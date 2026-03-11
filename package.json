@@ -33,6 +33,7 @@
     "react-dom": "^18.2.0",
     "react-redux": "^8.1.1",
     "react-router-dom": "^7.13.1",
+    "react-toastify": "^11.0.5",
     "redux": "^4.2.1",
     "serialize-javascript": "^7.0.0"
   },

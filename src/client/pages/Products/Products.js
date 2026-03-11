@@ -28,12 +28,12 @@ const Products = () => {
         dispatch(fetchProducts({ category: category.id }));
     }, [id, dispatch]);
 
-    if (loading) return <Spinner />;
+
     return (
         <div className={styles.products}>
             <WidthWrapper>
                 <SectionHeader name={category?.name} imageUrl={category?.imageUrl} description={category?.description} />
-                <ProductsList products={products} />
+                {loading ? <Spinner /> : <ProductsList products={products} />}
             </WidthWrapper>
         </div>
     )

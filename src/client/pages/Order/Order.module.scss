@@ -1,5 +1,4 @@
 .orderWrapper {
-    min-height: calc(100vh - $header-height - $footer-height);
 
     .title {
         @include main-text;
