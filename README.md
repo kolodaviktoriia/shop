@@ -32,7 +32,7 @@ This is a **demonstration of a server-side rendered (SSR) e-commerce web applica
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/yourusername/shop.git
+git clone https://github.com/kolodaviktoriia/shop.git
 cd shop
 ```
 2. Install dependencies:
@@ -47,6 +47,7 @@ npm install
 SUPABASE_URL=your_supabase_url
 SUPABASE_KEY=your_supabase_key
 PAYPAL_CLIENT_ID=your_paypal_client_id
+PAYPAL_CLIENT_SECRET=your_paypal_client_secret
 ```
 
 ## Scripts
