@@ -17,6 +17,7 @@ import Confirmation from '../pages/Confirmation/Confirmation.js';
 import ProfileDetails from '../pages/ProfileDetails/ProfileDetails.js';
 import Orders from '../pages/Orders/Orders.js';
 import Order from '../pages/Order/Order.js';
+import NotFound from '../pages/NotFound/NotFound.js';
 
 
 export const routes = [{
@@ -112,6 +113,10 @@ export const routes = [{
             ]
 
         },
+        {
+            element: <NotFound />,
+            path: '*',
+        }
     ]
 
 }]
