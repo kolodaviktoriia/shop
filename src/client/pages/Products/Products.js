@@ -5,7 +5,8 @@ import ProductsList from '../../components/ProductsList/ProductsList.js';
 import WidthWrapper from '../../components/WidthWrapper/WidthWrapper.js';
 import Spinner from '../../components/Spinner/Spinner.js';
 import SectionHeader from '../../components/SectionHeader/SectionHeader.js';
-import { fetchProducts } from '../../slices/productsSlice.js';
+import { clearProducts, fetchProducts } from '../../slices/productsSlice.js';
+import SEO from '../../components/SEO.js';
 
 import * as styles from './Products.module.scss';
 
@@ -26,11 +27,17 @@ const Products = () => {
 
     useEffect(() => {
         dispatch(fetchProducts({ category: category.id }));
+        return () => dispatch(clearProducts());
     }, [id, dispatch]);
 
 
     return (
         <div className={styles.products}>
+            <SEO
+                title={category?.name}
+                description={category?.description}
+                image={category?.imageUrl}
+            />
             <WidthWrapper>
                 <SectionHeader name={category?.name} imageUrl={category?.imageUrl} description={category?.description} />
                 {loading ? <Spinner /> : <ProductsList products={products} />}

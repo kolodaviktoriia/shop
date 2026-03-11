@@ -6,9 +6,10 @@ import ProductCartItem from '../../components/ProductCartItem /ProductCartItem.j
 import ButtonLink from '../../components/ButtonLink/ButtonLink.js';
 import Spinner from '../../components/Spinner/Spinner.js';
 import Button from '../../components/Button/Button.js';
-
+import SEO from '../../components/SEO.js';
 import { initCurrentOrder } from '../../slices/ordersSlice.js';
 import { displayPrice } from '../../helpers/priceConverters.js';
+
 
 import * as styles from './Cart.module.scss';
 
@@ -38,6 +39,9 @@ const Cart = () => {
 
     return (
         <div className={styles.cart}>
+            <SEO
+                title='Your Bag'
+            />
             {items.length === 0 ?
                 <WidthWrapper className={styles.emptyWrapper}>
                     <div className={styles.emptyCart}>

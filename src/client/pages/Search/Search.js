@@ -1,12 +1,15 @@
 import React, { useEffect } from 'react';
-import * as styles from './Search.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
-import ProductsList from '../../components/ProductsList/ProductsList.js';
-import WidthWrapper from '../../components/WidthWrapper/WidthWrapper.js';
 import { useSearchParams } from 'react-router-dom';
 import { fetchProducts } from '../../slices/productsSlice.js';
 import SectionHeader from '../../components/SectionHeader/SectionHeader.js';
+import SEO from '../../components/SEO.js';
 import Spinner from '../../components/Spinner/Spinner.js';
+import ProductsList from '../../components/ProductsList/ProductsList.js';
+import WidthWrapper from '../../components/WidthWrapper/WidthWrapper.js';
+
+
+import * as styles from './Search.module.scss';
 
 
 
@@ -43,6 +46,9 @@ const Search = () => {
     if (loading) return <Spinner />;
     return (
         <div className={styles.search}>
+            <SEO
+                title={`Search For ${searchParams}`}
+            />
             <WidthWrapper>
                 {products.length === 0 ?
                     <SectionHeader name={noResults.title} imageUrl={searchImage} description={noResults?.description} extra={noResults?.extra} /> :

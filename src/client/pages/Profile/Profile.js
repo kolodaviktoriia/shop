@@ -7,9 +7,9 @@ import WidthWrapper from '../../components/WidthWrapper/WidthWrapper.js';
 import LoginGrid from '../../components/LoginGrid/LoginGrid.js';
 import ButtonLink from '../../components/ButtonLink/ButtonLink.js';
 import Spinner from '../../components/Spinner/Spinner.js';
+import SEO from '../../components/SEO.js';
 
 import * as styles from './Profile.module.scss';
-
 const Profile = () => {
     const { user, loading } = useSelector(store => store.user);
 
@@ -23,6 +23,9 @@ const Profile = () => {
 
     return user ? (
         <div className={styles.profile}>
+            <SEO
+                title='Your Profile'
+            />
             <WidthWrapper className={styles.profileWrapper}>
                 <div className={styles.navigation}>
                     <ButtonLink to='/profile/details'>Profile</ButtonLink>

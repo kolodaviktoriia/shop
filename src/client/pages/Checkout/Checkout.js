@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import WidthWrapper from '../../components/WidthWrapper/WidthWrapper.js';
 import { Outlet, useNavigate, useParams } from 'react-router-dom';
-
+import SEO from '../../components/SEO.js';
 import * as styles from './Checkout.module.scss';
 
 const steps = ['login', 'address', 'payment', 'confirmation'];
@@ -24,6 +24,9 @@ const Checkout = () => {
 
     return (
         <div className={styles.checkout}>
+            <SEO
+                title='Checkout'
+            />
             <WidthWrapper>
                 <div className={styles.stepper}>
                     {steps.map((label, index) => (

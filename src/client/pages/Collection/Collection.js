@@ -4,10 +4,11 @@ import { useParams } from 'react-router-dom';
 import ProductsList from '../../components/ProductsList/ProductsList.js';
 import WidthWrapper from '../../components/WidthWrapper/WidthWrapper.js';
 import SectionHeader from '../../components/SectionHeader/SectionHeader.js';
-import { fetchProducts } from '../../slices/productsSlice.js';
+import Spinner from '../../components/Spinner/Spinner.js';
+import SEO from '../../components/SEO.js';
+import { clearProducts, fetchProducts } from '../../slices/productsSlice.js';
 
 import * as styles from './Collection.module.scss';
-import Spinner from '../../components/Spinner/Spinner.js';
 
 const Collection = () => {
     const { id } = useParams();
@@ -17,11 +18,17 @@ const Collection = () => {
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(fetchProducts({ collection: collection.id }));
+        return () => dispatch(clearProducts());
     }, [id, dispatch]);
 
     return (
         <div className={styles.collection}>
             <WidthWrapper>
+                <SEO
+                    title={collection?.name}
+                    description={collection?.description}
+                    image={collection?.imageUrl}
+                />
                 <SectionHeader name={collection?.name} imageUrl={collection?.imageUrl} description={collection?.description} className={id ? styles[id] : ''} />
                 {loading ? <Spinner /> : <ProductsList products={products} />}
             </WidthWrapper>

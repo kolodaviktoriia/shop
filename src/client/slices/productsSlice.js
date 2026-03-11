@@ -23,6 +23,9 @@ const productsSlice = createSlice({
         setProduct(state, action) {
             state.product = action.payload;
         },
+        clearProducts(state) {
+            state.products = [];
+        },
         clearProduct(state) {
             state.product = undefined;
         },
@@ -41,7 +44,7 @@ const productsSlice = createSlice({
     },
 });
 
-export const { clearProduct, setProducts, setProduct, setCategories, setCollections, setProductsLoading, setProductsError,
+export const { clearProduct, clearProducts, setProducts, setProduct, setCategories, setCollections, setProductsLoading, setProductsError,
     setFavorites } = productsSlice.actions;
 
 export const productsReducer = productsSlice.reducer;
