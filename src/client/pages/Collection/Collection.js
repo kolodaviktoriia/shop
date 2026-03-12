@@ -23,13 +23,15 @@ const Collection = () => {
 
     return (
         <div className={styles.collection}>
-            <WidthWrapper>
-                <SEO
-                    title={collection?.name}
-                    description={collection?.description}
-                    image={collection?.imageUrl}
-                />
+            <SEO
+                title={collection?.name}
+                description={collection?.description}
+                image={collection?.imageUrl}
+            />
+            <WidthWrapper isPadding={false}>
                 <SectionHeader name={collection?.name} imageUrl={collection?.imageUrl} description={collection?.description} className={id ? styles[id] : ''} />
+            </WidthWrapper>
+            <WidthWrapper>
                 {loading ? <Spinner /> : <ProductsList products={products} />}
             </WidthWrapper>
         </div>

@@ -32,10 +32,10 @@ const capitalize = (word) => word.substring(0, 1).toUpperCase() + word.substring
 const Footer = () => {
     const { categories, collections } = useSelector(store => store.products);
     navigation.shop = categories.map(category => ({
-        label: capitalize(category.name), link: `/${category.name}`
+        label: capitalize(category.name), link: `/products/${category.name}`
     }))
     navigation.collections = collections.map(collection => ({
-        label: capitalize(collection.name), link: `/ ${collection.name}`
+        label: capitalize(collection.name), link: `/collection/${collection.name}`
     }))
     return (
         <footer className={styles.footer}>

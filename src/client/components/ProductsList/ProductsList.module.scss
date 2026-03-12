@@ -3,4 +3,12 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 2rem;
+
+    @include custom(850) {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    @include custom(670) {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }

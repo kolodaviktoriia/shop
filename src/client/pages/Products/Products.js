@@ -8,8 +8,6 @@ import SectionHeader from '../../components/SectionHeader/SectionHeader.js';
 import { clearProducts, fetchProducts } from '../../slices/productsSlice.js';
 import SEO from '../../components/SEO.js';
 
-import * as styles from './Products.module.scss';
-
 
 const allCategory = {
     name: 'Goodies for Your Glow',
@@ -32,14 +30,16 @@ const Products = () => {
 
 
     return (
-        <div className={styles.products}>
+        <div>
             <SEO
                 title={category?.name}
                 description={category?.description}
                 image={category?.imageUrl}
             />
-            <WidthWrapper>
+            <WidthWrapper isPadding={false}>
                 <SectionHeader name={category?.name} imageUrl={category?.imageUrl} description={category?.description} />
+            </WidthWrapper>
+            <WidthWrapper>
                 {loading ? <Spinner /> : <ProductsList products={products} />}
             </WidthWrapper>
         </div>

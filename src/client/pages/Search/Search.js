@@ -9,10 +9,6 @@ import ProductsList from '../../components/ProductsList/ProductsList.js';
 import WidthWrapper from '../../components/WidthWrapper/WidthWrapper.js';
 
 
-import * as styles from './Search.module.scss';
-
-
-
 const searchPageContent = {
     resultsFound: {
         title: "We Found Some Beauty for You!",
@@ -45,15 +41,17 @@ const Search = () => {
 
     if (loading) return <Spinner />;
     return (
-        <div className={styles.search}>
+        <div>
             <SEO
                 title={`Search For ${searchParams}`}
             />
-            <WidthWrapper>
+            <WidthWrapper isPadding={false}>
                 {products.length === 0 ?
                     <SectionHeader name={noResults.title} imageUrl={searchImage} description={noResults?.description} extra={noResults?.extra} /> :
                     <SectionHeader name={resultsFound.title} imageUrl={searchImage} description={resultsFound?.description} extra={resultsFound?.extra} />
                 }
+            </WidthWrapper>
+            <WidthWrapper>
                 <ProductsList products={products} />
             </WidthWrapper>
         </div>
