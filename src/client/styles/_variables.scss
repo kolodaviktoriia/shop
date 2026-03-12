@@ -213,6 +213,26 @@ $screen-xxs: 380px;
     @include screen-s {
         font-size: 1.4rem;
     }
+}
 
+@mixin forms-h1 {
+    @include main-text;
+    font-size: 2.2rem;
 
+    @include screen-s {
+        font-size: 2rem;
+    }
+
+    @include screen-s {
+        font-size: 1.8rem;
+    }
+}
+
+@mixin forms-h2 {
+    @include main-text;
+    font-size: 1.6rem;
+
+    @include screen-s {
+        font-size: 1.4rem;
+    }
 }

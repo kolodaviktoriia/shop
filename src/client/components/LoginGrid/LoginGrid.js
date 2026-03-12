@@ -12,7 +12,7 @@ const LoginGrid = ({ header }) => {
     return (
         <div className={styles.loginGrid}>
             <WidthWrapper>
-                <h2 className={styles.title}>{header ?? 'Welcome to Blush & Blossom'}</h2>
+                <h1 className={styles.title}>{header ?? 'Welcome to Blush & Blossom'}</h1>
             </WidthWrapper>
             <WidthWrapper className={styles.wrapper}>
                 <LoginForm onNavigate={setStep} />
