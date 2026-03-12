@@ -78,9 +78,10 @@ const Product = () => {
                     <Spinner />
                 </WidthWrapper>
             ) : (
-                <WidthWrapper className={styles.wrapper}>
-                    <img src={imageUrl} alt={`${title} product image`} loading="lazy"
-                    />
+                <WidthWrapper className={styles.wrapper} >
+
+                    <img src={imageUrl} alt={`${title} product image`} loading="lazy" />
+
                     <div className={styles.infoWrapper}>
 
                         <div className={styles.tags}>
@@ -114,8 +115,9 @@ const Product = () => {
                             <Button secondary onClick={handleAddToFavorite}>Add to Favorite</Button>
                         )}
                     </div>
-                </WidthWrapper>)}
-        </div>
+                </WidthWrapper>)
+            }
+        </div >
     );
 };
 

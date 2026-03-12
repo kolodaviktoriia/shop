@@ -25,6 +25,11 @@
         &:disabled {
             opacity: 0.8;
         }
+
+        @include screen-s {
+            font-size: 1.4rem;
+            padding: 1.4rem 1.6rem;
+        }
     }
 
     .value {
@@ -33,6 +38,10 @@
         font-weight: 600;
         font-size: 1.8rem;
         font-family: $text-font-public-sans;
+
+        @include screen-s {
+            font-size: 1.4rem;
+        }
     }
 
 }

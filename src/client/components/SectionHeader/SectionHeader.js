@@ -5,7 +5,7 @@ import WidthWrapper from '../WidthWrapper/WidthWrapper.js';
 const SectionHeader = ({ name, imageUrl, description, extra, className }) => {
     return (
         <div className={`${styles.sectionHeader} ${className}`}>
-            <img src={imageUrl} />
+            <img src={imageUrl} loading="lazy" alt={name} />
             <WidthWrapper className={styles.textWrapper}>
                 <h2 className={styles.title}>{name}</h2>
                 <h3 className={styles.description}>{description}</h3>

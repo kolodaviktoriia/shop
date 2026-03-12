@@ -13,7 +13,7 @@ const ProductItem = ({ title, imageUrl, price, id }) => {
     return (
         <div className={styles.productItem} onClick={handleClick}>
             <div className={styles.imgWrapper}>
-                <img src={imageUrl} alt={title} />
+                <img src={imageUrl} alt={title} loading="lazy" />
             </div >
             <h3 className={styles.title}>{title}</h3>
             <span className={styles.price}>
