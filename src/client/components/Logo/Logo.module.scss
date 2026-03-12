@@ -10,4 +10,17 @@
     @include screen-m {
         font-size: 3rem;
     }
+
+    @include screen-s {
+        font-size: 2.8rem;
+    }
+
+    @include screen-xs {
+        font-size: 2.2rem;
+    }
+
+    @include screen-xs {
+        font-size: 1.8rem;
+    }
+
 }

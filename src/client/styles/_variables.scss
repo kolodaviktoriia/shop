@@ -17,6 +17,54 @@ $header-height: 20rem;
 $footer-height: 35rem;
 $border-radius: 3px;
 $max-width: 140rem;
+$screen-xl: 1440px;
+$screen-l: 1280px;
+$screen-m: 1080px;
+$screen-s: 768px;
+$screen-xs: 480px;
+$screen-xxs: 380px;
+
+@mixin screen-s {
+    @media (max-width: #{$screen-s}) {
+        @content;
+    }
+}
+
+@mixin screen-m {
+    @media (max-width: #{$screen-m}) {
+        @content;
+    }
+}
+
+@mixin screen-l {
+    @media (max-width: #{$screen-l}) {
+        @content;
+    }
+}
+
+@mixin screen-xs {
+    @media (max-width: #{$screen-xs}) {
+        @content;
+    }
+}
+
+@mixin screen-xxs {
+    @media (max-width: #{$screen-xs}) {
+        @content;
+    }
+}
+
+@mixin screen-xl {
+    @media (max-width: #{$screen-xl}) {
+        @content;
+    }
+}
+
+@mixin custom($screen) {
+    @media (max-width: $screen+'px') {
+        @content;
+    }
+}
 
 @mixin link {
     font-family: $text-font-public-sans;
@@ -27,7 +75,12 @@ $max-width: 140rem;
     text-transform: uppercase;
     color: $text-color;
     cursor: pointer;
+
+    @include screen-m {
+        font-size: 1.6rem;
+    }
 }
+
 
 @mixin primary-button {
     color: $text-button;
@@ -81,52 +134,75 @@ $max-width: 140rem;
     text-transform: uppercase;
 }
 
+@mixin h1-hero {
+    @include main-text;
+    font-size: 3rem;
 
-$screen-xl: 1440px;
-$screen-l: 1280px;
-$screen-m: 1080px;
-$screen-s: 768px;
-$screen-xs: 480px;
-$screen-xxs: 380px;
+    @include screen-m {
+        font-size: 2.8rem;
+    }
 
-@mixin screen-s {
-    @media (max-width: #{$screen-s}) {
-        @content;
+    @include screen-s {
+        font-size: 2.6rem;
+    }
+
+    @include screen-xs {
+        font-size: 2.4rem;
     }
 }
 
-@mixin screen-m {
-    @media (max-width: #{$screen-m}) {
-        @content;
+@mixin h2-hero {
+    @include sub-text;
+    font-size: 1.6rem;
+    line-height: 20px;
+
+
+}
+
+@mixin title-cards {
+    @include main-text;
+    font-size: 2rem;
+
+    @include screen-s {
+        font-size: 1.8rem;
+    }
+
+    @include screen-s {
+        font-size: 1.6rem;
     }
 }
 
-@mixin screen-l {
-    @media (max-width: #{$screen-l}) {
-        @content;
+@mixin description-cards {
+    @include sub-text;
+    font-size: 1.4rem;
+    line-height: 20px;
+}
+
+@mixin title-collections {
+    @include main-text;
+    font-size: 4rem;
+
+    @include screen-m {
+        font-size: 3rem;
+    }
+
+    @include screen-s {
+        font-size: 2.4rem;
+    }
+
+    @include screen-xs {
+        font-size: 1.8rem;
     }
 }
 
-@mixin screen-xs {
-    @media (max-width: #{$screen-xs}) {
-        @content;
-    }
-}
+@mixin description-collections {
+    @include sub-text;
+    font-size: 1.6rem;
+    line-height: 24px;
 
-@mixin screen-xxs {
-    @media (max-width: #{$screen-xs}) {
-        @content;
+    @include screen-s {
+        font-size: 1.4rem;
     }
-}
 
-@mixin screen-xl {
-    @media (max-width: #{$screen-xl}) {
-        @content;
-    }
-}
 
-@mixin custom($screen) {
-    @media (max-width: $screen+'px') {
-        @content;
-    }
 }

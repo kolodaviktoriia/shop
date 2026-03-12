@@ -4,6 +4,10 @@
     flex-direction: column;
     justify-content: space-between;
 
+    @include screen-m {
+        height: auto;
+    }
+
     .bar {
         min-height: 2rem;
     }
@@ -25,7 +29,11 @@
         justify-content: space-between;
         justify-items: start;
 
-
+        @include screen-s {
+            grid-template-columns: 1fr auto 3fr;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
 
         .logo {
             justify-self: center;

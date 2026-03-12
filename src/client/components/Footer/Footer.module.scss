@@ -1,5 +1,4 @@
 .footer {
-    height: $footer-height;
     overflow: hidden;
     background-color: $grey;
 
@@ -7,13 +6,18 @@
     flex-direction: column;
     justify-content: space-between;
 
+
     .navGrid {
         padding-top: 4rem;
         padding-bottom: 4rem;
         width: 100%;
         display: grid;
-        grid-template-columns: repeat(2, 1fr) 2fr;
+        grid-template-columns: repeat(4, 1fr);
         gap: 2rem;
+
+        @include screen-s {
+            grid-template-columns: repeat(2, 1fr);
+        }
 
         .nav {
             display: flex;
@@ -29,10 +33,10 @@
         }
 
         .socialsWrapper {
+            grid-column: span 2;
             width: 100%;
             align-self: center;
             justify-self: center;
-            width: 100%;
             display: flex;
             align-items: center;
             justify-content: center;

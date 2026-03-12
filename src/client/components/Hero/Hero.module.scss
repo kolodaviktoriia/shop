@@ -21,11 +21,23 @@
             @include screen-m {
                 display: block;
             }
+
+            @include screen-s {
+                display: none;
+            }
+
+            @include screen-xs {
+                display: block;
+            }
         }
 
         .heroImg {
             @include screen-m {
                 grid-column: 1/-1;
+            }
+
+            @include screen-xs {
+                display: none;
             }
         }
 
@@ -34,12 +46,12 @@
         }
 
         @include screen-s {
-            gap: 1rem;
+            gap: 3rem;
         }
 
         @include screen-xs {
             grid-template-columns: 1fr;
-            gap: 1rem;
+            gap: 2rem;
         }
 
 
@@ -51,14 +63,11 @@
             gap: 1.4rem;
 
             h1 {
-                @include main-text;
-                font-size: 3rem;
+                @include h1-hero;
             }
 
             h2 {
-                @include sub-text;
-                font-size: 1.6rem;
-                line-height: 20px;
+                @include h2-hero;
             }
         }
 

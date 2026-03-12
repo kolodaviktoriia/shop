@@ -6,6 +6,14 @@
     margin-top: 2rem;
     margin-bottom: 2rem;
 
+    @include screen-s {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include screen-xs {
+        grid-template-columns: 1fr;
+    }
+
     .category {
         background-color: $primary-pink;
 
@@ -13,14 +21,11 @@
             padding: 1rem;
 
             .title {
-                @include main-text;
-                font-size: 2rem;
+                @include title-cards;
             }
 
             .description {
-                @include sub-text;
-                font-size: 1.4rem;
-                line-height: 20px;
+                @include description-cards;
             }
         }
 
@@ -29,18 +34,54 @@
             width: 100%;
             aspect-ratio: 5/4;
             object-fit: cover;
+
+            @include screen-m {
+                aspect-ratio: 1/1;
+            }
+
+            @include screen-xs {
+                aspect-ratio: 5/4;
+            }
+
+
         }
 
         &:nth-child(1),
         &:nth-child(2),
         &:nth-child(3) {
             grid-column: span 2;
+
+            @include screen-s {
+                grid-column: span 1;
+            }
         }
 
 
         &:nth-child(4),
         &:nth-child(5) {
             grid-column: span 3;
+
+            @include screen-s {
+                grid-column: span 1;
+            }
+        }
+
+        &:nth-child(5) {
+            @include screen-s {
+                grid-column: span 2;
+
+                img {
+                    aspect-ratio: 5/3;
+                }
+            }
+
+            @include screen-xs {
+                grid-column: span 1;
+
+                img {
+                    aspect-ratio: 5/4;
+                }
+            }
         }
 
     }

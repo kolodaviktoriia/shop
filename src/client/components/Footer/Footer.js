@@ -49,7 +49,7 @@ const Footer = () => {
                     </div>
                 )}
                 <div className={styles.socialsWrapper}>
-                    <Logo className={styles.logo} />
+                    <Logo />
                     <div className={styles.socials}>
                         <LinkSecondary to='https://tiktok.com' isIcon>
                             <ion-icon name="logo-tiktok"></ion-icon>
