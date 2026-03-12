@@ -61,10 +61,16 @@ const Header = () => {
                     <button className={styles.mobileClose} onClick={() => setIsOpen(false)}>
                         <XMarkIcon className={styles.icon} />
                     </button>
-                    <NavLinkCustom to='/'>Home</NavLinkCustom>
-                    <NavLinkCustom to='/products/all'>All</NavLinkCustom>
-                    {categories.map(category => <NavLinkCustom to={`/products/${category.name}`} key={category.id}>{category.name}</NavLinkCustom>)}
-                    {collections.map(collection => <NavLinkCustom to={`/collection/${collection.name}`} key={collection.id}>{collection.name}</NavLinkCustom>)}
+                    <NavLinkCustom to='/' onClick={() => setIsOpen(false)}>Home</NavLinkCustom>
+                    <NavLinkCustom to='/products/all' onClick={() => setIsOpen(false)}>All</NavLinkCustom>
+                    {categories.map(category =>
+                        <NavLinkCustom onClick={() => setIsOpen(false)} to={`/products/${category.name}`} key={category.id}>
+                            {category.name}
+                        </NavLinkCustom>
+                    )}
+                    {collections.map(collection =>
+                        <NavLinkCustom onClick={() => setIsOpen(false)} to={`/collection/${collection.name}`} key={collection.id}>{collection.name}
+                        </NavLinkCustom>)}
                 </WidthWrapper>
             </nav>
         </header >

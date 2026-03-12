@@ -3,9 +3,9 @@ import { NavLink } from 'react-router-dom';
 
 import * as styles from './NavLinkCustom.module.scss';
 
-const NavLinkCustom = ({ to, children }) => {
+const NavLinkCustom = ({ to, children, ...props }) => {
     return (
-        <NavLink to={to} className={({ isActive }) => isActive ? `${styles.navLinkActive} ${styles.navLink}` : styles.navLink}>{children}</NavLink>
+        <NavLink to={to} {...props} className={({ isActive }) => isActive ? `${styles.navLinkActive} ${styles.navLink}` : styles.navLink}>{children}</NavLink>
     )
 }
 

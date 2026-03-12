@@ -1,15 +1,16 @@
 import React from 'react';
 import * as styles from './SectionHeader.module.scss';
+import WidthWrapper from '../WidthWrapper/WidthWrapper.js';
 
 const SectionHeader = ({ name, imageUrl, description, extra, className }) => {
     return (
-        <div className={`${styles.sectionHeader} ${className}`} onClick={() => handleClick(name)}>
+        <div className={`${styles.sectionHeader} ${className}`}>
             <img src={imageUrl} />
-            <div className={styles.textWrapper}>
+            <WidthWrapper className={styles.textWrapper}>
                 <h2 className={styles.title}>{name}</h2>
                 <h3 className={styles.description}>{description}</h3>
                 {extra && <h3 className={styles.description}>{extra}</h3>}
-            </div>
+            </WidthWrapper>
         </div >
     )
 }
