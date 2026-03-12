@@ -29,6 +29,7 @@ const Profile = () => {
             <WidthWrapper className={styles.profileWrapper}>
                 <div className={styles.navigation}>
                     <ButtonLink to='/profile/details'>Profile</ButtonLink>
+                    <ButtonLink to='/profile/favorites'>Favorites</ButtonLink>
                     <ButtonLink to='/profile/orders'>Orders</ButtonLink>
                     <Button onClick={handleLogout}>Log out</Button>
                 </div>
