@@ -13,6 +13,7 @@
         }
 
         .navigation {
+
             width: 100%;
             background-color: $soft-pink;
             display: grid;
@@ -22,7 +23,12 @@
             padding: 2rem;
 
             @include screen-s {
+                order: 2;
                 grid-template-columns: 1fr 1fr;
+            }
+
+            @include screen-xs {
+                grid-template-columns: 1fr;
             }
         }
 

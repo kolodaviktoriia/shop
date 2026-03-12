@@ -1,9 +1,11 @@
 .orderWrapper {
 
     .title {
-        @include main-text;
-        font-size: 2.2rem;
-        margin-top: 4rem;
+        @include forms-h1;
+
+        @include screen-xs {
+            font-size: 1.6rem;
+        }
     }
 
     .wrapper {
@@ -13,30 +15,33 @@
         align-items: start;
         gap: 10rem;
 
+        @include screen-m {
+            margin-top: 2rem;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
         .order {
             display: flex;
             flex-direction: column;
             gap: 2rem;
 
             .subTitle {
-                @include main-text;
-                font-size: 2.2rem;
+                @include forms-h2;
             }
 
             .delivery {
                 margin-bottom: 2rem;
                 display: flex;
-                gap: 1rem;
+                gap: 0.5rem;
                 flex-direction: column;
 
+                @include screen-xs {
+                    margin-bottom: 1rem;
+                }
+
                 .deliveryText {
-                    font-family: $text-font-public-sans;
-                    color: $text-color;
-                    text-transform: none;
-                    font-size: 1.4rem;
-                    font-weight: 400;
-                    line-height: 20px;
-                    letter-spacing: 0.04em;
+                    @include sub-text;
                 }
             }
 
@@ -62,10 +67,6 @@
                 background-color: #e0dad5;
             }
 
-            .btn {
-                margin-top: 1rem;
-            }
-
             .summaryRow {
                 display: flex;
                 align-items: center;
@@ -73,62 +74,17 @@
 
 
                 .summarySpan {
-                    font-family: $text-font-public-sans;
-                    color: $text-color;
-                    text-transform: none;
-                    font-size: 1.4rem;
-                    font-weight: 400;
-                    line-height: 20px;
-                    letter-spacing: 0.04em;
+                    @include summary-span;
                 }
 
                 .totalTitle {
-                    font-family: $text-font-public-sans;
-                    color: $text-color;
-                    text-transform: uppercase;
-                    font-size: 1.6rem;
-                    font-weight: 600;
-                    line-height: 20px;
-                    letter-spacing: 0.04em;
-
+                    @include total-title;
                 }
 
                 .amount {
-                    font-family: $text-font-public-sans;
-                    color: $text-color;
-                    text-transform: none;
-                    font-size: 1.6rem;
-                    font-weight: 600;
-                    line-height: 20px;
-                    letter-spacing: 0.04em;
-                }
-            }
-
-            .infoWrapper {
-                margin-top: 1rem;
-                display: flex;
-                align-items: center;
-                justify-content: flex-start;
-                gap: 2px;
-
-                .icon {
-                    display: inline-block;
-                    @include sub-text;
-                    font-size: 2rem;
-                    text-align: center;
-                    padding: 0;
-                    line-height: 2rem;
-                }
-
-                .info {
-                    display: inline-block;
-                    @include sub-text;
-                    font-size: 1.2rem;
-                    line-height: 1.2rem;
+                    @include amount-text;
                 }
             }
         }
-
-
     }
 }
