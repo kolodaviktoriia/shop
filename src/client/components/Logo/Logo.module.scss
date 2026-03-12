@@ -6,4 +6,8 @@
     text-transform: uppercase;
     text-decoration: none;
     color: $text-color;
+
+    @include screen-m {
+        font-size: 3rem;
+    }
 }

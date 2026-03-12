@@ -24,11 +24,17 @@ body {
 html {
     font-size: 62.5% !important;
 
+    @include screen-m {
+        font-size: 56.25% !important;
+    }
+
+    @include screen-s {
+        font-size: 53.125% !important;
+    }
 }
 
 body {
     color: $text-color;
     font-size: 1.2rem;
     line-height: 1.5;
-    overflow-x: hidden;
 }

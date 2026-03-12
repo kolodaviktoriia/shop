@@ -46,6 +46,22 @@
         }
     }
 
+
+    .mobileOpen,
+    .mobileClose {
+        display: none;
+
+        @include screen-m {
+            @include link;
+            display: block;
+            background-color: transparent;
+
+            &.hide {
+                visibility: hidden;
+            }
+        }
+    }
+
     .nav {
         background-color: $soft-pink;
 
@@ -55,6 +71,56 @@
             align-items: center;
             justify-content: center;
             gap: 2rem;
+        }
+
+        @include screen-m {
+            padding: 2rem;
+            z-index: 100;
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            overflow: hidden;
+            max-width: 30rem;
+            width: 100%;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease-in-out;
+
+            &.open {
+                display: block;
+                transform: translateX(0);
+            }
+
+            .navWrapper {
+                height: 100%;
+                overflow-y: auto;
+                flex-direction: column;
+                justify-content: flex-start;
+
+                gap: 0.2rem;
+
+                .mobileClose {
+                    align-self: self-end;
+                }
+            }
+        }
+    }
+
+    .mobileSearch {
+        display: none;
+
+        @include screen-m {
+            background-color: $soft-pink;
+            display: block;
+            width: 100%;
+        }
+    }
+
+    .search {
+        display: block;
+
+        @include screen-m {
+            display: none;
         }
     }
 

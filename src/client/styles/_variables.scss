@@ -80,3 +80,53 @@ $max-width: 140rem;
     font-weight: 400;
     text-transform: uppercase;
 }
+
+
+$screen-xl: 1440px;
+$screen-l: 1280px;
+$screen-m: 1080px;
+$screen-s: 768px;
+$screen-xs: 480px;
+$screen-xxs: 380px;
+
+@mixin screen-s {
+    @media (max-width: #{$screen-s}) {
+        @content;
+    }
+}
+
+@mixin screen-m {
+    @media (max-width: #{$screen-m}) {
+        @content;
+    }
+}
+
+@mixin screen-l {
+    @media (max-width: #{$screen-l}) {
+        @content;
+    }
+}
+
+@mixin screen-xs {
+    @media (max-width: #{$screen-xs}) {
+        @content;
+    }
+}
+
+@mixin screen-xxs {
+    @media (max-width: #{$screen-xs}) {
+        @content;
+    }
+}
+
+@mixin screen-xl {
+    @media (max-width: #{$screen-xl}) {
+        @content;
+    }
+}
+
+@mixin custom($screen) {
+    @media (max-width: $screen+'px') {
+        @content;
+    }
+}

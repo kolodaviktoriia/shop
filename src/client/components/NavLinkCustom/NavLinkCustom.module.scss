@@ -6,6 +6,9 @@
     padding: 1.5rem 0;
     border-bottom: 2px solid transparent;
 
+    @include screen-m {
+        padding: 0.5rem 0;
+    }
 
     &:hover {
         border-color: rgba($accent-pink, 0.8);

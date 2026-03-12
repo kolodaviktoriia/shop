@@ -14,11 +14,16 @@ const Hero = () => {
                     <h2>Potions, scrubs, and serums that make your skin giggle with joy</h2>
                     <ButtonLink to='/products/all'>Sprinkle Some Magic</ButtonLink>
                 </div>
-                <div className={styles.imgWrapper}>
-                    <img src='https://ikaoenxuuphxuvaiwzex.supabase.co/storage/v1/object/public/images/heroImg.png' />
-                </div>
+                <img
+                    src="https://ikaoenxuuphxuvaiwzex.supabase.co/storage/v1/object/public/images/heroMobile.png"
+                    className={styles.mobileImg} />
+                <img
+                    className={styles.heroImg}
+                    src="https://ikaoenxuuphxuvaiwzex.supabase.co/storage/v1/object/public/images/hero.png"
+                    alt="Hero"
+                />
             </WidthWrapper>
-        </section>
+        </section >
     )
 }
 
