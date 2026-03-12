@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { fetchFavorites } from '../../slices/productsSlice.js';
 import ProductsList from '../../components/ProductsList/ProductsList.js';
 import WidthWrapper from '../../components/WidthWrapper/WidthWrapper.js';
 import Spinner from '../../components/Spinner/Spinner.js';
-import { fetchFavorites } from '../../slices/productsSlice.js';
 
+import * as styles from './Favorites.module.scss';
 
 
 const Favorites = () => {
@@ -19,6 +20,7 @@ const Favorites = () => {
 
     return (
         <WidthWrapper>
+            <h1 className={styles.title}>Your Favorites</h1>
             {loading ? <Spinner /> : <ProductsList products={favorites} />}
         </WidthWrapper>
     )

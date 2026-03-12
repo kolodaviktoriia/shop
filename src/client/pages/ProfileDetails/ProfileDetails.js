@@ -7,12 +7,12 @@ const ProfileDetails = () => {
     const { address } = user;
     return (
         <div className={styles.profileDetails}>
-            <h2 className={styles.title}>Hello, {user?.firstName} {user?.lastName}!</h2>
+            <h1 className={styles.title}>Hello, {user?.firstName} {user?.lastName}!</h1>
             <div className={styles.main}>
-                <h3 className={styles.subTitle}>My personal data</h3>
+                <h2 className={styles.subTitle}>My personal data</h2>
                 <span className={styles.infoText}>{user?.firstName} {user?.lastName}</span>
                 <span className={styles.infoText}>{user?.email}</span>
-                {address ? <>  <h3 className={styles.subTitle}>My shipping details</h3>
+                {address ? <>  <h2 className={styles.subTitle}>My shipping details</h2>
                     <div>
                         <p className={styles.infoText}>{address.firstName} {address.lastName}</p>
                         <p className={styles.infoText}>{address.street} {address.houseNumber}</p>

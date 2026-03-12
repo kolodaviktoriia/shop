@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { fetchOrders } from '../../slices/ordersSlice.js';
+import { displayPrice } from '../../helpers/priceConverters.js';
+import Spinner from '../../components/Spinner/Spinner.js';
 
 import * as styles from './Orders.module.scss';
-import { displayPrice } from '../../helpers/priceConverters.js';
-import { useNavigate } from 'react-router-dom';
-import Spinner from '../../components/Spinner/Spinner.js';
 
 const Orders = () => {
     const { orders, loading } = useSelector(store => store.orders);
@@ -22,7 +22,7 @@ const Orders = () => {
     if (loading) return <Spinner />;
     return (
         <div className={styles.orders}>
-            <h2 className={styles.title}>Your Orders</h2>
+            <h1 className={styles.title}>Your Orders</h1>
             <div className={styles.orderList}>
                 {orders?.map(order =>
                     <div className={styles.order} key={order.id} onClick={() => handleClick(order.id)}>

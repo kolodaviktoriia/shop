@@ -3,8 +3,7 @@
     flex-direction: column;
 
     .title {
-        @include main-text;
-        font-size: 2.4rem;
+        @include forms-h1;
 
     }
 
@@ -12,12 +11,14 @@
         margin: 2rem 0;
         display: flex;
         flex-direction: column;
-
         gap: 2rem;
 
+        @include screen-s {
+            gap: 1rem;
+        }
+
         .subTitle {
-            @include main-text;
-            font-size: 1.8rem;
+            @include forms-h2;
         }
 
         .infoText {

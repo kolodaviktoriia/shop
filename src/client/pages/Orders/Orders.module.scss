@@ -1,11 +1,6 @@
 .orders {
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-
     .title {
-        @include main-text;
-        font-size: 2.2rem;
-        margin-top: 4rem;
+        @include forms-h1;
     }
 
     .orderList {

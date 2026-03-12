@@ -7,14 +7,23 @@
         align-items: start;
         gap: 8rem;
 
+        @include screen-s {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
         .navigation {
             width: 100%;
             background-color: $soft-pink;
-            display: flex;
-            flex-direction: column;
+            display: grid;
+            grid-template-columns: 1fr;
             gap: 2rem;
             justify-content: flex-start;
             padding: 2rem;
+
+            @include screen-s {
+                grid-template-columns: 1fr 1fr;
+            }
         }
 
         .info {
@@ -22,21 +31,17 @@
             flex-direction: column;
 
             .title {
-                @include main-text;
-                font-size: 2.4rem;
-
+                @include forms-h1;
             }
 
             .main {
                 margin: 2rem 0;
                 display: flex;
                 flex-direction: column;
-
                 gap: 2rem;
 
                 .subTitle {
-                    @include main-text;
-                    font-size: 1.8rem;
+                    @include forms-h2;
                 }
 
                 .infoText {
