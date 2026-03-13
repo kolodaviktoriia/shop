@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { clearCartAndSync } from '../../slices/cartSlice.js';
 import { clearCurrentOrder } from '../../slices/ordersSlice.js';
+import Message from '../../components/Message/Message.js';
 
 import * as styles from './Confirmation.module.scss';
 

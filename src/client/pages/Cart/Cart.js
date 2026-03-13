@@ -58,7 +58,10 @@ const Cart = () => {
                         </div>
                         <Total subTotal={itemsPrice} shipping={shippingPrice} total={totalPrice}>
                             <Button className={styles.btn} onClick={handleCheckout}>To checkout</Button>
-                            <div className={styles.infoWrapper}> <span className={styles.icon} ><ion-icon name="information-circle-outline"></ion-icon></span>
+                            <div className={styles.infoWrapper}>
+                                <span className={styles.icon} >
+                                    <ion-icon name="information-circle-outline"></ion-icon>
+                                </span>
                                 <span className={styles.info}>
                                     Items in the shopping cart are not reserved.
                                 </span>
