@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import ProductCartItem from '../../components/ProductCartItem /ProductCartItem.js';
 import Spinner from '../../components/Spinner/Spinner.js';
-import { displayPrice } from '../../helpers/priceConverters.js';
+import Total from '../../components/Total/Total.js';
 import { fetchOrder } from '../../slices/ordersSlice.js';
 
 import * as styles from './Order.module.scss';
@@ -52,21 +52,7 @@ const Order = () => {
                         )}
                     </div>
                 </div>
-                <div className={styles.details}>
-                    <div className={styles.summaryRow}>
-                        <span className={styles.summarySpan}>Subtotal</span>
-                        <span className={styles.amount}>{displayPrice(itemsPrice)}</span>
-                    </div>
-                    <div className={styles.summaryRow}>
-                        <span className={styles.summarySpan}>Shipping</span>
-                        <span className={styles.amount}>{displayPrice(shippingPrice)}</span>
-                    </div>
-                    <div className={styles.divider}></div>
-                    <div className={styles.summaryRow}>
-                        <span className={styles.totalTitle}>Total</span>
-                        <span className={styles.amount}>{displayPrice(totalPrice)}</span>
-                    </div>
-                </div>
+                <Total subTotal={itemsPrice} shipping={shippingPrice} total={totalPrice} />
             </div>
         </div >
     )

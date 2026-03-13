@@ -51,40 +51,5 @@
                 gap: 1rem;
             }
         }
-
-
-        .details {
-            background-color: $soft-pink;
-            padding: 2rem;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-
-            .divider {
-                margin-top: 1rem;
-                height: 1px;
-                width: 100%;
-                background-color: #e0dad5;
-            }
-
-            .summaryRow {
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-
-
-                .summarySpan {
-                    @include summary-span;
-                }
-
-                .totalTitle {
-                    @include total-title;
-                }
-
-                .amount {
-                    @include amount-text;
-                }
-            }
-        }
     }
 }

@@ -19,6 +19,17 @@
         }
     }
 
+    .detailsWrapper {
+        width: 100%;
+        display: flex;
+        justify-items: space-between;
+        gap: 1rem;
+
+        @include screen-xs {
+            flex-direction: column;
+        }
+    }
+
     .textWrapper {
         display: flex;
         flex-direction: column;
@@ -57,5 +68,10 @@
     .amount {
         margin-left: auto;
         justify-self: end;
+
+        @include screen-xs {
+            margin-left: 0;
+            justify-self: start;
+        }
     }
 }

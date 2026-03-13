@@ -7,9 +7,9 @@ import Message from '../../components/Message/Message.js';
 import Spinner from '../../components/Spinner/Spinner.js';
 import Button from '../../components/Button/Button.js';
 import SEO from '../../components/SEO.js';
-import { initCurrentOrder } from '../../slices/ordersSlice.js';
-import { displayPrice } from '../../helpers/priceConverters.js';
 
+import Total from '../../components/Total/Total.js';
+import { initCurrentOrder } from '../../slices/ordersSlice.js';
 import * as styles from './Cart.module.scss';
 
 const Cart = () => {
@@ -48,7 +48,7 @@ const Cart = () => {
                     buttonLabel={user ? 'Continue Shopping' : 'Sign in'} to={user ? '/' : '/login'}
                 /> : <>
                     <WidthWrapper>
-                        <h2 className={styles.title}>Your Shopping Bag</h2>
+                        <h1 className={styles.title}>Your Shopping Bag</h1>
                     </WidthWrapper>
                     <WidthWrapper className={styles.wrapper}>
                         <div className={styles.items}>
@@ -56,27 +56,14 @@ const Cart = () => {
                                 (<ProductCartItem key={product.id} product={product} />)
                             )}
                         </div>
-                        <div className={styles.details}>
-                            <div className={styles.summaryRow}>
-                                <span className={styles.summarySpan}>Subtotal</span>
-                                <span className={styles.amount}>{displayPrice(itemsPrice)}</span>
-                            </div>
-                            <div className={styles.summaryRow}>
-                                <span className={styles.summarySpan}>Shipping</span>
-                                <span className={styles.amount}>{displayPrice(shippingPrice)}</span>
-                            </div>
-                            <div className={styles.divider}></div>
-                            <div className={styles.summaryRow}>
-                                <span className={styles.totalTitle}>Total</span>
-                                <span className={styles.amount}>{displayPrice(totalPrice)}</span>
-                            </div>
-                            <Button className={styles.btn} onClick={handleCheckout}>Continue to checkout</Button>
+                        <Total subTotal={itemsPrice} shipping={shippingPrice} total={totalPrice}>
+                            <Button className={styles.btn} onClick={handleCheckout}>To checkout</Button>
                             <div className={styles.infoWrapper}> <span className={styles.icon} ><ion-icon name="information-circle-outline"></ion-icon></span>
                                 <span className={styles.info}>
                                     Items in the shopping cart are not reserved.
                                 </span>
                             </div>
-                        </div>
+                        </Total>
                     </WidthWrapper >
                 </>}
         </div >

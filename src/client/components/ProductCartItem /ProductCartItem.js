@@ -1,11 +1,12 @@
 import React from 'react';
 
-import * as styles from './ProductCartItem.module.scss';
 import { useNavigate } from 'react-router-dom';
-import AmountField from '../AmountField/AmountField.js';
 import { useDispatch } from 'react-redux';
+import AmountField from '../AmountField/AmountField.js';
 import { addItemAndSync, deleteItemAndSync, removeItemAndSync } from '../../slices/cartSlice.js';
 import { displayPrice } from '../../helpers/priceConverters.js';
+
+import * as styles from './ProductCartItem.module.scss';
 
 const ProductCartItem = ({ product, isOrder = false }) => {
     const { title, imageUrl, price, id, quantity } = product;
@@ -31,18 +32,20 @@ const ProductCartItem = ({ product, isOrder = false }) => {
             <div className={styles.imgWrapper} onClick={handleClick}>
                 <img src={imageUrl} alt={title} />
             </div >
-            <div className={styles.textWrapper}>
-                <h3 className={styles.title}>{title}</h3>
-                {isOrder ?
-                    <span className={styles.price}>
-                        {quantity} x {displayPrice(price)}
+            <div className={styles.detailsWrapper}>
+                <div className={styles.textWrapper}>
+                    <h3 className={styles.title}>{title}</h3>
+                    {isOrder ?
+                        <span className={styles.price}>
+                            {quantity} x {displayPrice(price)}
+                        </span>
+                        : ''}
+                    <span className={styles.mainPrice}>
+                        {displayPrice(quantity * price)}
                     </span>
-                    : ''}
-                <span className={styles.mainPrice}>
-                    {displayPrice(quantity * price)}
-                </span>
+                </div>
+                {isOrder ? '' : <AmountField value={quantity} handleMinus={handleMinus} handlePlus={handlePlus} handleDelete={handleDelete} small className={styles.amount} />}
             </div>
-            {isOrder ? '' : <AmountField value={quantity} handleMinus={handleMinus} handlePlus={handlePlus} handleDelete={handleDelete} small className={styles.amount} />}
         </div >
     )
 }
