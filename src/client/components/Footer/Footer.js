@@ -21,11 +21,11 @@ const Footer = () => {
     ],
 
     company: [
-      { label: 'About Us', link: '/about' },
-      { label: 'Our Ingredients', link: '/ingredients' },
-      { label: 'Sustainability', link: '/sustainability' },
-      { label: 'Privacy Policy', link: '/privacy' },
-      { label: 'Terms of Service', link: '/terms' },
+      { label: 'About Us', link: '/company/about' },
+      { label: 'Our Ingredients', link: '/company/ingredients' },
+      { label: 'Sustainability', link: '/company/sustainability' },
+      { label: 'Privacy Policy', link: '/company/privacy' },
+      { label: 'Terms of Service', link: '/company/terms' },
     ],
   };
   const { categories, collections } = useSelector((store) => store.products);

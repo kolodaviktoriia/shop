@@ -24,7 +24,7 @@ import Order from '../pages/Order/Order.js';
 import Favorites from '../pages/Favorites/Favorites.js';
 import NotFound from '../pages/NotFound/NotFound.js';
 import ErrorHandler from '../pages/ErrorHandler/ErrorHandler.js';
-import About from '../pages/About/About.js';
+import Company from '../pages/Company/Company.js';
 
 export const routes = [
   {
@@ -114,8 +114,8 @@ export const routes = [
         ],
       },
       {
-        element: <About />,
-        path: 'about',
+        element: <Company />,
+        path: 'company/:id',
       },
       {
         element: <NotFound />,
