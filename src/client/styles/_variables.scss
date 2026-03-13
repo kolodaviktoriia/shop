@@ -223,7 +223,7 @@ $screen-xxs: 380px;
         font-size: 2rem;
     }
 
-    @include screen-s {
+    @include screen-xs {
         font-size: 1.8rem;
     }
 }

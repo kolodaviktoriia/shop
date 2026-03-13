@@ -3,13 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import WidthWrapper from '../../components/WidthWrapper/WidthWrapper.js';
 import ProductCartItem from '../../components/ProductCartItem /ProductCartItem.js';
-import ButtonLink from '../../components/ButtonLink/ButtonLink.js';
+import Message from '../../components/Message/Message.js';
 import Spinner from '../../components/Spinner/Spinner.js';
 import Button from '../../components/Button/Button.js';
 import SEO from '../../components/SEO.js';
 import { initCurrentOrder } from '../../slices/ordersSlice.js';
 import { displayPrice } from '../../helpers/priceConverters.js';
-
 
 import * as styles from './Cart.module.scss';
 
@@ -43,19 +42,11 @@ const Cart = () => {
                 title='Your Bag'
             />
             {items.length === 0 ?
-                <WidthWrapper className={styles.emptyWrapper}>
-                    <div className={styles.emptyCart}>
-                        <h2 className={styles.title}>Your Bag Is Empty</h2>
-                        {user ? <>
-                            <p className={styles.subtitle}>Nothing here yet? Let’s find something you’ll love!</p>
-                            <ButtonLink to='/' >Continue Shopping</ButtonLink>
-                        </> : <>
-                            <p className={styles.subtitle}>Looking for items you added previously? Then log in to see them!</p>
-                            <ButtonLink to='/login' >Sign in</ButtonLink>
-                        </>
-                        }
-                    </div>
-                </WidthWrapper> : <>
+                <Message
+                    title='Your Bag Is Empty'
+                    subtitle={user ? 'Nothing here yet? Let’s find something you’ll love!' : 'Looking for items you added previously? Then log in to see them!'}
+                    buttonLabel={user ? 'Continue Shopping' : 'Sign in'} to={user ? '/' : '/login'}
+                /> : <>
                     <WidthWrapper>
                         <h2 className={styles.title}>Your Shopping Bag</h2>
                     </WidthWrapper>
