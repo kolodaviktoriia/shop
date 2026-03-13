@@ -2,7 +2,8 @@
     margin: 2rem 0;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 2rem;
+    column-gap: 0.5rem;
+    row-gap: 1rem;
 
     @include custom(850) {
         grid-template-columns: repeat(3, 1fr);
