@@ -4,21 +4,20 @@
   flex-direction: column;
   gap: 2rem;
 
-  .title {
-    @include forms-h2;
-    margin-bottom: 0.5rem;
+  .section {
+    .title {
+      @include forms-h2;
+      margin-bottom: 0.5rem;
+    }
 
+    .subTitle {
+      font-family: $text-font-public-sans;
+      color: $text-color;
+      text-transform: none;
+      font-size: 1.4rem;
+      font-weight: 400;
+      line-height: 20px;
+      letter-spacing: 0.04em;
+    }
   }
-
-  .subTitle {
-    font-family: $text-font-public-sans;
-    color: $text-color;
-    text-transform: none;
-    font-size: 1.4rem;
-    font-weight: 400;
-    line-height: 20px;
-    letter-spacing: 0.04em;
-
-  }
-
 }

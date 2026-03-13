@@ -4,7 +4,14 @@ import ButtonLink from '../ButtonLink/ButtonLink.js';
 
 import * as styles from './Message.module.scss';
 
-const Message = ({ children, title, subtitle, buttonLabel, to = '/', isLink = true }) => {
+const Message = ({
+  children,
+  title,
+  subtitle,
+  buttonLabel,
+  to = '/',
+  isLink = true,
+}) => {
   return (
     <WidthWrapper>
       <div className={styles.message}>
