@@ -25,6 +25,7 @@ import Favorites from '../pages/Favorites/Favorites.js';
 import NotFound from '../pages/NotFound/NotFound.js';
 import ErrorHandler from '../pages/ErrorHandler/ErrorHandler.js';
 import Company from '../pages/Company/Company.js';
+import Help from '../pages/Help/Help.js';
 
 export const routes = [
   {
@@ -112,6 +113,10 @@ export const routes = [
             path: 'complete/:id',
           },
         ],
+      },
+      {
+        element: <Help />,
+        path: 'help/:id',
       },
       {
         element: <Company />,

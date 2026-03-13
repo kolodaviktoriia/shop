@@ -14,10 +14,10 @@ const Footer = () => {
     shop: [],
     collections: [],
     help: [
-      { label: 'Contact Us', link: '/contact' },
-      { label: 'Shipping & Delivery', link: '/shipping' },
-      { label: 'Returns', link: '/returns' },
-      { label: 'FAQ', link: '/faq' },
+      { label: 'Contact Us', link: '/help/contact' },
+      { label: 'Shipping & Delivery', link: '/help/shipping' },
+      { label: 'Returns', link: '/help/returns' },
+      { label: 'FAQ', link: '/help/faq' },
     ],
 
     company: [
