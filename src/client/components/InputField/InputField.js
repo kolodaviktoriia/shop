@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import * as styles from './InputField.module.scss';
 
 const InputField = ({ label, name, icon, type, error, ...props }) => {

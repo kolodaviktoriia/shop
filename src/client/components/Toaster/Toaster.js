@@ -1,7 +1,6 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import { toast, ToastContainer } from "react-toastify";
 import * as styles from './Toaster.module.scss';
-import { useSelector } from "react-redux";
 
 
 export const notify = {

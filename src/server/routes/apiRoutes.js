@@ -1,6 +1,6 @@
 import express from 'express';
 import { getCategoriesApi, getCollectionsApi, getProductApi, getProductsApi, getFavoritesApi, addFavoriteApi, deleteFavoriteApi, } from '../supabaseApi/productsApi.js';
-import { getProfile, getUserApi, loginApi, logoutApi, signupApi } from '../supabaseApi/userApi.js';
+import { getProfile, getUserApi, loginApi, signupApi } from '../supabaseApi/userApi.js';
 import { getToken } from '../helpers/getToken.js';
 import { setCookie } from '../helpers/setCookie.js';
 import { getCartApi, saveCartApi } from '../supabaseApi/cartApi.js';

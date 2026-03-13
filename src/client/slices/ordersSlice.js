@@ -31,7 +31,7 @@ const ordersSlice = createSlice({
             state.currentOrder.totalPrice = action.payload.totalPrice;
 
         },
-        clearCurrentOrder: (state, action) => {
+        clearCurrentOrder: (state) => {
             state.currentOrder = initialOrder;
         },
         setSelectedOrder: (state, action) => {

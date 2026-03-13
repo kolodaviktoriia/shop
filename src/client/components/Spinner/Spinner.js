@@ -1,7 +1,7 @@
 import React from 'react';
 import * as styles from './Spinner.module.scss';
 
-const Spinner = ({ children, className, secondary = false, ...props }) => {
+const Spinner = () => {
     return (
         <div className={styles.spinnerWrapper}>
             <div className={styles.spinner} />

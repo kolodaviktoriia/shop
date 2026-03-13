@@ -26,7 +26,7 @@ const Products = () => {
     useEffect(() => {
         dispatch(fetchProducts({ category: category.id }));
         return () => dispatch(clearProducts());
-    }, [id, dispatch]);
+    }, [id, dispatch, category.id]);
 
 
     return (

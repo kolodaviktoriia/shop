@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Outlet, useLocation } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Header from "./components/Header/Header.js";
 import Footer from "./components/Footer/Footer.js";
@@ -26,7 +26,6 @@ const App = () => {
             <div
                 className={`${styles.pageWrapper} ${hydrated ? styles.visible : ""}`}
             >
-
                 <ErrorBoundary>
                     {loading ? (
                         <Spinner />

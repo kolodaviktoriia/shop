@@ -12,7 +12,7 @@ const Confirmation = () => {
     useEffect(() => {
         dispatch(clearCartAndSync());
         dispatch(clearCurrentOrder());
-    }, [])
+    }, [dispatch])
 
     return (
         <div className={styles.confirmation}>

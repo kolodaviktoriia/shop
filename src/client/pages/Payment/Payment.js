@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useNavigate, useOutletContext } from 'react-router-dom';
-import { displayPrice } from '../../helpers/priceConverters.js';
 
 import Spinner from '../../components/Spinner/Spinner.js';
 import PayPalComponent from '../../components/PayPalComponent/PayPalComponent.js';
@@ -21,7 +20,7 @@ const Payment = () => {
 
     useEffect(() => {
         if (!items && items.length === 0 || !totalPrice || !address) navigate('/cart');
-    }, [items, totalPrice, address]);
+    }, [items, totalPrice, address, navigate]);
 
 
     const handlePayment = (id) => {

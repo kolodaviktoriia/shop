@@ -20,7 +20,7 @@ const Checkout = () => {
         if (step === 0 && user) setStep(cur => cur + 1);
         if (step !== 3) navigate(steps[step]);
         if (!items || items.length === 0 && !isConfirmation) navigate('/cart');
-    }, [step, user, navigate, items])
+    }, [step, user, navigate, items, isConfirmation])
 
     return (
         <div className={styles.checkout}>

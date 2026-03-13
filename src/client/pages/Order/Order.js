@@ -15,7 +15,7 @@ const Order = () => {
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(fetchOrder(id))
-    }, [id])
+    }, [id, dispatch])
 
     const { selectedOrder: order, loading } = useSelector(store => store.orders);
 

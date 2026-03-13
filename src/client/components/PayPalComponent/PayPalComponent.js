@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { useSelector } from "react-redux";
 import { captureOrderApi, createOrderApi } from "../../api/ordersApi.js";
+import { notify } from "../Toaster/Toaster.js";
 
 const PayPalComponent = ({ handlePayment }) => {
     const { currentOrder: order } = useSelector(store => store.orders);
@@ -15,7 +16,6 @@ const PayPalComponent = ({ handlePayment }) => {
         components: "buttons",
     };
 
-    const [message, setMessage] = useState("");
 
     const handleCreateOrder = async () => {
         try {
@@ -33,7 +33,7 @@ const PayPalComponent = ({ handlePayment }) => {
             }
         } catch (error) {
             console.error(error);
-            setMessage(
+            notify.error(
                 `Could not initiate PayPal Checkout...${error}`
             );
         }
@@ -56,7 +56,7 @@ const PayPalComponent = ({ handlePayment }) => {
                 }
             } catch (error) {
                 console.error(error);
-                setMessage(
+                notify.error(
                     `Sorry, your transaction could not be processed...${error}`
                 );
             }

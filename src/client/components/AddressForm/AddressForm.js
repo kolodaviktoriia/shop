@@ -37,7 +37,8 @@ const AddressForm = ({ onSubmit }) => {
                 } = address;
 
                 setFormValues({
-                    ...initialState, firstName, lastName, firstName,
+                    ...initialState,
+                    firstName,
                     lastName,
                     street,
                     houseNumber,
@@ -60,7 +61,6 @@ const AddressForm = ({ onSubmit }) => {
     };
 
     const validate = () => {
-        let valid = true;
         const newErrors = {};
 
         if (!formValues.firstName) newErrors.firstName = 'First name is required';
@@ -75,6 +75,7 @@ const AddressForm = ({ onSubmit }) => {
 
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
+
     };
 
     const handleForm = (e) => {

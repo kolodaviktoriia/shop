@@ -19,7 +19,7 @@ const Collection = () => {
     useEffect(() => {
         dispatch(fetchProducts({ collection: collection.id }));
         return () => dispatch(clearProducts());
-    }, [id, dispatch]);
+    }, [id, dispatch, collection.id]);
 
     return (
         <div className={styles.collection}>

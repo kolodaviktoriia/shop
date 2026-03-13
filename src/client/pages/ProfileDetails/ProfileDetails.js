@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import * as styles from './ProfileDetails.module.scss';
 import { useSelector } from 'react-redux';
 
