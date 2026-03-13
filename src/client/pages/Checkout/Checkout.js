@@ -5,7 +5,7 @@ import { Outlet, useNavigate, useParams } from 'react-router-dom';
 import SEO from '../../components/SEO.js';
 import * as styles from './Checkout.module.scss';
 
-const steps = ['login', 'address', 'payment', 'confirmation'];
+const steps = ['login', 'address', 'payment', 'complete'];
 
 const Checkout = () => {
     const [step, setStep] = useState(0);
@@ -27,7 +27,7 @@ const Checkout = () => {
             <SEO
                 title='Checkout'
             />
-            <WidthWrapper>
+            <WidthWrapper className={styles.wrapper}>
                 <div className={styles.stepper}>
                     {steps.map((label, index) => (
                         <React.Fragment key={label}>

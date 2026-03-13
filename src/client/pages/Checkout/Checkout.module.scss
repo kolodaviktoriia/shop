@@ -1,4 +1,8 @@
 .checkout {
+    .wrapper {
+        overflow-x: hidden;
+    }
+
     .stepper {
         margin: 4rem auto;
         width: 100%;
@@ -8,18 +12,50 @@
         align-items: center;
         gap: 3px;
 
+        @include screen-m {
+            max-width: 60rem;
+        }
+
+
         .step {
             position: relative;
             display: flex;
             flex-direction: column;
             gap: 1rem;
 
+            &:first-child {
+                margin-left: 2rem;
+
+                @include screen-xs {
+                    margin-left: 1rem;
+
+                }
+
+                @include screen-xxs {
+                    margin-left: 0.5rem;
+                }
+            }
+
+            &:last-child {
+                margin-right: 4rem;
+
+                @include screen-xs {
+                    margin-right: 3rem;
+                }
+            }
+
             .circle {
                 background-color: $grey;
                 height: 2rem;
                 width: 2rem;
+
                 border-radius: 50%;
                 text-align: center;
+
+                @include screen-xs {
+                    height: 1rem;
+                    width: 1rem;
+                }
             }
 
             .label {
@@ -33,6 +69,11 @@
                 font-weight: 400;
                 text-transform: uppercase;
                 color: $text-soft-grey;
+                font-size: 1.2rem;
+
+                @include screen-xs {
+                    font-size: 1rem;
+                }
             }
 
 
@@ -72,6 +113,10 @@
 
     .stepContent {
         margin: 8rem 0;
+
+        @include screen-s {
+            margin: 6rem 0;
+        }
 
     }
 }
