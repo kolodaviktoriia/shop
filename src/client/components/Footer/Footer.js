@@ -13,20 +13,20 @@ const Footer = () => {
   const navigation = {
     shop: [],
     collections: [],
-    // help: [
-    //     { label: "Contact Us", link: "/contact" },
-    //     { label: "Shipping & Delivery", link: "/shipping" },
-    //     { label: "Returns", link: "/returns" },
-    //     { label: "FAQ", link: "/faq" },
-    // ],
+    help: [
+      { label: 'Contact Us', link: '/contact' },
+      { label: 'Shipping & Delivery', link: '/shipping' },
+      { label: 'Returns', link: '/returns' },
+      { label: 'FAQ', link: '/faq' },
+    ],
 
-    // company: [
-    //     { label: "About Us", link: "/about" },
-    //     { label: "Our Ingredients", link: "/ingredients" },
-    //     { label: "Sustainability", link: "/sustainability" },
-    //     { label: "Privacy Policy", link: "/privacy" },
-    //     { label: "Terms of Service", link: "/terms" },
-    // ],
+    company: [
+      { label: 'About Us', link: '/about' },
+      { label: 'Our Ingredients', link: '/ingredients' },
+      { label: 'Sustainability', link: '/sustainability' },
+      { label: 'Privacy Policy', link: '/privacy' },
+      { label: 'Terms of Service', link: '/terms' },
+    ],
   };
   const { categories, collections } = useSelector((store) => store.products);
   navigation.shop = categories.map((category) => ({

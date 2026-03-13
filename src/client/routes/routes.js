@@ -24,6 +24,7 @@ import Order from '../pages/Order/Order.js';
 import Favorites from '../pages/Favorites/Favorites.js';
 import NotFound from '../pages/NotFound/NotFound.js';
 import ErrorHandler from '../pages/ErrorHandler/ErrorHandler.js';
+import About from '../pages/About/About.js';
 
 export const routes = [
   {
@@ -111,6 +112,10 @@ export const routes = [
             path: 'complete/:id',
           },
         ],
+      },
+      {
+        element: <About />,
+        path: 'about',
       },
       {
         element: <NotFound />,

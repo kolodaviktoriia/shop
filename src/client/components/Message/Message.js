@@ -12,7 +12,7 @@ const Message = ({ title, subtitle, buttonLabel, to = '/', isLink = true }) => {
           <h1 className={styles.title}>{title}</h1>
           <p className={styles.subtitle}>{subtitle}</p>
           <ButtonLink to={to} isLink={isLink}>
-            {buttonLabel}
+            {buttonLabel ?? 'Continue Shopping'}
           </ButtonLink>
         </div>
       </div>

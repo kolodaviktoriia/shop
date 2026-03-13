@@ -11,8 +11,12 @@
     padding-bottom: 4rem;
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(6, 1fr);
     gap: 2rem;
+
+    @include screen-m {
+      grid-template-columns: repeat(4, 1fr);
+    }
 
     @include screen-s {
       grid-template-columns: repeat(2, 1fr);
@@ -41,6 +45,14 @@
       justify-content: center;
       gap: 1rem;
       flex-direction: column;
+
+      @include screen-m {
+        grid-column: span 4;
+      }
+
+      @include screen-s {
+        grid-column: span 2;
+      }
 
       .logo {
         font-size: 2.8rem;
