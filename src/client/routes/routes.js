@@ -113,7 +113,7 @@ export const routes = [{
                 },
                 {
                     element: <Confirmation />,
-                    path: 'confirmation/:id',
+                    path: 'complete/:id',
 
                 },
 
