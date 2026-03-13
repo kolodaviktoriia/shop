@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import InputField from '../InputField/InputField.js';
-import * as styles from './AddressForm.module.scss';
-import Button from '../Button/Button.js';
 import { useSelector } from 'react-redux';
+import InputField from '../InputField/InputField.js';
+import Button from '../Button/Button.js';
+
+import * as styles from './AddressForm.module.scss';
 
 const initialState = {
     firstName: '',
@@ -85,11 +86,13 @@ const AddressForm = ({ onSubmit }) => {
 
     return (
         <div className={styles.addressFormWrapper}>
-            <h2 className={styles.title}>Where should we deliver your order?</h2>
-            <h3 className={styles.subTitle}>
+            <h1 className={styles.title}>
+                Where should we deliver your order?
+            </h1>
+            <h2 className={styles.subTitle}>
                 Enter your delivery address below so we know exactly where to send your order.
                 Make sure the address is correct before continuing.
-            </h3>
+            </h2>
             <form className={styles.addressForm} noValidate>
                 <InputField label='First Name' name='firstName' type='text' value={formValues.firstName} error={errors.firstName} onChange={handleChange} />
                 <InputField label='Last Name' name='lastName' type='text' value={formValues.lastName} error={errors.lastName} onChange={handleChange} />
@@ -99,7 +102,7 @@ const AddressForm = ({ onSubmit }) => {
                 <InputField label='City' name='city' type='text' value={formValues.city} error={errors.city} onChange={handleChange} />
                 <InputField label='Country' name='country' type='text' value={formValues.country} error={errors.country} onChange={handleChange} />
                 <InputField label='Phone' name='phone' type='text' value={formValues.phone} error={errors.phone} onChange={handleChange} />
-                <Button onClick={handleForm}>Add Address</Button>
+                <Button onClick={handleForm} className={styles.btn}>Add Address</Button>
             </form>
         </div>
     );

@@ -6,6 +6,16 @@
     margin-top: 4rem;
     margin-bottom: 4rem;
 
+    @include screen-m {
+        gap: 5rem;
+        grid-template-columns: 1fr 0.5fr;
+    }
+
+    @include screen-s {
+        gap: 2rem;
+        grid-template-columns: 1fr;
+    }
+
     .details {
         background-color: $soft-pink;
         padding: 3rem;
@@ -13,13 +23,28 @@
         grid-template-columns: 1fr 1fr;
         gap: 3rem;
 
+        @include screen-m {
+            grid-template-columns: 1fr;
+        }
+
+        @include screen-s {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        @include screen-xxs {
+            gap: 2rem;
+            grid-template-columns: 1fr;
+        }
 
         .row {
             display: flex;
             flex-direction: column;
             align-items: center;
-
             gap: 2rem;
+
+            @include screen-xxs {
+                gap: 1rem;
+            }
 
             .icon {
                 display: inline-block;

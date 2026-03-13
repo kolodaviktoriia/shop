@@ -165,8 +165,6 @@ $screen-xxs: 380px;
     @include sub-text;
     font-size: 1.6rem;
     line-height: 20px;
-
-
 }
 
 @mixin title-cards {
@@ -230,6 +228,15 @@ $screen-xxs: 380px;
 
 @mixin forms-h2 {
     @include main-text;
+    font-size: 1.6rem;
+
+    @include screen-s {
+        font-size: 1.4rem;
+    }
+}
+
+@mixin forms-h2-grey {
+    @include sub-text;
     font-size: 1.6rem;
 
     @include screen-s {
