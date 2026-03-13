@@ -1,24 +1,16 @@
-import { deleteData, getData, postData } from "./axiosConfig.js";
-
+import { deleteData, getData, postData } from './axiosConfig.js';
 
 export const getProductsApi = (filter) =>
-    getData("/api/products", { params: filter });
+  getData('/api/products', { params: filter });
 
-export const getProductApi = (id) =>
-    getData(`/api/product/${id}`);
+export const getProductApi = (id) => getData(`/api/product/${id}`);
 
-export const getCategoriesApi = () =>
-    getData("/api/categories");
+export const getCategoriesApi = () => getData('/api/categories');
 
-export const getCollectionsApi = () =>
-    getData("/api/collections");
+export const getCollectionsApi = () => getData('/api/collections');
 
-export const getFavoritesApi = () =>
-    getData("/api/favorites");
+export const getFavoritesApi = () => getData('/api/favorites');
 
+export const postFavoritesApi = (id) => postData('/api/favorites', { id });
 
-export const postFavoritesApi = (id) =>
-    postData("/api/favorites", { id });
-
-export const deleteFavoritesApi = (id) =>
-    deleteData(`/api/favorites/${id}`);
+export const deleteFavoritesApi = (id) => deleteData(`/api/favorites/${id}`);

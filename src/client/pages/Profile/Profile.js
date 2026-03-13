@@ -11,35 +11,34 @@ import SEO from '../../components/SEO.js';
 
 import * as styles from './Profile.module.scss';
 const Profile = () => {
-    const { user, loading } = useSelector(store => store.user);
+  const { user, loading } = useSelector((store) => store.user);
 
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-    const handleLogout = () => {
-        dispatch(logoutUser());
-    }
+  const handleLogout = () => {
+    dispatch(logoutUser());
+  };
 
-    if (loading) return <Spinner />;
+  if (loading) return <Spinner />;
 
-    return user ? (
-        <div className={styles.profile}>
-            <SEO
-                title='Your Profile'
-            />
-            <WidthWrapper className={styles.profileWrapper}>
-                <div className={styles.navigation}>
-                    <ButtonLink to='/profile/details'>Profile</ButtonLink>
-                    <ButtonLink to='/profile/favorites'>Favorites</ButtonLink>
-                    <ButtonLink to='/profile/orders'>Orders</ButtonLink>
-                    <Button onClick={handleLogout}>Log out</Button>
-                </div>
-                <div className={styles.info}>
-                    <Outlet />
-                </div>
-            </WidthWrapper>
-        </div >
-
-    ) : (<LoginGrid />)
-}
+  return user ? (
+    <div className={styles.profile}>
+      <SEO title="Your Profile" />
+      <WidthWrapper className={styles.profileWrapper}>
+        <div className={styles.navigation}>
+          <ButtonLink to="/profile/details">Profile</ButtonLink>
+          <ButtonLink to="/profile/favorites">Favorites</ButtonLink>
+          <ButtonLink to="/profile/orders">Orders</ButtonLink>
+          <Button onClick={handleLogout}>Log out</Button>
+        </div>
+        <div className={styles.info}>
+          <Outlet />
+        </div>
+      </WidthWrapper>
+    </div>
+  ) : (
+    <LoginGrid />
+  );
+};
 
 export default Profile;

@@ -6,74 +6,98 @@ import { useNavigate } from 'react-router-dom';
 import { signupUser } from '../../slices/userSlice.js';
 import { useDispatch } from 'react-redux';
 
-
 const initialState = {
-    email: '',
-    password: '',
-    firstName: '',
-    lastName: '',
-    phone: '',
+  email: '',
+  password: '',
+  firstName: '',
+  lastName: '',
+  phone: '',
 };
 
 const SignupForm = ({ navigateTo, onNavigate }) => {
-    const navigate = useNavigate();
-    const [formValues, setFormValues] = useState(initialState);
-    const [errors, setErrors] = useState({});
-    const dispatch = useDispatch();
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormValues(prev => ({ ...prev, [name]: value }));
-    };
+  const navigate = useNavigate();
+  const [formValues, setFormValues] = useState(initialState);
+  const [errors, setErrors] = useState({});
+  const dispatch = useDispatch();
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormValues((prev) => ({ ...prev, [name]: value }));
+  };
 
-    const validate = () => {
-        let valid = true;
-        const newErrors = {};
+  const validate = () => {
+    let valid = true;
+    const newErrors = {};
 
-        if (!formValues.email) {
-            newErrors.email = 'Email is required';
-            valid = false;
-        } else if (!/\S+@\S+\.\S+/.test(formValues.email)) {
-            newErrors.email = 'Email is invalid';
-            valid = false;
-        }
-
-        if (!formValues.password) {
-            newErrors.password = 'Password is required';
-            valid = false;
-        } else if (formValues.password.length < 6) {
-            newErrors.password = 'Password must be at least 6 characters';
-            valid = false;
-        }
-        if (!formValues.firstName) newErrors.firstName = 'First name is required';
-        if (!formValues.lastName) newErrors.lastName = 'Last name is required';
-
-        setErrors(newErrors);
-        return valid;
-
-    };
-
-    const handleLogin = (e) => {
-        e.preventDefault();
-        if (!validate()) return;
-        dispatch(signupUser(formValues, Boolean(onNavigate)));
-        if (onNavigate) onNavigate();
-        else navigate(navigateTo ?? '/profile/details')
-
+    if (!formValues.email) {
+      newErrors.email = 'Email is required';
+      valid = false;
+    } else if (!/\S+@\S+\.\S+/.test(formValues.email)) {
+      newErrors.email = 'Email is invalid';
+      valid = false;
     }
 
-    return (
-        <div className={styles.signupWrapper}>
-            <h2 className={styles.title}>I am new to Blush & Blossom</h2>
-            <form className={styles.loginForm} noValidate>
-                <InputField label='First Name' name='firstName' type='text' value={formValues.firstName} error={errors.firstName} onChange={handleChange} />
-                <InputField label='Last Name' name='lastName' type='text' value={formValues.lastName} error={errors.lastName} onChange={handleChange} />
-                <InputField label='Email address' name='email' type='email' value={formValues.email} error={errors.email} onChange={handleChange} />
-                <InputField label='Password' name='password' type='password' value={formValues.password} error={errors.password} onChange={handleChange} />
-                <Button onClick={handleLogin}>Create Account</Button>
-            </form>
-        </div>
+    if (!formValues.password) {
+      newErrors.password = 'Password is required';
+      valid = false;
+    } else if (formValues.password.length < 6) {
+      newErrors.password = 'Password must be at least 6 characters';
+      valid = false;
+    }
+    if (!formValues.firstName) newErrors.firstName = 'First name is required';
+    if (!formValues.lastName) newErrors.lastName = 'Last name is required';
 
-    )
-}
+    setErrors(newErrors);
+    return valid;
+  };
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    if (!validate()) return;
+    dispatch(signupUser(formValues, Boolean(onNavigate)));
+    if (onNavigate) onNavigate();
+    else navigate(navigateTo ?? '/profile/details');
+  };
+
+  return (
+    <div className={styles.signupWrapper}>
+      <h2 className={styles.title}>I am new to Blush & Blossom</h2>
+      <form className={styles.loginForm} noValidate>
+        <InputField
+          label="First Name"
+          name="firstName"
+          type="text"
+          value={formValues.firstName}
+          error={errors.firstName}
+          onChange={handleChange}
+        />
+        <InputField
+          label="Last Name"
+          name="lastName"
+          type="text"
+          value={formValues.lastName}
+          error={errors.lastName}
+          onChange={handleChange}
+        />
+        <InputField
+          label="Email address"
+          name="email"
+          type="email"
+          value={formValues.email}
+          error={errors.email}
+          onChange={handleChange}
+        />
+        <InputField
+          label="Password"
+          name="password"
+          type="password"
+          value={formValues.password}
+          error={errors.password}
+          onChange={handleChange}
+        />
+        <Button onClick={handleLogin}>Create Account</Button>
+      </form>
+    </div>
+  );
+};
 
 export default SignupForm;

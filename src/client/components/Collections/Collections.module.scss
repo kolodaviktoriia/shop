@@ -1,96 +1,90 @@
 .collections {
-    display: flex;
-    flex-direction: column;
-    gap: 4rem;
-    cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  cursor: pointer;
 
+  .collection {
+    background-color: $white-pink;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1.35fr 1fr;
 
-    .collection {
-        background-color: $white-pink;
-        display: grid;
-        gap: 1rem;
-        grid-template-columns: 1.35fr 1fr;
+    @include screen-s {
+      grid-template-columns: 1fr;
+    }
 
-        @include screen-s {
-            grid-template-columns: 1fr;
-        }
+    &:nth-child(even) {
+      grid-template-columns: 1fr 1.35fr;
 
-        &:nth-child(even) {
-            grid-template-columns: 1fr 1.35fr;
+      .textWrapper {
+        order: 1;
+      }
 
-            .textWrapper {
-                order: 1;
-            }
+      img {
+        order: 2;
+      }
 
-            img {
-                order: 2;
-            }
+      @include screen-s {
+        grid-template-columns: 1fr;
 
-            @include screen-s {
-                grid-template-columns: 1fr;
-
-                .textWrapper {
-                    order: unset;
-                }
-
-                img {
-                    order: unset;
-                }
-            }
+        .textWrapper {
+          order: unset;
         }
 
         img {
-            margin: 4rem 0;
-            width: 100%;
-            aspect-ratio: 6/4;
-
-            @include screen-xs {
-                aspect-ratio: 4/5;
-                object-fit: cover;
-                object-position: center;
-                margin-top: 2rem;
-                margin-bottom: 0;
-            }
+          order: unset;
         }
-
-        .textWrapper {
-            margin: auto;
-            max-width: 40rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 2rem;
-
-            @include screen-m {
-                margin: auto 2rem;
-            }
-
-            @include screen-s {
-                gap: 1rem;
-                margin: 1rem;
-                margin-bottom: 2rem;
-                max-width: 100%;
-            }
-
-            @include screen-xs {
-                margin: 1rem;
-                margin-bottom: 2rem;
-                max-width: 100%;
-            }
-
-            .title {
-                @include title-collections;
-            }
-
-            .description {
-                @include description-collections;
-            }
-        }
-
-
+      }
     }
 
+    img {
+      margin: 4rem 0;
+      width: 100%;
+      aspect-ratio: 6/4;
 
+      @include screen-xs {
+        aspect-ratio: 4/5;
+        object-fit: cover;
+        object-position: center;
+        margin-top: 2rem;
+        margin-bottom: 0;
+      }
+    }
 
+    .textWrapper {
+      margin: auto;
+      max-width: 40rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+
+      @include screen-m {
+        margin: auto 2rem;
+      }
+
+      @include screen-s {
+        gap: 1rem;
+        margin: 1rem;
+        margin-bottom: 2rem;
+        max-width: 100%;
+      }
+
+      @include screen-xs {
+        margin: 1rem;
+        margin-bottom: 2rem;
+        max-width: 100%;
+      }
+
+      .title {
+        @include title-collections;
+      }
+
+      .description {
+        @include description-collections;
+      }
+    }
+  }
 }

@@ -7,23 +7,20 @@ import Spinner from '../../components/Spinner/Spinner.js';
 
 import * as styles from './Favorites.module.scss';
 
-
 const Favorites = () => {
-    const dispatch = useDispatch();
-    const { favorites, loading } = useSelector(state => state.products);
+  const dispatch = useDispatch();
+  const { favorites, loading } = useSelector((state) => state.products);
 
+  useEffect(() => {
+    dispatch(fetchFavorites());
+  }, [dispatch]);
 
-    useEffect(() => {
-        dispatch(fetchFavorites());
-    }, [dispatch]);
-
-
-    return (
-        <WidthWrapper>
-            <h1 className={styles.title}>Your Favorites</h1>
-            {loading ? <Spinner /> : <ProductsList products={favorites} />}
-        </WidthWrapper>
-    )
-}
+  return (
+    <WidthWrapper>
+      <h1 className={styles.title}>Your Favorites</h1>
+      {loading ? <Spinner /> : <ProductsList products={favorites} />}
+    </WidthWrapper>
+  );
+};
 
 export default Favorites;

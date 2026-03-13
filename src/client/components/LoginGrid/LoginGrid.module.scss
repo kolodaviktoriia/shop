@@ -1,35 +1,35 @@
 .loginGrid {
-    .title {
-        @include forms-h1;
-        margin-top: 4rem;
+  .title {
+    @include forms-h1;
+    margin-top: 4rem;
+  }
+
+  .wrapper {
+    display: grid;
+    grid-template-columns: 1fr 3px 1fr;
+    gap: 8rem;
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+
+    @include screen-s {
+      margin-top: 2rem;
+      grid-template-columns: 1fr;
+      grid-template-row: auto 3px auto;
+      gap: 3rem;
     }
 
-    .wrapper {
-        display: grid;
-        grid-template-columns: 1fr 3px 1fr;
-        gap: 8rem;
-        margin-top: 4rem;
-        margin-bottom: 4rem;
+    .divider {
+      height: 100%;
+      border-left: 1px solid $accent-pink;
+      border-right: 1px solid $accent-pink;
 
-        @include screen-s {
-            margin-top: 2rem;
-            grid-template-columns: 1fr;
-            grid-template-row: auto 3px auto;
-            gap: 3rem
-        }
-
-        .divider {
-            height: 100%;
-            border-left: 1px solid $accent-pink;
-            border-right: 1px solid $accent-pink;
-
-            @include screen-s {
-                height: 3px;
-                border-left: none;
-                border-right: none;
-                border-top: 1px solid $accent-pink;
-                border-bottom: 1px solid $accent-pink;
-            }
-        }
+      @include screen-s {
+        height: 3px;
+        border-left: none;
+        border-right: none;
+        border-top: 1px solid $accent-pink;
+        border-bottom: 1px solid $accent-pink;
+      }
     }
+  }
 }

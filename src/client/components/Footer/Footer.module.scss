@@ -1,70 +1,68 @@
 .footer {
-    overflow: hidden;
-    background-color: $grey;
+  overflow: hidden;
+  background-color: $grey;
 
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 
+  .navGrid {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
 
-    .navGrid {
-        padding-top: 4rem;
-        padding-bottom: 4rem;
-        width: 100%;
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 2rem;
-
-        @include screen-s {
-            grid-template-columns: repeat(2, 1fr);
-        }
-
-        .nav {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-            justify-content: start;
-            align-items: flex-start;
-
-            .title {
-                @include main-text;
-                font-size: 1.6rem;
-            }
-        }
-
-        .socialsWrapper {
-            grid-column: span 2;
-            width: 100%;
-            align-self: center;
-            justify-self: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 1rem;
-            flex-direction: column;
-
-            .logo {
-                font-size: 2.8rem;
-            }
-
-            .socials {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                gap: 0.5rem;
-            }
-        }
-
+    @include screen-s {
+      grid-template-columns: repeat(2, 1fr);
     }
 
-    .copyrightWrapper {
-        padding: 2rem 0;
-        background-color: white;
+    .nav {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      justify-content: start;
+      align-items: flex-start;
 
-        .copyright,
-        .authorLink {
-            text-align: center;
-            @include sub-text;
-        }
+      .title {
+        @include main-text;
+        font-size: 1.6rem;
+      }
     }
+
+    .socialsWrapper {
+      grid-column: span 2;
+      width: 100%;
+      align-self: center;
+      justify-self: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      flex-direction: column;
+
+      .logo {
+        font-size: 2.8rem;
+      }
+
+      .socials {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+      }
+    }
+  }
+
+  .copyrightWrapper {
+    padding: 2rem 0;
+    background-color: white;
+
+    .copyright,
+    .authorLink {
+      text-align: center;
+      @include sub-text;
+    }
+  }
 }

@@ -1,7 +1,7 @@
 $primary-pink: #f9e2e8;
 $pink: #fff3f3;
 $soft-pink: #f9f8f9;
-$dark-pink: #F4C6CF;
+$dark-pink: #f4c6cf;
 
 $accent-pink: #e0718b;
 $white-pink: #fafafa;
@@ -11,8 +11,8 @@ $grey: #f5f5f6;
 $text-soft-grey: #605858;
 $text-button: #4e3844;
 $text-color: #221d1d;
-$text-font-public-sans: "Public Sans", sans-serif;
-$text-font-libre-sans: "Libre Franklin", sans-serif;
+$text-font-public-sans: 'Public Sans', sans-serif;
+$text-font-libre-sans: 'Libre Franklin', sans-serif;
 $header-height: 20rem;
 $footer-height: 35rem;
 $border-radius: 3px;
@@ -25,267 +25,266 @@ $screen-xs: 480px;
 $screen-xxs: 380px;
 
 @mixin screen-s {
-    @media (max-width: #{$screen-s}) {
-        @content;
-    }
+  @media (max-width: #{$screen-s}) {
+    @content;
+  }
 }
 
 @mixin screen-m {
-    @media (max-width: #{$screen-m}) {
-        @content;
-    }
+  @media (max-width: #{$screen-m}) {
+    @content;
+  }
 }
 
 @mixin screen-l {
-    @media (max-width: #{$screen-l}) {
-        @content;
-    }
+  @media (max-width: #{$screen-l}) {
+    @content;
+  }
 }
 
 @mixin screen-xs {
-    @media (max-width: #{$screen-xs}) {
-        @content;
-    }
+  @media (max-width: #{$screen-xs}) {
+    @content;
+  }
 }
 
 @mixin screen-xxs {
-    @media (max-width: #{$screen-xs}) {
-        @content;
-    }
+  @media (max-width: #{$screen-xs}) {
+    @content;
+  }
 }
 
 @mixin screen-xl {
-    @media (max-width: #{$screen-xl}) {
-        @content;
-    }
+  @media (max-width: #{$screen-xl}) {
+    @content;
+  }
 }
 
 @mixin custom($screen) {
-    @media (max-width: $screen+'px') {
-        @content;
-    }
+  @media (max-width: $screen+'px') {
+    @content;
+  }
 }
 
 @mixin link {
-    font-family: $text-font-public-sans;
-    font-size: 1.2rem;
-    font-weight: 400;
-    line-height: 20px;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: $text-color;
-    cursor: pointer;
+  font-family: $text-font-public-sans;
+  font-size: 1.2rem;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: $text-color;
+  cursor: pointer;
 
-    @include screen-m {
-        font-size: 1.6rem;
-    }
+  @include screen-m {
+    font-size: 1.6rem;
+  }
 }
 
-
 @mixin primary-button {
-    color: $text-button;
-    background-color: $dark-pink;
-    border-radius: $border-radius;
-    cursor: pointer;
-    font-weight: 600;
-    font-family: $text-font-public-sans;
-    font-size: 1.6rem;
-    letter-spacing: 0.08em;
-    padding: 1.6rem 1.8rem;
-    line-height: 20px;
-    text-transform: uppercase;
-    text-align: center;
+  color: $text-button;
+  background-color: $dark-pink;
+  border-radius: $border-radius;
+  cursor: pointer;
+  font-weight: 600;
+  font-family: $text-font-public-sans;
+  font-size: 1.6rem;
+  letter-spacing: 0.08em;
+  padding: 1.6rem 1.8rem;
+  line-height: 20px;
+  text-transform: uppercase;
+  text-align: center;
 
-    &:hover {
-        opacity: 0.8;
-    }
+  &:hover {
+    opacity: 0.8;
+  }
 
-    @include screen-s {
-        font-size: 1.4rem;
-        padding: 1.4rem 1.6rem;
-    }
+  @include screen-s {
+    font-size: 1.4rem;
+    padding: 1.4rem 1.6rem;
+  }
 }
 
 @mixin secondary-button {
-    color: $text-color;
-    background-color: transparent;
-    border: 1px solid $text-color;
-    border-radius: $border-radius;
-    cursor: pointer;
-    font-weight: 600;
-    font-family: $text-font-public-sans;
-    font-size: 1.6rem;
-    letter-spacing: 0.08em;
-    padding: 1.6rem 1.8rem;
-    line-height: 20px;
-    text-transform: uppercase;
-    text-align: center;
+  color: $text-color;
+  background-color: transparent;
+  border: 1px solid $text-color;
+  border-radius: $border-radius;
+  cursor: pointer;
+  font-weight: 600;
+  font-family: $text-font-public-sans;
+  font-size: 1.6rem;
+  letter-spacing: 0.08em;
+  padding: 1.6rem 1.8rem;
+  line-height: 20px;
+  text-transform: uppercase;
+  text-align: center;
 
-    &:hover {
-        opacity: 0.8;
-    }
+  &:hover {
+    opacity: 0.8;
+  }
 
-    @include screen-s {
-        font-size: 1.4rem;
-        padding: 1.4rem 1.6rem;
-    }
+  @include screen-s {
+    font-size: 1.4rem;
+    padding: 1.4rem 1.6rem;
+  }
 }
 
 @mixin sub-text {
-    font-family: $text-font-public-sans;
-    font-weight: 400;
-    letter-spacing: 0.1em;
-    color: $text-soft-grey;
+  font-family: $text-font-public-sans;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  color: $text-soft-grey;
 }
 
 @mixin main-text {
-    font-family: $text-font-libre-sans;
-    font-weight: 400;
-    text-transform: uppercase;
+  font-family: $text-font-libre-sans;
+  font-weight: 400;
+  text-transform: uppercase;
 }
 
 @mixin h1-hero {
-    @include main-text;
-    font-size: 3rem;
+  @include main-text;
+  font-size: 3rem;
 
-    @include screen-m {
-        font-size: 2.8rem;
-    }
+  @include screen-m {
+    font-size: 2.8rem;
+  }
 
-    @include screen-s {
-        font-size: 2.6rem;
-    }
+  @include screen-s {
+    font-size: 2.6rem;
+  }
 
-    @include screen-xs {
-        font-size: 2.4rem;
-    }
+  @include screen-xs {
+    font-size: 2.4rem;
+  }
 }
 
 @mixin h2-hero {
-    @include sub-text;
-    font-size: 1.6rem;
-    line-height: 20px;
+  @include sub-text;
+  font-size: 1.6rem;
+  line-height: 20px;
 }
 
 @mixin title-cards {
-    @include main-text;
-    font-size: 2rem;
+  @include main-text;
+  font-size: 2rem;
 
-    @include screen-s {
-        font-size: 1.8rem;
-    }
+  @include screen-s {
+    font-size: 1.8rem;
+  }
 
-    @include screen-s {
-        font-size: 1.6rem;
-    }
+  @include screen-s {
+    font-size: 1.6rem;
+  }
 }
 
 @mixin description-cards {
-    @include sub-text;
-    font-size: 1.4rem;
-    line-height: 20px;
+  @include sub-text;
+  font-size: 1.4rem;
+  line-height: 20px;
 }
 
 @mixin title-collections {
-    @include main-text;
-    font-size: 4rem;
+  @include main-text;
+  font-size: 4rem;
 
-    @include screen-m {
-        font-size: 3rem;
-    }
+  @include screen-m {
+    font-size: 3rem;
+  }
 
-    @include screen-s {
-        font-size: 2.4rem;
-    }
+  @include screen-s {
+    font-size: 2.4rem;
+  }
 
-    @include screen-xs {
-        font-size: 1.8rem;
-    }
+  @include screen-xs {
+    font-size: 1.8rem;
+  }
 }
 
 @mixin description-collections {
-    @include sub-text;
-    font-size: 1.6rem;
-    line-height: 24px;
+  @include sub-text;
+  font-size: 1.6rem;
+  line-height: 24px;
 
-    @include screen-s {
-        font-size: 1.4rem;
-    }
+  @include screen-s {
+    font-size: 1.4rem;
+  }
 }
 
 @mixin forms-h1 {
-    @include main-text;
-    font-size: 2.2rem;
+  @include main-text;
+  font-size: 2.2rem;
 
-    @include screen-s {
-        font-size: 2rem;
-    }
+  @include screen-s {
+    font-size: 2rem;
+  }
 
-    @include screen-xs {
-        font-size: 1.8rem;
-    }
+  @include screen-xs {
+    font-size: 1.8rem;
+  }
 }
 
 @mixin forms-h2 {
-    @include main-text;
-    font-size: 1.6rem;
+  @include main-text;
+  font-size: 1.6rem;
 
-    @include screen-s {
-        font-size: 1.4rem;
-    }
+  @include screen-s {
+    font-size: 1.4rem;
+  }
 }
 
 @mixin forms-h2-grey {
-    @include sub-text;
-    font-size: 1.6rem;
+  @include sub-text;
+  font-size: 1.6rem;
 
-    @include screen-s {
-        font-size: 1.4rem;
-    }
+  @include screen-s {
+    font-size: 1.4rem;
+  }
 }
 
 @mixin total-title {
-    font-family: $text-font-public-sans;
-    color: $text-color;
-    text-transform: uppercase;
-    font-size: 1.6rem;
-    font-weight: 600;
-    line-height: 20px;
-    letter-spacing: 0.04em;
+  font-family: $text-font-public-sans;
+  color: $text-color;
+  text-transform: uppercase;
+  font-size: 1.6rem;
+  font-weight: 600;
+  line-height: 20px;
+  letter-spacing: 0.04em;
 
-    @include screen-s {
-        font-size: 1.4rem;
-    }
+  @include screen-s {
+    font-size: 1.4rem;
+  }
 }
 
 @mixin amount-text {
-    font-family: $text-font-public-sans;
-    color: $text-color;
-    text-transform: none;
-    font-size: 1.6rem;
-    font-weight: 600;
-    line-height: 20px;
-    letter-spacing: 0.04em;
+  font-family: $text-font-public-sans;
+  color: $text-color;
+  text-transform: none;
+  font-size: 1.6rem;
+  font-weight: 600;
+  line-height: 20px;
+  letter-spacing: 0.04em;
 
-    @include screen-s {
-        font-size: 1.4rem;
-    }
+  @include screen-s {
+    font-size: 1.4rem;
+  }
 
-    @include screen-xs {
-        font-size: 1.3rem;
-    }
+  @include screen-xs {
+    font-size: 1.3rem;
+  }
 }
 
 @mixin summary-span {
-    font-family: $text-font-public-sans;
-    color: $text-color;
-    text-transform: none;
-    font-size: 1.4rem;
-    font-weight: 400;
-    line-height: 20px;
-    letter-spacing: 0.04em;
+  font-family: $text-font-public-sans;
+  color: $text-color;
+  text-transform: none;
+  font-size: 1.4rem;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0.04em;
 
-    @include screen-s {
-        font-size: 1.2rem;
-    }
+  @include screen-s {
+    font-size: 1.2rem;
+  }
 }

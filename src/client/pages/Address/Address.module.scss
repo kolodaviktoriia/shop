@@ -1,68 +1,67 @@
 .addressWrapper {
+  display: grid;
+  grid-template-columns: 1fr 0.6fr;
+  align-items: start;
+  gap: 10rem;
+  margin-top: 4rem;
+  margin-bottom: 4rem;
+
+  @include screen-m {
+    gap: 5rem;
+    grid-template-columns: 1fr 0.5fr;
+  }
+
+  @include screen-s {
+    gap: 2rem;
+    grid-template-columns: 1fr;
+  }
+
+  .details {
+    background-color: $soft-pink;
+    padding: 3rem;
     display: grid;
-    grid-template-columns: 1fr 0.6fr;
-    align-items: start;
-    gap: 10rem;
-    margin-top: 4rem;
-    margin-bottom: 4rem;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
 
     @include screen-m {
-        gap: 5rem;
-        grid-template-columns: 1fr 0.5fr;
+      grid-template-columns: 1fr;
     }
 
     @include screen-s {
-        gap: 2rem;
-        grid-template-columns: 1fr;
+      grid-template-columns: 1fr 1fr;
     }
 
-    .details {
-        background-color: $soft-pink;
-        padding: 3rem;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 3rem;
-
-        @include screen-m {
-            grid-template-columns: 1fr;
-        }
-
-        @include screen-s {
-            grid-template-columns: 1fr 1fr;
-        }
-
-        @include screen-xxs {
-            gap: 2rem;
-            grid-template-columns: 1fr;
-        }
-
-        .row {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 2rem;
-
-            @include screen-xxs {
-                gap: 1rem;
-            }
-
-            .icon {
-                display: inline-block;
-                @include sub-text;
-                font-size: 3rem;
-                text-align: center;
-                padding: 0;
-                line-height: 2rem;
-            }
-
-
-            .info {
-                text-align: center;
-                display: inline-block;
-                @include sub-text;
-                font-size: 1.4rem;
-                line-height: 1.8rem;
-            }
-        }
+    @include screen-xxs {
+      gap: 2rem;
+      grid-template-columns: 1fr;
     }
+
+    .row {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
+
+      @include screen-xxs {
+        gap: 1rem;
+      }
+
+      .icon {
+        display: inline-block;
+        @include sub-text;
+        font-size: 3rem;
+        text-align: center;
+        padding: 0;
+        line-height: 2rem;
+      }
+
+      .info {
+        text-align: center;
+        display: inline-block;
+        @include sub-text;
+        font-size: 1.4rem;
+        line-height: 1.8rem;
+      }
+    }
+  }
 }

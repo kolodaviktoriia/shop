@@ -1,42 +1,42 @@
 .paymentWrapper {
-    margin-top: 2rem;
-    margin-bottom: 2rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 
-    .title {
-        @include forms-h1;
+  .title {
+    @include forms-h1;
+  }
+
+  .wrapper {
+    margin-top: 4rem;
+    display: grid;
+    grid-template-columns: 1fr 0.6fr;
+    align-items: start;
+    gap: 10rem;
+
+    @include screen-m {
+      grid-template-columns: 1fr 0.8fr;
+      gap: 2rem;
     }
 
-    .wrapper {
-        margin-top: 4rem;
-        display: grid;
-        grid-template-columns: 1fr 0.6fr;
-        align-items: start;
-        gap: 10rem;
-
-        @include screen-m {
-            grid-template-columns: 1fr 0.8fr;
-            gap: 2rem;
-        }
-
-        @include screen-s {
-            grid-template-columns: 1fr;
-            gap: 2rem;
-        }
-
-        .order {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-
-            .subTitle {
-                @include forms-h2;
-            }
-
-            .items {
-                display: flex;
-                flex-direction: column;
-                gap: 1rem;
-            }
-        }
+    @include screen-s {
+      grid-template-columns: 1fr;
+      gap: 2rem;
     }
+
+    .order {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+
+      .subTitle {
+        @include forms-h2;
+      }
+
+      .items {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+    }
+  }
 }

@@ -1,38 +1,36 @@
 .addressFormWrapper {
-    .title {
-        @include forms-h1;
+  .title {
+    @include forms-h1;
+  }
+
+  .subTitle {
+    margin-top: 2rem;
+    @include forms-h2-grey;
+
+    @include screen-xs {
+      margin-top: 1rem;
+    }
+  }
+
+  .addressForm {
+    margin-top: 3rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+
+    @include screen-xs {
+      gap: 1.5rem;
+      grid-template-columns: 1fr;
     }
 
-    .subTitle {
-        margin-top: 2rem;
-        @include forms-h2-grey;
+    .btn {
+      @include screen-m {
+        grid-column: span 2;
+      }
 
-        @include screen-xs {
-            margin-top: 1rem;
-        }
+      @include screen-xs {
+        grid-column: span 1;
+      }
     }
-
-    .addressForm {
-        margin-top: 3rem;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 2rem;
-
-        @include screen-xs {
-            gap: 1.5rem;
-            grid-template-columns: 1fr;
-        }
-
-        .btn {
-            @include screen-m {
-                grid-column: span 2;
-            }
-
-            @include screen-xs {
-                grid-column: span 1;
-            }
-        }
-    }
-
-
+  }
 }

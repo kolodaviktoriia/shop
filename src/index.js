@@ -2,15 +2,17 @@ import 'dotenv/config';
 import React from 'react';
 import express from 'express';
 import { renderer } from './helpers/renderer.js';
-import { matchRoutes } from "react-router-dom";
+import { matchRoutes } from 'react-router-dom';
 import { routes } from './client/routes/routes.js';
 import { createStore } from './helpers/createStore.js';
 import apiRoutes from './server/routes/apiRoutes.js';
 import cookieParser from 'cookie-parser';
-import { clearServerCookies, setServerCookies } from './client/api/axiosConfig.js';
+import {
+  clearServerCookies,
+  setServerCookies,
+} from './client/api/axiosConfig.js';
 
 const app = express();
-
 
 app.use(cookieParser());
 app.use(express.json());
@@ -21,7 +23,7 @@ app.use('/api', apiRoutes);
 app.get('*', (req, res) => {
   const store = createStore();
 
-  setServerCookies(req.headers.cookie || "");
+  setServerCookies(req.headers.cookie || '');
 
   const matches = matchRoutes(routes, req.path) || [];
 
@@ -39,9 +41,8 @@ app.get('*', (req, res) => {
     .finally(() => {
       clearServerCookies();
     });
-
-})
+});
 
 app.listen(3000, () => {
   console.log('Listening on port 3000');
-})
+});

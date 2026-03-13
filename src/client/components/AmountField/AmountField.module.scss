@@ -1,61 +1,60 @@
 .amountField {
-    align-self: flex-start;
+  align-self: flex-start;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  background-color: $soft-pink;
+  border-radius: $border-radius;
+
+  .btn {
+    cursor: pointer;
+    color: $text-color;
+    font-size: 2rem;
+    letter-spacing: 0.08em;
+    padding: 1.6rem 1.8rem;
+    line-height: 20px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    background-color: $soft-pink;
-    border-radius: $border-radius;
+    justify-content: center;
+    text-transform: uppercase;
+    text-align: center;
+    background-color: $dark-pink;
+    font-weight: 700;
 
-    .btn {
-        cursor: pointer;
-        color: $text-color;
-        font-size: 2rem;
-        letter-spacing: 0.08em;
-        padding: 1.6rem 1.8rem;
-        line-height: 20px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-transform: uppercase;
-        text-align: center;
-        background-color: $dark-pink;
-        font-weight: 700;
-
-        &:disabled {
-            opacity: 0.8;
-        }
-
-        @include screen-s {
-            font-size: 1.4rem;
-            padding: 1.4rem 1.6rem;
-        }
+    &:disabled {
+      opacity: 0.8;
     }
 
-    .value {
-        margin: 0 2rem;
-        color: $text-color;
-        font-weight: 600;
-        font-size: 1.8rem;
-        font-family: $text-font-public-sans;
-
-        @include screen-s {
-            font-size: 1.4rem;
-        }
+    @include screen-s {
+      font-size: 1.4rem;
+      padding: 1.4rem 1.6rem;
     }
+  }
 
+  .value {
+    margin: 0 2rem;
+    color: $text-color;
+    font-weight: 600;
+    font-size: 1.8rem;
+    font-family: $text-font-public-sans;
+
+    @include screen-s {
+      font-size: 1.4rem;
+    }
+  }
 }
 
 .smallField {
-    gap: 0.5rem;
+  gap: 0.5rem;
 
-    .btn {
-        font-size: 1.6rem;
-        padding: 1rem 1.2rem;
-        line-height: 16px;
-    }
+  .btn {
+    font-size: 1.6rem;
+    padding: 1rem 1.2rem;
+    line-height: 16px;
+  }
 
-    .value {
-        font-size: 1.4rem;
-    }
+  .value {
+    font-size: 1.4rem;
+  }
 }

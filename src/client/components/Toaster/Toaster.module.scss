@@ -1,32 +1,32 @@
 .toastContainer {
-    font-family: $text-font-public-sans;
+  font-family: $text-font-public-sans;
 }
 
 .toast {
-    border-radius: 3px;
-    padding: 1.4rem 1.6rem;
-    font-size: 1.4rem;
-    font-weight: 400;
-    letter-spacing: 0.16em;
-    color: $text-color;
+  border-radius: 3px;
+  padding: 1.4rem 1.6rem;
+  font-size: 1.4rem;
+  font-weight: 400;
+  letter-spacing: 0.16em;
+  color: $text-color;
 }
 
 .body {
-    color: $white-pink;
+  color: $white-pink;
 }
 
 .Toastify__toast--success {
-    background-color: $dark-pink;
+  background-color: $dark-pink;
 }
 
 .Toastify__toast--error {
-    background-color: $accent-pink;
+  background-color: $accent-pink;
 }
 
 .Toastify__toast--info {
-    background-color: $primary-pink;
+  background-color: $primary-pink;
 }
 
 .progress {
-    background: $grey;
+  background: $grey;
 }

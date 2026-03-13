@@ -1,66 +1,65 @@
 .sectionHeader {
+  width: 100%;
+  background-color: $pink;
+  display: grid;
+  grid-template-columns: 1.35fr 1fr;
+  gap: 2rem;
+  margin: 6rem 0;
+  padding: 4rem;
+
+  @include screen-s {
+    grid-template-columns: 1fr;
+    margin-top: 0;
+    margin-bottom: 2rem;
+    gap: 0;
+    padding: 0;
+  }
+
+  img {
+    margin-top: -8rem;
     width: 100%;
-    background-color: $pink;
-    display: grid;
-    grid-template-columns: 1.35fr 1fr;
-    gap: 2rem;
-    margin: 6rem 0;
-    padding: 4rem;
+    aspect-ratio: 6/4;
+    object-fit: cover;
 
     @include screen-s {
-        grid-template-columns: 1fr;
-        margin-top: 0;
-        margin-bottom: 2rem;
-        gap: 0;
-        padding: 0;
+      margin-top: 0;
+      aspect-ratio: 6/3;
     }
 
+    @include screen-xs {
+      aspect-ratio: 4/5;
+    }
+  }
 
-    img {
-        margin-top: -8rem;
-        width: 100%;
-        aspect-ratio: 6/4;
-        object-fit: cover;
+  .textWrapper {
+    margin: auto;
+    max-width: 40rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
 
-        @include screen-s {
-            margin-top: 0;
-            aspect-ratio: 6/3;
-        }
-
-        @include screen-xs {
-            aspect-ratio: 4/5;
-        }
+    @include screen-s {
+      max-width: 100%;
+      width: 100%;
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+      gap: 0.5rem;
+      text-align: center;
     }
 
-    .textWrapper {
-        margin: auto;
-        max-width: 40rem;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 2rem;
-
-        @include screen-s {
-            max-width: 100%;
-            width: 100%;
-            margin-top: 1rem;
-            margin-bottom: 1rem;
-            gap: 0.5rem;
-            text-align: center;
-        }
-
-        .title {
-            @include title-collections;
-        }
-
-        .description {
-            @include description-collections;
-        }
-
-        .extra {
-            margin-top: 1rem;
-            @include description-collections;
-        }
+    .title {
+      @include title-collections;
     }
+
+    .description {
+      @include description-collections;
+    }
+
+    .extra {
+      margin-top: 1rem;
+      @include description-collections;
+    }
+  }
 }

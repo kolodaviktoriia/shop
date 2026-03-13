@@ -1,29 +1,28 @@
 .link {
-    @include link;
-    color: $text-soft-grey;
-    text-transform: none;
-    text-decoration: none;
-    display: inline-block;
-    font-weight: 400;
-    font-size: 1.6rem;
+  @include link;
+  color: $text-soft-grey;
+  text-transform: none;
+  text-decoration: none;
+  display: inline-block;
+  font-weight: 400;
+  font-size: 1.6rem;
 
-    letter-spacing: 0.12em;
+  letter-spacing: 0.12em;
 
-    &:hover {
-        opacity: 0.8;
-    }
+  &:hover {
+    opacity: 0.8;
+  }
 }
 
 .iconLink {
-    @include link;
-    color: $text-color;
-    text-transform: none;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 2.8rem;
+  @include link;
+  color: $text-color;
+  text-transform: none;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 2.8rem;
 
-
-    &:hover {
-        opacity: 0.8;
-    }
+  &:hover {
+    opacity: 0.8;
+  }
 }

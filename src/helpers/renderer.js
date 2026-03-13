@@ -7,31 +7,30 @@ import { HelmetProvider } from 'react-helmet-async';
 import { defaultSEO } from '../client/constants/defaultSeo.js';
 import { RoutesRender } from '../client/routes/RoutesRender.js';
 
-
 export const renderer = (req, store) => {
   const helmetContext = {};
   const content = renderToString(
     <HelmetProvider context={helmetContext}>
-      <Provider store={store} >
+      <Provider store={store}>
         <StaticRouter location={req.path}>
           <RoutesRender />
         </StaticRouter>
       </Provider>
-    </HelmetProvider>);
+    </HelmetProvider>
+  );
 
   const { helmet } = helmetContext;
   const fullUrl = `${req.protocol}://${req.get('host')}${req.originalUrl}`;
 
-
   const state = store.getState();
 
   const isProductPage = Boolean(state.products?.product);
-  const ogType = isProductPage ? "product" : "website";
+  const ogType = isProductPage ? 'product' : 'website';
 
-  const helmetTitle = helmet.title?.toString() || "";
+  const helmetTitle = helmet.title?.toString() || '';
 
   const title =
-    helmetTitle.includes("</title>") && !helmetTitle.includes("></title>")
+    helmetTitle.includes('</title>') && !helmetTitle.includes('></title>')
       ? helmetTitle
       : `<title>${defaultSEO.title}</title>`;
 
@@ -40,15 +39,14 @@ export const renderer = (req, store) => {
     `<meta name="description" content="${defaultSEO.description}" />`;
 
   const imageMeta = metaTags.includes('property="og:image"')
-    ? '' : `<meta property="og:image" content="${defaultSEO.image}" />`
-
+    ? ''
+    : `<meta property="og:image" content="${defaultSEO.image}" />`;
 
   const keywords = metaTags.includes('name="keywords"')
-    ? ""
+    ? ''
     : `<meta name="keywords" content="${defaultSEO.keywords}" />`;
 
   const canonical = `<link rel="canonical" href="${fullUrl}" />`;
-
 
   const html = `
     <!DOCTYPE html>
@@ -60,8 +58,8 @@ export const renderer = (req, store) => {
         ${metaTags}
         ${imageMeta}
         ${keywords}
-        ${helmet.link?.toString() || ""}
-        ${helmet.script?.toString() || ""}
+        ${helmet.link?.toString() || ''}
+        ${helmet.script?.toString() || ''}
         ${canonical}
         <meta property="og:url" content="${fullUrl}" />
         <meta property="og:type" content="${ogType}" />
@@ -87,4 +85,4 @@ export const renderer = (req, store) => {
     </html>
     `;
   return html;
-}
+};

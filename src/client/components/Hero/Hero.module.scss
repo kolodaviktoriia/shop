@@ -1,83 +1,80 @@
 .heroSection {
-    background-color: $pink;
-    height: calc(100vh - $header-height);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem 0;
+  background-color: $pink;
+  height: calc(100vh - $header-height);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 0;
+
+  @include screen-m {
+    height: fit-content;
+  }
+
+  .heroWrapper {
+    display: grid;
+    gap: 3rem;
+    grid-template-columns: 1fr 2.5fr;
+
+    .mobileImg {
+      display: none;
+
+      @include screen-m {
+        display: block;
+      }
+
+      @include screen-s {
+        display: none;
+      }
+
+      @include screen-xs {
+        display: block;
+      }
+    }
+
+    .heroImg {
+      @include screen-m {
+        grid-column: 1/-1;
+      }
+
+      @include screen-xs {
+        display: none;
+      }
+    }
 
     @include screen-m {
-        height: fit-content;
+      grid-template-columns: 2.5fr 1fr;
     }
 
-    .heroWrapper {
-        display: grid;
-        gap: 3rem;
-        grid-template-columns: 1fr 2.5fr;
-
-        .mobileImg {
-            display: none;
-
-            @include screen-m {
-                display: block;
-            }
-
-            @include screen-s {
-                display: none;
-            }
-
-            @include screen-xs {
-                display: block;
-            }
-        }
-
-        .heroImg {
-            @include screen-m {
-                grid-column: 1/-1;
-            }
-
-            @include screen-xs {
-                display: none;
-            }
-        }
-
-        @include screen-m {
-            grid-template-columns: 2.5fr 1fr;
-        }
-
-        @include screen-s {
-            gap: 3rem;
-        }
-
-        @include screen-xs {
-            grid-template-columns: 1fr;
-            gap: 2rem;
-        }
-
-
-        .textWrapper {
-            max-width: 60rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            gap: 1.4rem;
-
-            h1 {
-                @include h1-hero;
-            }
-
-            h2 {
-                @include h2-hero;
-            }
-        }
-
-
-        img {
-            width: 100%;
-            height: auto;
-            object-fit: contain;
-            display: block;
-
-        }
+    @include screen-s {
+      gap: 3rem;
     }
+
+    @include screen-xs {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .textWrapper {
+      max-width: 60rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 1.4rem;
+
+      h1 {
+        @include h1-hero;
+      }
+
+      h2 {
+        @include h2-hero;
+      }
+    }
+
+    img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      display: block;
+    }
+  }
 }

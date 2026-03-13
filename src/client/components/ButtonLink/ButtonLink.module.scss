@@ -1,8 +1,5 @@
 .buttonLink {
-    @include primary-button;
-    text-decoration: none;
-    display: inline-block;
-
-
-
+  @include primary-button;
+  text-decoration: none;
+  display: inline-block;
 }

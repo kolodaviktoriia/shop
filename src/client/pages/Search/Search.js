@@ -8,54 +8,62 @@ import Spinner from '../../components/Spinner/Spinner.js';
 import ProductsList from '../../components/ProductsList/ProductsList.js';
 import WidthWrapper from '../../components/WidthWrapper/WidthWrapper.js';
 
-
 const searchPageContent = {
-    resultsFound: {
-        title: "We Found Some Beauty for You!",
-        description: "Here are the products that match your search.",
-        extra:
-            "Looking for something else? Try another search or explore our collections."
-    },
+  resultsFound: {
+    title: 'We Found Some Beauty for You!',
+    description: 'Here are the products that match your search.',
+    extra:
+      'Looking for something else? Try another search or explore our collections.',
+  },
 
-    noResults: {
-        title: "Oops… Nothing Found",
-        description: "We couldn't find any products matching your search.",
-        extra:
-            "Beauty treasures are hiding somewhere… try another search!"
-    },
+  noResults: {
+    title: 'Oops… Nothing Found',
+    description: "We couldn't find any products matching your search.",
+    extra: 'Beauty treasures are hiding somewhere… try another search!',
+  },
 };
 
-const searchImage = 'https://ikaoenxuuphxuvaiwzex.supabase.co/storage/v1/object/public/images/search.png';
+const searchImage =
+  'https://ikaoenxuuphxuvaiwzex.supabase.co/storage/v1/object/public/images/search.png';
 
 const Search = () => {
-    const [searchParams] = useSearchParams();
-    const query = searchParams.get('q');
-    const dispatch = useDispatch();
-    const { products, loading } = useSelector(state => state.products);
+  const [searchParams] = useSearchParams();
+  const query = searchParams.get('q');
+  const dispatch = useDispatch();
+  const { products, loading } = useSelector((state) => state.products);
 
-    useEffect(() => {
-        dispatch(fetchProducts({ search: query }));
-    }, [query, dispatch]);
+  useEffect(() => {
+    dispatch(fetchProducts({ search: query }));
+  }, [query, dispatch]);
 
-    const { noResults, resultsFound } = searchPageContent;
+  const { noResults, resultsFound } = searchPageContent;
 
-    if (loading) return <Spinner />;
-    return (
-        <div>
-            <SEO
-                title={`Search For ${searchParams}`}
-            />
-            <WidthWrapper isPadding={false}>
-                {products.length === 0 ?
-                    <SectionHeader name={noResults.title} imageUrl={searchImage} description={noResults?.description} extra={noResults?.extra} /> :
-                    <SectionHeader name={resultsFound.title} imageUrl={searchImage} description={resultsFound?.description} extra={resultsFound?.extra} />
-                }
-            </WidthWrapper>
-            <WidthWrapper>
-                <ProductsList products={products} />
-            </WidthWrapper>
-        </div>
-    )
-}
+  if (loading) return <Spinner />;
+  return (
+    <div>
+      <SEO title={`Search For ${searchParams}`} />
+      <WidthWrapper isPadding={false}>
+        {products.length === 0 ? (
+          <SectionHeader
+            name={noResults.title}
+            imageUrl={searchImage}
+            description={noResults?.description}
+            extra={noResults?.extra}
+          />
+        ) : (
+          <SectionHeader
+            name={resultsFound.title}
+            imageUrl={searchImage}
+            description={resultsFound?.description}
+            extra={resultsFound?.extra}
+          />
+        )}
+      </WidthWrapper>
+      <WidthWrapper>
+        <ProductsList products={products} />
+      </WidthWrapper>
+    </div>
+  );
+};
 
 export default Search;

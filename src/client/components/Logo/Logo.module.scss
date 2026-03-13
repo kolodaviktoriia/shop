@@ -1,26 +1,25 @@
 .logo {
-    justify-self: center;
-    font-family: $text-font-libre-sans;
-    font-weight: 400;
-    font-size: 4rem;
-    text-transform: uppercase;
-    text-decoration: none;
-    color: $text-color;
+  justify-self: center;
+  font-family: $text-font-libre-sans;
+  font-weight: 400;
+  font-size: 4rem;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: $text-color;
 
-    @include screen-m {
-        font-size: 3rem;
-    }
+  @include screen-m {
+    font-size: 3rem;
+  }
 
-    @include screen-s {
-        font-size: 2.8rem;
-    }
+  @include screen-s {
+    font-size: 2.8rem;
+  }
 
-    @include screen-xs {
-        font-size: 2.2rem;
-    }
+  @include screen-xs {
+    font-size: 2.2rem;
+  }
 
-    @include screen-xs {
-        font-size: 1.8rem;
-    }
-
+  @include screen-xs {
+    font-size: 1.8rem;
+  }
 }

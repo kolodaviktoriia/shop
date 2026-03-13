@@ -1,130 +1,129 @@
 .skeletonWrapper {
-    min-height: 20rem;
-    position: relative;
+  min-height: 20rem;
+  position: relative;
 }
 
 .product {
-    .wrapper {
-        display: grid;
-        grid-template-columns: 1fr 1.25fr;
-        gap: 4rem;
+  .wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1.25fr;
+    gap: 4rem;
 
-        margin-top: 4rem;
-        margin-bottom: 4rem;
+    margin-top: 4rem;
+    margin-bottom: 4rem;
 
-        @include screen-m {
-            gap: 2rem;
-            grid-template-columns: 1fr 1fr;
-        }
+    @include screen-m {
+      gap: 2rem;
+      grid-template-columns: 1fr 1fr;
+    }
 
-        @include custom(900) {
-            grid-template-columns: 1.5fr 1fr;
+    @include custom(900) {
+      grid-template-columns: 1.5fr 1fr;
+    }
+
+    @include screen-s {
+      grid-template-columns: 1fr;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      aspect-ratio: 1/1;
+      display: block;
+    }
+
+    .infoWrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+
+      .title {
+        margin-top: 2rem;
+        @include sub-text;
+        font-size: 2rem;
+        line-height: 2rem;
+        text-transform: uppercase;
+
+        @include screen-s {
+          margin-top: 1rem;
+          font-size: 1.8rem;
         }
 
         @include screen-s {
-            grid-template-columns: 1fr;
+          font-size: 1.6rem;
+        }
+      }
+
+      .price {
+        margin: 2rem 0;
+        @include main-text;
+        font-size: 2.2rem;
+        font-weight: 500;
+
+        @include screen-s {
+          margin: 0.5rem 0;
+          font-size: 2rem;
         }
 
-        img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            aspect-ratio: 1/1;
-            display: block;
+        @include screen-s {
+          font-size: 1.8rem;
+        }
+      }
+
+      .subTitle {
+        @include main-text;
+        text-transform: none;
+        font-size: 1.8rem;
+        font-weight: 500;
+
+        @include screen-s {
+          font-size: 1.6rem;
         }
 
-        .infoWrapper {
-
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-
-            .title {
-                margin-top: 2rem;
-                @include sub-text;
-                font-size: 2rem;
-                line-height: 2rem;
-                text-transform: uppercase;
-
-                @include screen-s {
-                    margin-top: 1rem;
-                    font-size: 1.8rem;
-                }
-
-                @include screen-s {
-                    font-size: 1.6rem;
-                }
-            }
-
-            .price {
-                margin: 2rem 0;
-                @include main-text;
-                font-size: 2.2rem;
-                font-weight: 500;
-
-                @include screen-s {
-                    margin: 0.5rem 0;
-                    font-size: 2rem;
-                }
-
-                @include screen-s {
-                    font-size: 1.8rem;
-                }
-            }
-
-            .subTitle {
-                @include main-text;
-                text-transform: none;
-                font-size: 1.8rem;
-                font-weight: 500;
-
-                @include screen-s {
-                    font-size: 1.6rem;
-                }
-
-                @include screen-s {
-                    font-size: 1.4rem;
-                }
-            }
-
-            .description {
-                @include sub-text;
-                font-size: 1.8rem;
-                line-height: 26px;
-
-                @include screen-s {
-                    font-size: 1.6rem;
-                }
-
-                @include screen-s {
-                    font-size: 1.4rem;
-                }
-            }
-
-            .amount {
-                margin: 2rem 0;
-            }
-
-            .tags {
-                display: flex;
-
-                gap: 1rem;
-
-                .tag {
-                    @include sub-text;
-                    font-size: 1.4rem;
-                    display: inline-block;
-                    border: 1px solid $accent-pink;
-                    border-radius: 3px;
-                    padding: 1rem 1.2rem;
-                    text-transform: uppercase;
-
-                    @include screen-s {
-                        padding: 0.8rem 1rem;
-                        font-size: 1.2rem;
-                    }
-                }
-            }
+        @include screen-s {
+          font-size: 1.4rem;
         }
+      }
+
+      .description {
+        @include sub-text;
+        font-size: 1.8rem;
+        line-height: 26px;
+
+        @include screen-s {
+          font-size: 1.6rem;
+        }
+
+        @include screen-s {
+          font-size: 1.4rem;
+        }
+      }
+
+      .amount {
+        margin: 2rem 0;
+      }
+
+      .tags {
+        display: flex;
+
+        gap: 1rem;
+
+        .tag {
+          @include sub-text;
+          font-size: 1.4rem;
+          display: inline-block;
+          border: 1px solid $accent-pink;
+          border-radius: 3px;
+          padding: 1rem 1.2rem;
+          text-transform: uppercase;
+
+          @include screen-s {
+            padding: 0.8rem 1rem;
+            font-size: 1.2rem;
+          }
+        }
+      }
     }
+  }
 }

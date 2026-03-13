@@ -1,12 +1,12 @@
 .signupWrapper {
-    .title {
-        @include forms-h2;
-    }
+  .title {
+    @include forms-h2;
+  }
 
-    .loginForm {
-        margin-top: 3rem;
-        display: flex;
-        flex-direction: column;
-        gap: 2rem;
-    }
+  .loginForm {
+    margin-top: 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
 }

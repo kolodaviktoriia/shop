@@ -8,42 +8,47 @@ import SectionHeader from '../../components/SectionHeader/SectionHeader.js';
 import { clearProducts, fetchProducts } from '../../slices/productsSlice.js';
 import SEO from '../../components/SEO.js';
 
-
 const allCategory = {
-    name: 'Goodies for Your Glow',
-    description: 'From sweet skincare to magical makeup — everything here is made to boost your glow and brighten your day.',
-    imageUrl: 'https://ikaoenxuuphxuvaiwzex.supabase.co/storage/v1/object/public/images/lipstick.png'
+  name: 'Goodies for Your Glow',
+  description:
+    'From sweet skincare to magical makeup — everything here is made to boost your glow and brighten your day.',
+  imageUrl:
+    'https://ikaoenxuuphxuvaiwzex.supabase.co/storage/v1/object/public/images/lipstick.png',
 };
 
 const Products = () => {
-    const { id } = useParams();
-    const dispatch = useDispatch();
-    const { products, categories, loading } = useSelector(state => state.products);
+  const { id } = useParams();
+  const dispatch = useDispatch();
+  const { products, categories, loading } = useSelector(
+    (state) => state.products
+  );
 
-    const category =
-        categories.find(cat => cat.name === id) ?? allCategory;
+  const category = categories.find((cat) => cat.name === id) ?? allCategory;
 
-    useEffect(() => {
-        dispatch(fetchProducts({ category: category.id }));
-        return () => dispatch(clearProducts());
-    }, [id, dispatch, category.id]);
+  useEffect(() => {
+    dispatch(fetchProducts({ category: category.id }));
+    return () => dispatch(clearProducts());
+  }, [id, dispatch, category.id]);
 
-
-    return (
-        <div>
-            <SEO
-                title={category?.name}
-                description={category?.description}
-                image={category?.imageUrl}
-            />
-            <WidthWrapper isPadding={false}>
-                <SectionHeader name={category?.name} imageUrl={category?.imageUrl} description={category?.description} />
-            </WidthWrapper>
-            <WidthWrapper>
-                {loading ? <Spinner /> : <ProductsList products={products} />}
-            </WidthWrapper>
-        </div>
-    )
-}
+  return (
+    <div>
+      <SEO
+        title={category?.name}
+        description={category?.description}
+        image={category?.imageUrl}
+      />
+      <WidthWrapper isPadding={false}>
+        <SectionHeader
+          name={category?.name}
+          imageUrl={category?.imageUrl}
+          description={category?.description}
+        />
+      </WidthWrapper>
+      <WidthWrapper>
+        {loading ? <Spinner /> : <ProductsList products={products} />}
+      </WidthWrapper>
+    </div>
+  );
+};
 
 export default Products;

@@ -1,18 +1,18 @@
 .addressFormWrapper {
-    .title {
-        @include main-text;
-    }
+  .title {
+    @include main-text;
+  }
 
-    .subTitle {
-        margin-top: 2rem;
-        @include sub-text;
-        font-size: 1.8rem;
-    }
+  .subTitle {
+    margin-top: 2rem;
+    @include sub-text;
+    font-size: 1.8rem;
+  }
 
-    .addressForm {
-        margin-top: 3rem;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 2rem;
-    }
+  .addressForm {
+    margin-top: 3rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
 }
