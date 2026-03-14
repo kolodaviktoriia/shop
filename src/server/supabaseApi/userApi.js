@@ -18,7 +18,13 @@ export const getUserApi = async (token) => {
   return data.user;
 };
 
-export const signupApi = async (email, password, firstName, lastName, birthday) => {
+export const signupApi = async (
+  email,
+  password,
+  firstName,
+  lastName,
+  birthday
+) => {
   const { data: signupData, error: signupError } = await supabase.auth.signUp({
     email,
     password,
