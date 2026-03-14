@@ -8,3 +8,6 @@ export const loginApi = (email, password) =>
   postData('/api/login', { email, password });
 
 export const signupApi = (userData) => postData('/api/signup', { ...userData });
+
+export const updateAddressApi = (address) =>
+  postData('/api/address', address);

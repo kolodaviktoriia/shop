@@ -16,7 +16,7 @@ const initialState = {
   phone: '',
 };
 
-const AddressForm = ({ onSubmit }) => {
+const AddressForm = ({ onSubmit, title, subTitle }) => {
   const { user } = useSelector((store) => store.user);
   const [formValues, setFormValues] = useState(initialState);
   const [errors, setErrors] = useState({});
@@ -85,10 +85,10 @@ const AddressForm = ({ onSubmit }) => {
 
   return (
     <div className={styles.addressFormWrapper}>
-      <h1 className={styles.title}>Where should we deliver your order?</h1>
+      <h1 className={styles.title}>{title ?? 'Where should we deliver your order?'}</h1>
       <h2 className={styles.subTitle}>
-        Enter your delivery address below so we know exactly where to send your
-        order. Make sure the address is correct before continuing.
+        {subTitle ?? `Enter your delivery address below so we know exactly where to send your
+        order. Make sure the address is correct before continuing.`}
       </h2>
       <form className={styles.addressForm} noValidate>
         <InputField

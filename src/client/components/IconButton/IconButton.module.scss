@@ -1,9 +1,27 @@
 .btn {
+  cursor: pointer;
   display: block;
   background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+
+  gap: 1rem;
 
   .icon {
     stroke: $text-color;
     height: 2.4rem;
+  }
+
+  .label {
+    color: $text-color;
+    font-family: $text-font-public-sans;
+    font-size: 1.6rem;
+    letter-spacing: 0.08em;
+    text-decoration: underline;
+  }
+
+  &:hover {
+    opacity: 0.8;
   }
 }

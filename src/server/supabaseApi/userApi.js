@@ -49,10 +49,41 @@ export const getProfile = async (userId) => {
 
   const profileWithAddress = {
     ...data,
-    address: data.addresses?.[0] || null,
+    address: data.addresses || null,
   };
 
   delete profileWithAddress.addresses;
 
   return profileWithAddress;
 };
+
+export const updateShippingAddress = async (address, userId) => {
+  const {
+    firstName,
+    lastName,
+    street,
+    houseNumber,
+    postalCode,
+    city,
+    country,
+    phone,
+  } = address;
+
+  const { error } = await supabase.from('addresses').upsert(
+    {
+      firstName,
+      lastName,
+      street,
+      houseNumber,
+      postalCode,
+      city,
+      country,
+      phone,
+      userId,
+    }, { onConflict: 'userId' }
+  );
+  if (error) {
+    throw error;
+  }
+
+}

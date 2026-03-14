@@ -13,6 +13,7 @@ import {
   getUserApi,
   loginApi,
   signupApi,
+  updateShippingAddress,
 } from '../supabaseApi/userApi.js';
 import { getToken } from '../helpers/getToken.js';
 import { setCookie } from '../helpers/setCookie.js';
@@ -390,3 +391,27 @@ router.delete('/favorites/:id', async (req, res) => {
   }
 });
 export default router;
+
+
+router.post('/address', async (req, res) => {
+  try {
+    const token = await getToken(req, res);
+
+    if (!token) {
+      return res
+        .status(401)
+        .json({ message: 'Please log in to update your address.' });
+    }
+
+    const user = await getUserApi(token);
+
+    await updateShippingAddress(req.body, user.id);
+    const profile = await getProfile(user.id);
+
+    res.json({ user: profile });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Failed to update address.' });
+  }
+});
+

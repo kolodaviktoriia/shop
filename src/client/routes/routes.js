@@ -26,6 +26,7 @@ import NotFound from '../pages/NotFound/NotFound.js';
 import ErrorHandler from '../pages/ErrorHandler/ErrorHandler.js';
 import Company from '../pages/Company/Company.js';
 import Help from '../pages/Help/Help.js';
+import EditAddress from '../pages/EditAddress/EditAddress.js';
 
 export const routes = [
   {
@@ -66,6 +67,14 @@ export const routes = [
         path: '/profile',
         loadData: (store) => store.dispatch(fetchCurrentUser()),
         children: [
+          {
+            element: <EditAddress />,
+            path: 'details/edit/address',
+          },
+          {
+            element: <ProfileDetails />,
+            path: 'details/edit/profile',
+          },
           {
             element: <ProfileDetails />,
             path: 'details',
