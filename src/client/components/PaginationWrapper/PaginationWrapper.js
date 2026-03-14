@@ -2,6 +2,7 @@ import React from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
 import * as styles from './PaginationWrapper.module.scss';
+import IconButton from '../IconButton/IconButton.js';
 
 const PaginationWrapper = ({ children, totalPages }) => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -21,21 +22,19 @@ const PaginationWrapper = ({ children, totalPages }) => {
     <div className={styles.pagination}>
       {children}
       <div className={styles.navigation}>
-        <button
-          className={`${styles.btn} ${page === 1 ? styles.hide : ''}`}
+        <IconButton
+          className={page === 1 ? styles.hide : ''}
           onClick={handleBack}
-        >
-          <ChevronLeftIcon className={styles.icon} />
-        </button>
+          Icon={ChevronLeftIcon}
+        />
         <span className={styles.page}>
           Page {page} of {totalPages}
         </span>
-        <button
-          className={`${styles.btn} ${page === totalPages ? styles.hide : ''}`}
+        <IconButton
+          className={page === totalPages ? styles.hide : ''}
           onClick={handleNext}
-        >
-          <ChevronRightIcon className={styles.icon} />
-        </button>
+          Icon={ChevronRightIcon}
+        />
       </div>
     </div>
   );
