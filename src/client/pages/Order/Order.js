@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import ProductCartItem from '../../components/ProductCartItem /ProductCartItem.js';
-import Spinner from '../../components/Spinner/Spinner.js';
-import Total from '../../components/Total/Total.js';
 import DeliveryAddress from '../../components/DeliveryAddress/DeliveryAddress.js';
 import { fetchOrder } from '../../slices/ordersSlice.js';
 
+import ProductCartItem from '../../components/ProductCartItem /ProductCartItem.js';
+import Spinner from '../../components/Spinner/Spinner.js';
+import Total from '../../components/Total/Total.js';
+import BackButton from '../../components/BackButton/BackButton.js';
 import * as styles from './Order.module.scss';
 
 const Order = () => {
@@ -43,6 +44,11 @@ const Order = () => {
           total={totalPrice}
         />
       </div>
+      <BackButton
+        className={styles.btn}
+        to="/profile/orders"
+        label="Back To Orders"
+      />
     </div>
   );
 };

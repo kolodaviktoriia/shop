@@ -1,10 +1,18 @@
 .orderWrapper {
+  display: flex;
+  flex-direction: column;
+
   .title {
     @include forms-h1;
 
     @include screen-xs {
       font-size: 1.6rem;
     }
+  }
+
+  .btn {
+    margin-top: 2rem;
+    align-self: center;
   }
 
   .wrapper {
