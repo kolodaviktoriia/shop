@@ -19,6 +19,8 @@ import Address from '../pages/Address/Address.js';
 import Payment from '../pages/Payment/Payment.js';
 import Confirmation from '../pages/Confirmation/Confirmation.js';
 import ProfileDetails from '../pages/ProfileDetails/ProfileDetails.js';
+import EditAddress from '../pages/EditAddress/EditAddress.js';
+import EditProfile from '../pages/EditProfile/EditProfile.js';
 import Orders from '../pages/Orders/Orders.js';
 import Order from '../pages/Order/Order.js';
 import Favorites from '../pages/Favorites/Favorites.js';
@@ -26,7 +28,6 @@ import NotFound from '../pages/NotFound/NotFound.js';
 import ErrorHandler from '../pages/ErrorHandler/ErrorHandler.js';
 import Company from '../pages/Company/Company.js';
 import Help from '../pages/Help/Help.js';
-import EditAddress from '../pages/EditAddress/EditAddress.js';
 
 export const routes = [
   {
@@ -72,7 +73,7 @@ export const routes = [
             path: 'details/edit/address',
           },
           {
-            element: <ProfileDetails />,
+            element: <EditProfile />,
             path: 'details/edit/profile',
           },
           {

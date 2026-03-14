@@ -1,9 +1,10 @@
 import React from 'react';
-import * as styles from './ProfileDetails.module.scss';
 import { useSelector } from 'react-redux';
-import IconButton from '../../components/IconButton/IconButton.js';
 import { PencilIcon } from '@heroicons/react/24/outline';
 import { useNavigate } from 'react-router-dom';
+import { formatDateToString } from '../../helpers/dateHelper.js';
+import IconButton from '../../components/IconButton/IconButton.js';
+import * as styles from './ProfileDetails.module.scss';
 
 const ProfileDetails = () => {
   const { user } = useSelector((store) => store.user);
@@ -11,7 +12,10 @@ const ProfileDetails = () => {
   const navigate = useNavigate();
   const handleEditAddress = () => {
     navigate('/profile/details/edit/address');
-  }
+  };
+  const handleEditProfile = () => {
+    navigate('/profile/details/edit/profile');
+  };
   return (
     <div className={styles.profileDetails}>
       <h1 className={styles.title}>
@@ -19,10 +23,20 @@ const ProfileDetails = () => {
       </h1>
       <div className={styles.main}>
         <h2 className={styles.subTitle}>My personal data</h2>
-        <span className={styles.infoText}>
-          {user?.firstName} {user?.lastName}
-        </span>
-        <span className={styles.infoText}>{user?.email}</span>
+        <div>
+          <p className={styles.infoText}>
+            {user?.firstName} {user?.lastName}
+          </p>
+          <p className={styles.infoText}>{user?.email}</p>
+          <p className={styles.infoText}>
+            {formatDateToString(user?.birthday)}
+          </p>
+        </div>
+        <IconButton
+          onClick={handleEditProfile}
+          Icon={PencilIcon}
+          label="Edit"
+        />
         <h2 className={styles.subTitle}>My shipping details</h2>
         {address ? (
           <>
@@ -41,7 +55,11 @@ const ProfileDetails = () => {
             </div>
           </>
         ) : undefined}
-        <IconButton onClick={handleEditAddress} Icon={PencilIcon} label='Edit' />
+        <IconButton
+          onClick={handleEditAddress}
+          Icon={PencilIcon}
+          label="Edit"
+        />
       </div>
     </div>
   );

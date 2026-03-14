@@ -1,7 +1,15 @@
 import React from 'react';
 import * as styles from './InputField.module.scss';
 
-const InputField = ({ label, name, icon, type, error, ...props }) => {
+const InputField = ({
+  label,
+  name,
+  icon,
+  type,
+  error,
+  placeholder,
+  ...props
+}) => {
   const inputRender = () => (
     <div>
       <div className={styles.inputGroup}>
@@ -14,7 +22,8 @@ const InputField = ({ label, name, icon, type, error, ...props }) => {
         />
         <label htmlFor={name}>{label}</label>
       </div>
-      {error && <span className={styles.error}>{error}</span>}
+      {error && <p className={styles.error}>{error}</p>}
+      {placeholder && <p className={styles.placeholder}>{placeholder}</p>}
     </div>
   );
   return icon ? (

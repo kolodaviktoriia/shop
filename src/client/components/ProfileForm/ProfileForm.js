@@ -1,29 +1,40 @@
-import React, { useState } from 'react';
-import InputField from '../InputField/InputField.js';
-import * as styles from './SignupForm.module.scss';
-import Button from '../Button/Button.js';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { signupUser } from '../../slices/userSlice.js';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateProfile } from '../../slices/userSlice.js';
 import {
+  formatDateToString,
   formatValue,
   isAtLeast16,
   isValidDate,
 } from '../../helpers/dateHelper.js';
+import InputField from '../InputField/InputField.js';
+import Button from '../Button/Button.js';
+import * as styles from './ProfileForm.module.scss';
 
 const initialState = {
-  email: '',
-  password: '',
   firstName: '',
   lastName: '',
   birthday: '',
 };
 
-const SignupForm = ({ navigateTo, onNavigate }) => {
+const ProfileForm = () => {
+  const { user } = useSelector((store) => store.user);
   const navigate = useNavigate();
   const [formValues, setFormValues] = useState(initialState);
   const [errors, setErrors] = useState({});
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (user) {
+      const { firstName, lastName, birthday } = user;
+      setFormValues({
+        firstName,
+        lastName,
+        birthday: formatDateToString(birthday),
+      });
+    }
+  }, [user]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -38,47 +49,29 @@ const SignupForm = ({ navigateTo, onNavigate }) => {
   };
 
   const validate = () => {
-    let valid = true;
     const newErrors = {};
 
-    if (!formValues.email) {
-      newErrors.email = 'Email is required';
-      valid = false;
-    } else if (!/\S+@\S+\.\S+/.test(formValues.email)) {
-      newErrors.email = 'Email is invalid';
-      valid = false;
-    }
-
-    if (!formValues.password) {
-      newErrors.password = 'Password is required';
-      valid = false;
-    } else if (formValues.password.length < 6) {
-      newErrors.password = 'Password must be at least 6 characters';
-      valid = false;
-    }
     if (!formValues.firstName) newErrors.firstName = 'First name is required';
     if (!formValues.lastName) newErrors.lastName = 'Last name is required';
-
     if (!isValidDate(formValues.birthday)) newErrors.birthday = 'Invalid date';
     else if (!isAtLeast16(formValues.birthday))
       newErrors.birthday = 'You must be at least 16 years old';
 
     setErrors(newErrors);
-    return valid;
+    return Object.keys(newErrors).length === 0;
   };
 
   const handleLogin = (e) => {
     e.preventDefault();
     if (!validate()) return;
-    dispatch(signupUser(formValues, Boolean(onNavigate)));
-    if (onNavigate) onNavigate();
-    else navigate(navigateTo ?? '/profile/details');
+    dispatch(updateProfile(formValues));
+    navigate('/profile/details');
   };
 
   return (
-    <div className={styles.signupWrapper}>
-      <h2 className={styles.title}>I am new to Blush & Blossom</h2>
-      <form className={styles.loginForm} noValidate>
+    <div className={styles.profileWrapper}>
+      <h2 className={styles.title}>Personal Data</h2>
+      <form className={styles.profileForm} noValidate>
         <InputField
           label="First Name"
           name="firstName"
@@ -104,26 +97,10 @@ const SignupForm = ({ navigateTo, onNavigate }) => {
           onChange={handleChange}
           placeholder="DD.MM.YYYY"
         />
-        <InputField
-          label="Email address"
-          name="email"
-          type="email"
-          value={formValues.email}
-          error={errors.email}
-          onChange={handleChange}
-        />
-        <InputField
-          label="Password"
-          name="password"
-          type="password"
-          value={formValues.password}
-          error={errors.password}
-          onChange={handleChange}
-        />
-        <Button onClick={handleLogin}>Create Account</Button>
+        <Button onClick={handleLogin}>Update Personal Data</Button>
       </form>
     </div>
   );
 };
 
-export default SignupForm;
+export default ProfileForm;

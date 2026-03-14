@@ -9,11 +9,12 @@ import {
   deleteFavoriteApi,
 } from '../supabaseApi/productsApi.js';
 import {
-  getProfile,
+  getProfileApi,
   getUserApi,
   loginApi,
   signupApi,
-  updateShippingAddress,
+  updateProfileApi,
+  updateShippingAddressApi,
 } from '../supabaseApi/userApi.js';
 import { getToken } from '../helpers/getToken.js';
 import { setCookie } from '../helpers/setCookie.js';
@@ -123,7 +124,7 @@ router.post('/login', async (req, res) => {
 
     setCookie(res, data);
 
-    const profile = await getProfile(data.user.id);
+    const profile = await getProfileApi(data.user.id);
 
     res.json({ user: profile });
   } catch (err) {
@@ -136,19 +137,19 @@ router.post('/login', async (req, res) => {
 
 router.post('/signup', async (req, res) => {
   try {
-    const { email, password, lastName, firstName } = req.body;
+    const { email, password, lastName, firstName, birthday } = req.body;
 
     if (!email || !password || !firstName || !lastName) {
       return res.status(400).json({ message: 'All fields are required.' });
     }
 
-    await signupApi(email, password, firstName, lastName);
+    await signupApi(email, password, firstName, lastName, birthday);
 
     const data = await loginApi(email, password);
 
     setCookie(res, data);
 
-    const profile = await getProfile(data.user.id);
+    const profile = await getProfileApi(data.user.id);
 
     res.json({ user: profile });
   } catch (err) {
@@ -166,7 +167,7 @@ router.get('/user', async (req, res) => {
     }
 
     const user = await getUserApi(token);
-    const profile = await getProfile(user.id);
+    const profile = await getProfileApi(user.id);
 
     res.json({ user: profile });
   } catch (err) {
@@ -392,6 +393,27 @@ router.delete('/favorites/:id', async (req, res) => {
 });
 export default router;
 
+router.post('/profile', async (req, res) => {
+  try {
+    const token = await getToken(req, res);
+
+    if (!token) {
+      return res
+        .status(401)
+        .json({ message: 'Please log in to update your profile.' });
+    }
+
+    const user = await getUserApi(token);
+
+    await updateProfileApi(req.body, user.id);
+    const profile = await getProfileApi(user.id);
+
+    res.json({ user: profile });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Failed to update profile.' });
+  }
+});
 
 router.post('/address', async (req, res) => {
   try {
@@ -405,8 +427,8 @@ router.post('/address', async (req, res) => {
 
     const user = await getUserApi(token);
 
-    await updateShippingAddress(req.body, user.id);
-    const profile = await getProfile(user.id);
+    await updateShippingAddressApi(req.body, user.id);
+    const profile = await getProfileApi(user.id);
 
     res.json({ user: profile });
   } catch (err) {
@@ -414,4 +436,3 @@ router.post('/address', async (req, res) => {
     res.status(500).json({ message: 'Failed to update address.' });
   }
 });
-

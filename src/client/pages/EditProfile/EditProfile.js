@@ -1,10 +1,10 @@
 import React from 'react';
-import AddressForm from '../../components/AddressForm/AddressForm.js';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { updateAddress } from '../../slices/userSlice.js';
+import ProfileForm from '../../components/ProfileForm/ProfileForm.js';
 
-const EditAddress = () => {
+const EditProfile = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleForm = (formValues) => {
@@ -13,7 +13,7 @@ const EditAddress = () => {
   };
 
   return (
-    <AddressForm
+    <ProfileForm
       onSubmit={handleForm}
       title="Shipping Address"
       subTitle="Update the address where you want your orders delivered."
@@ -21,4 +21,4 @@ const EditAddress = () => {
   );
 };
 
-export default EditAddress;
+export default EditProfile;

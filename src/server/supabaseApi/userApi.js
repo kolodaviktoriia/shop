@@ -18,7 +18,7 @@ export const getUserApi = async (token) => {
   return data.user;
 };
 
-export const signupApi = async (email, password, firstName, lastName) => {
+export const signupApi = async (email, password, firstName, lastName, birthday) => {
   const { data: signupData, error: signupError } = await supabase.auth.signUp({
     email,
     password,
@@ -29,7 +29,7 @@ export const signupApi = async (email, password, firstName, lastName) => {
 
   const { data, error } = await supabase
     .from('profiles')
-    .insert([{ id: userId, firstName, lastName, email }])
+    .insert([{ id: userId, firstName, lastName, email, birthday }])
     .select()
     .single();
 
@@ -38,7 +38,7 @@ export const signupApi = async (email, password, firstName, lastName) => {
   return data;
 };
 
-export const getProfile = async (userId) => {
+export const getProfileApi = async (userId) => {
   const { data, error } = await supabase
     .from('profiles')
     .select('*, addresses(*)')
@@ -57,7 +57,24 @@ export const getProfile = async (userId) => {
   return profileWithAddress;
 };
 
-export const updateShippingAddress = async (address, userId) => {
+export const updateProfileApi = async (profile, userId) => {
+  const { firstName, lastName, birthday } = profile;
+
+  const { error } = await supabase
+    .from('profiles')
+    .update({
+      firstName,
+      lastName,
+      birthday,
+    })
+    .eq('id', userId);
+
+  if (error) {
+    throw error;
+  }
+};
+
+export const updateShippingAddressApi = async (address, userId) => {
   const {
     firstName,
     lastName,
@@ -80,10 +97,10 @@ export const updateShippingAddress = async (address, userId) => {
       country,
       phone,
       userId,
-    }, { onConflict: 'userId' }
+    },
+    { onConflict: 'userId' }
   );
   if (error) {
     throw error;
   }
-
-}
+};

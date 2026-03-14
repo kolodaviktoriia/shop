@@ -85,9 +85,12 @@ const AddressForm = ({ onSubmit, title, subTitle }) => {
 
   return (
     <div className={styles.addressFormWrapper}>
-      <h1 className={styles.title}>{title ?? 'Where should we deliver your order?'}</h1>
+      <h1 className={styles.title}>
+        {title ?? 'Where should we deliver your order?'}
+      </h1>
       <h2 className={styles.subTitle}>
-        {subTitle ?? `Enter your delivery address below so we know exactly where to send your
+        {subTitle ??
+          `Enter your delivery address below so we know exactly where to send your
         order. Make sure the address is correct before continuing.`}
       </h2>
       <form className={styles.addressForm} noValidate>

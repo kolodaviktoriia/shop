@@ -4,7 +4,8 @@ import {
   loginApi,
   logoutApi,
   signupApi,
-  updateAddressApi
+  updateAddressApi,
+  updateProfileApi,
 } from '../api/usersApi.js';
 import { clearCart, fetchCart } from './cartSlice.js';
 import { notify } from '../components/Toaster/Toaster.js';
@@ -39,22 +40,22 @@ export const userReducer = userSlice.reducer;
 
 export const loginUser =
   (email, password, isCheckout = false) =>
-    async (dispatch) => {
-      dispatch(setLoading(true));
-      dispatch(setError(null));
+  async (dispatch) => {
+    dispatch(setLoading(true));
+    dispatch(setError(null));
 
-      try {
-        const data = await loginApi(email, password);
-        dispatch(setUser(data.user));
-        dispatch(fetchCart(isCheckout));
-        dispatch(fetchFavorites());
-      } catch (err) {
-        notify.error(err?.response?.data?.message || err.message);
-        dispatch(setError(err?.response?.data?.message || err.message));
-      } finally {
-        dispatch(setLoading(false));
-      }
-    };
+    try {
+      const data = await loginApi(email, password);
+      dispatch(setUser(data.user));
+      dispatch(fetchCart(isCheckout));
+      dispatch(fetchFavorites());
+    } catch (err) {
+      notify.error(err?.response?.data?.message || err.message);
+      dispatch(setError(err?.response?.data?.message || err.message));
+    } finally {
+      dispatch(setLoading(false));
+    }
+  };
 
 export const logoutUser = () => async (dispatch) => {
   dispatch(setLoading(true));
@@ -87,21 +88,33 @@ export const fetchCurrentUser = () => async (dispatch) => {
 
 export const signupUser =
   (userData, isCheckout = false) =>
-    async (dispatch) => {
-      dispatch(setLoading(true));
-      dispatch(setError(null));
-      try {
-        const data = await signupApi(userData);
-        dispatch(setUser(data.user || null));
-        dispatch(fetchCart(isCheckout));
-        dispatch(fetchFavorites());
-      } catch (err) {
-        notify.error(err?.response?.data?.message || err.message);
-        dispatch(setError(err?.response?.data?.message || err.message));
-      } finally {
-        dispatch(setLoading(false));
-      }
-    };
+  async (dispatch) => {
+    dispatch(setLoading(true));
+    dispatch(setError(null));
+    try {
+      const data = await signupApi(userData);
+      dispatch(setUser(data.user || null));
+      dispatch(fetchCart(isCheckout));
+      dispatch(fetchFavorites());
+    } catch (err) {
+      notify.error(err?.response?.data?.message || err.message);
+      dispatch(setError(err?.response?.data?.message || err.message));
+    } finally {
+      dispatch(setLoading(false));
+    }
+  };
+
+export const updateProfile = (profile) => async (dispatch) => {
+  dispatch(setLoading(true));
+  try {
+    const data = await updateProfileApi(profile);
+    dispatch(setUser(data.user || null));
+  } catch (err) {
+    dispatch(setError(err?.response?.data?.message || err.message));
+  } finally {
+    dispatch(setLoading(false));
+  }
+};
 
 export const updateAddress = (address) => async (dispatch) => {
   dispatch(setLoading(true));
