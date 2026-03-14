@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useParams, useSearchParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import ProductsList from '../../components/ProductsList/ProductsList.js';
 import WidthWrapper from '../../components/WidthWrapper/WidthWrapper.js';
@@ -7,7 +7,7 @@ import Spinner from '../../components/Spinner/Spinner.js';
 import SectionHeader from '../../components/SectionHeader/SectionHeader.js';
 import SEO from '../../components/SEO.js';
 import PageWrapper from '../../components/PageWrapper/PageWrapper.js';
-import { clearProducts, fetchProducts } from '../../slices/productsSlice.js';
+import { fetchProducts } from '../../slices/productsSlice.js';
 import { usePagination } from '../../hooks/pagination.js';
 const allCategory = {
   name: 'Goodies for Your Glow',
@@ -30,8 +30,6 @@ const Products = () => {
 
   useEffect(() => {
     dispatch(fetchProducts({ category: category.id, page, limit: 12 }));
-
-    return () => dispatch(clearProducts());
   }, [id, page, dispatch, category.id]);
 
   return (

@@ -7,7 +7,7 @@ import SectionHeader from '../../components/SectionHeader/SectionHeader.js';
 import Spinner from '../../components/Spinner/Spinner.js';
 import SEO from '../../components/SEO.js';
 import PageWrapper from '../../components/PageWrapper/PageWrapper.js';
-import { clearProducts, fetchProducts } from '../../slices/productsSlice.js';
+import { fetchProducts } from '../../slices/productsSlice.js';
 
 import { usePagination } from '../../hooks/pagination.js';
 import * as styles from './Collection.module.scss';
@@ -26,7 +26,6 @@ const Collection = () => {
 
   useEffect(() => {
     dispatch(fetchProducts({ collection: collection.id, page, limit: 12 }));
-    return () => dispatch(clearProducts());
   }, [id, dispatch, page, collection?.id]);
 
   return (
