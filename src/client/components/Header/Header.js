@@ -116,6 +116,10 @@ const Header = () => {
           ))}
         </WidthWrapper>
       </nav>
+      <div
+        className={`${styles.navBarOverlay} ${isOpen ? styles.open : ''}`}
+        onClick={() => setIsOpen(false)}
+      />
     </header>
   );
 };
