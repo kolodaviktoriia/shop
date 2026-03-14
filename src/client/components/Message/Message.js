@@ -11,7 +11,7 @@ const Message = ({
   buttonLabel,
   to = '/',
   isLink = true,
-  isPadding = true
+  isPadding = true,
 }) => {
   return (
     <WidthWrapper isPadding={isPadding}>

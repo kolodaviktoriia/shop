@@ -26,13 +26,14 @@ const Orders = () => {
   return (
     <div className={styles.orders}>
       <h1 className={styles.title}>Your Orders</h1>
-      {!orders || orders.length === 0 ?
+      {!orders || orders.length === 0 ? (
         <Message
-          title='Your order history is empty'
-          subtitle='Looks like you haven’t placed an order yet. Explore our products and find something you’ll love ✨'
+          title="Your order history is empty"
+          subtitle="Looks like you haven’t placed an order yet. Explore our products and find something you’ll love ✨"
           isPadding={false}
         />
-        : <PaginationWrapper totalPages={totalPages}>
+      ) : (
+        <PaginationWrapper totalPages={totalPages}>
           <div className={styles.orderList}>
             {orders?.map((order) => (
               <div
@@ -51,8 +52,8 @@ const Orders = () => {
               </div>
             ))}
           </div>
-        </PaginationWrapper>}
-
+        </PaginationWrapper>
+      )}
     </div>
   );
 };

@@ -32,9 +32,10 @@ const Search = () => {
   const [searchParams] = useSearchParams();
   const query = searchParams.get('q');
   const dispatch = useDispatch();
-  const { products, loading, totalPages } = useSelector((state) => state.products);
+  const { products, loading, totalPages } = useSelector(
+    (state) => state.products
+  );
   const page = usePagination(totalPages);
-
 
   useEffect(() => {
     dispatch(fetchProducts({ search: query, page, limit: 12 }));

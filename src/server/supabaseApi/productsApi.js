@@ -25,12 +25,13 @@ export const getProductsApi = async (filter = {}) => {
   if (search) query = query.ilike('title', `%${search}%`);
 
   const { data, count, error } = await query;
-  if (error) return {
-    products: [],
-    page: 1,
-    total: 0,
-    totalPages: 1,
-  };
+  if (error)
+    return {
+      products: [],
+      page: 1,
+      total: 0,
+      totalPages: 1,
+    };
 
   return {
     products: data,

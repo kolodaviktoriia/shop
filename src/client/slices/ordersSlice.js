@@ -61,31 +61,33 @@ export const {
   setOrders,
   setOrderLoading,
   setOrderError,
-  setPagination
+  setPagination,
 } = ordersSlice.actions;
 
 export const ordersReducer = ordersSlice.reducer;
 
-export const fetchOrders = (filter = {}) => async (dispatch) => {
-  dispatch(setOrderLoading(true));
-  dispatch(setOrderError(null));
+export const fetchOrders =
+  (filter = {}) =>
+  async (dispatch) => {
+    dispatch(setOrderLoading(true));
+    dispatch(setOrderError(null));
 
-  try {
-    const data = await getOrdersApi(filter);
-    dispatch(setOrders(data.orders ?? []));
-    dispatch(
-      setPagination({
-        totalPages: data.totalPages,
-        total: data.total,
-      })
-    );
-  } catch (err) {
-    notify.error(err?.response?.data?.message || err.message);
-    dispatch(setOrderError(err?.response.data?.message || err.message));
-  } finally {
-    dispatch(setOrderLoading(false));
-  }
-};
+    try {
+      const data = await getOrdersApi(filter);
+      dispatch(setOrders(data.orders ?? []));
+      dispatch(
+        setPagination({
+          totalPages: data.totalPages,
+          total: data.total,
+        })
+      );
+    } catch (err) {
+      notify.error(err?.response?.data?.message || err.message);
+      dispatch(setOrderError(err?.response.data?.message || err.message));
+    } finally {
+      dispatch(setOrderLoading(false));
+    }
+  };
 
 export const fetchOrder = (id) => async (dispatch) => {
   dispatch(setOrderLoading(true));
