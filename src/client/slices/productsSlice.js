@@ -35,6 +35,8 @@ const productsSlice = createSlice({
     },
     clearProducts(state) {
       state.products = [];
+      state.totalPages = 1;
+      state.total = 0;
     },
     clearProduct(state) {
       state.product = undefined;

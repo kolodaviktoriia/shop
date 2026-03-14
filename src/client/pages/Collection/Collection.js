@@ -6,31 +6,37 @@ import WidthWrapper from '../../components/WidthWrapper/WidthWrapper.js';
 import SectionHeader from '../../components/SectionHeader/SectionHeader.js';
 import Spinner from '../../components/Spinner/Spinner.js';
 import SEO from '../../components/SEO.js';
+import PageWrapper from '../../components/PageWrapper/PageWrapper.js'
 import { clearProducts, fetchProducts } from '../../slices/productsSlice.js';
 
-import * as styles from './Collection.module.scss';
+import { usePagination } from '../../hooks/pagination.js';
+import * as styles from './Collection.module.scss';;
 
 const Collection = () => {
   const { id } = useParams();
-  const { products, collections, loading } = useSelector(
+  const { products, collections, loading, totalPages } = useSelector(
     (state) => state.products
   );
+
+  const page = usePagination(totalPages);
+
   const collection = collections.find((col) => col.name === id);
 
   const dispatch = useDispatch();
+
   useEffect(() => {
-    dispatch(fetchProducts({ collection: collection.id }));
+    dispatch(fetchProducts({ collection: collection.id, page, limit: 12 }));
     return () => dispatch(clearProducts());
-  }, [id, dispatch, collection.id]);
+  }, [id, dispatch, page, collection?.id]);
 
   return (
-    <div className={styles.collection}>
+    <PageWrapper>
       <SEO
         title={collection?.name}
         description={collection?.description}
         image={collection?.imageUrl}
       />
-      <WidthWrapper isPadding={false}>
+      <WidthWrapper isPadding={false} className={styles.collection}>
         <SectionHeader
           name={collection?.name}
           imageUrl={collection?.imageUrl}
@@ -39,9 +45,9 @@ const Collection = () => {
         />
       </WidthWrapper>
       <WidthWrapper>
-        {loading ? <Spinner /> : <ProductsList products={products} />}
+        {loading ? <Spinner /> : <ProductsList products={products} totalPages={totalPages} />}
       </WidthWrapper>
-    </div>
+    </PageWrapper >
   );
 };
 

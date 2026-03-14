@@ -1,12 +1,14 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useSearchParams } from 'react-router-dom';
-import { fetchProducts } from '../../slices/productsSlice.js';
+import { clearProducts, fetchProducts } from '../../slices/productsSlice.js';
 import SectionHeader from '../../components/SectionHeader/SectionHeader.js';
 import SEO from '../../components/SEO.js';
 import Spinner from '../../components/Spinner/Spinner.js';
 import ProductsList from '../../components/ProductsList/ProductsList.js';
 import WidthWrapper from '../../components/WidthWrapper/WidthWrapper.js';
+import PageWrapper from '../../components/PageWrapper/PageWrapper.js';
+import { usePagination } from '../../hooks/pagination.js';
 
 const searchPageContent = {
   resultsFound: {
@@ -30,17 +32,21 @@ const Search = () => {
   const [searchParams] = useSearchParams();
   const query = searchParams.get('q');
   const dispatch = useDispatch();
-  const { products, loading } = useSelector((state) => state.products);
+  const { products, loading, totalPages } = useSelector((state) => state.products);
+  const page = usePagination(totalPages);
+
 
   useEffect(() => {
-    dispatch(fetchProducts({ search: query }));
-  }, [query, dispatch]);
+    dispatch(fetchProducts({ search: query, page, limit: 12 }));
+
+    return () => dispatch(clearProducts());
+  }, [page, dispatch, query]);
 
   const { noResults, resultsFound } = searchPageContent;
 
   if (loading) return <Spinner />;
   return (
-    <div>
+    <PageWrapper>
       <SEO title={`Search For ${searchParams}`} />
       <WidthWrapper isPadding={false}>
         {products.length === 0 ? (
@@ -60,9 +66,9 @@ const Search = () => {
         )}
       </WidthWrapper>
       <WidthWrapper>
-        <ProductsList products={products} />
+        <ProductsList products={products} totalPages={totalPages} />
       </WidthWrapper>
-    </div>
+    </PageWrapper>
   );
 };
 
