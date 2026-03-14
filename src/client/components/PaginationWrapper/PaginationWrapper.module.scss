@@ -1,0 +1,27 @@
+.pagination {
+  .navigation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 1rem;
+
+    .btn {
+      display: block;
+      background-color: transparent;
+    }
+
+    .page {
+      @include summary-span;
+    }
+
+    .hide {
+      visibility: hidden;
+    }
+
+    .icon {
+      stroke: $text-color;
+      height: 2.4rem;
+    }
+  }
+}

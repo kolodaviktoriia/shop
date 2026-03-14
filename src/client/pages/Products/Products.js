@@ -1,13 +1,14 @@
 import React, { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useSearchParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import ProductsList from '../../components/ProductsList/ProductsList.js';
 import WidthWrapper from '../../components/WidthWrapper/WidthWrapper.js';
 import Spinner from '../../components/Spinner/Spinner.js';
 import SectionHeader from '../../components/SectionHeader/SectionHeader.js';
-import { clearProducts, fetchProducts } from '../../slices/productsSlice.js';
 import SEO from '../../components/SEO.js';
-
+import PageWrapper from '../../components/PageWrapper/PageWrapper.js';
+import { clearProducts, fetchProducts } from '../../slices/productsSlice.js';
+import { usePagination } from '../../hooks/pagination.js';
 const allCategory = {
   name: 'Goodies for Your Glow',
   description:
@@ -18,20 +19,23 @@ const allCategory = {
 
 const Products = () => {
   const { id } = useParams();
-  const dispatch = useDispatch();
-  const { products, categories, loading } = useSelector(
+  const { products, categories, loading, totalPages } = useSelector(
     (state) => state.products
   );
+  const page = usePagination(totalPages);
+
+  const dispatch = useDispatch();
 
   const category = categories.find((cat) => cat.name === id) ?? allCategory;
 
   useEffect(() => {
-    dispatch(fetchProducts({ category: category.id }));
+    dispatch(fetchProducts({ category: category.id, page, limit: 12 }));
+
     return () => dispatch(clearProducts());
-  }, [id, dispatch, category.id]);
+  }, [id, page, dispatch, category.id]);
 
   return (
-    <div>
+    <PageWrapper>
       <SEO
         title={category?.name}
         description={category?.description}
@@ -45,9 +49,13 @@ const Products = () => {
         />
       </WidthWrapper>
       <WidthWrapper>
-        {loading ? <Spinner /> : <ProductsList products={products} />}
+        {loading ? (
+          <Spinner />
+        ) : (
+          <ProductsList products={products} totalPages={totalPages} />
+        )}
       </WidthWrapper>
-    </div>
+    </PageWrapper>
   );
 };
 

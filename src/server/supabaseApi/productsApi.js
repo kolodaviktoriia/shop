@@ -1,25 +1,38 @@
 import { supabase } from './supabaseClient.js';
 
 export const getProductsApi = async (filter = {}) => {
-  const { category, collection, search } = filter;
+  const { category, collection, search, page = 1, limit = 12 } = filter;
+  const safePage = Number(page);
+  const safeLimit = Number(limit);
+  const from = (safePage - 1) * safeLimit;
+  const to = from + safeLimit - 1;
 
-  let query = supabase.from('products').select(
-    `
+  let query = supabase
+    .from('products')
+    .select(
+      `
       *,
       categories(name),
       collections(name)
     `,
-    { count: 'exact' }
-  );
+      { count: 'exact' }
+    )
+    .order('title', { ascending: true })
+    .range(from, to);
 
   if (category) query = query.eq('categoryId', category);
   if (collection) query = query.eq('collectionId', collection);
   if (search) query = query.ilike('title', `%${search}%`);
 
-  const { data, error } = await query;
+  const { data, count, error } = await query;
   if (error) throw error;
 
-  return data;
+  return {
+    products: data,
+    page: Number(page),
+    total: count,
+    totalPages: Math.ceil(count / limit),
+  };
 };
 
 export const getProductApi = async (id) => {

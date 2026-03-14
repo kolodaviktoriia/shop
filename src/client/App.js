@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Header from './components/Header/Header.js';
 import Footer from './components/Footer/Footer.js';
@@ -13,11 +13,18 @@ const App = () => {
   const { loading } = useSelector((store) => store.user);
   const dispatch = useDispatch();
   const [hydrated, setHydrated] = useState(false);
+  const { pathname, search } = useLocation();
 
   useEffect(() => {
     setHydrated(true);
     dispatch(fetchCurrentUser());
   }, [dispatch]);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }, [pathname, search]);
 
   return (
     <div className={styles.appWrapper}>

@@ -20,6 +20,8 @@ const productsSlice = createSlice({
     loading: false,
     error: null,
     favorites: [],
+    totalPages: 1,
+    total: 0,
   },
   reducers: {
     setCategories(state, action) {
@@ -49,6 +51,15 @@ const productsSlice = createSlice({
     setFavorites(state, action) {
       state.favorites = action.payload;
     },
+    setPagination(state, action) {
+      state.page = action.payload.page;
+      state.totalPages = action.payload.totalPages;
+      state.total = action.payload.total;
+    },
+    clearPagination(state) {
+      state.totalPages = 1;
+      state.total = 0;
+    },
   },
 });
 
@@ -62,6 +73,8 @@ export const {
   setProductsLoading,
   setProductsError,
   setFavorites,
+  setPagination,
+  clearPagination,
 } = productsSlice.actions;
 
 export const productsReducer = productsSlice.reducer;
@@ -115,7 +128,15 @@ export const fetchProducts = (filter) => async (dispatch) => {
 
   try {
     const data = await getProductsApi(filter);
-    dispatch(setProducts(data));
+
+    dispatch(setProducts(data.products));
+
+    dispatch(
+      setPagination({
+        totalPages: data.totalPages,
+        total: data.total,
+      })
+    );
   } catch (err) {
     notify.error(err?.response?.data?.message || err.message);
     dispatch(setProductsError(err?.response?.data?.message || err.message));
