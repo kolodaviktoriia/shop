@@ -1,6 +1,7 @@
 .orders {
   .title {
     @include forms-h1;
+    margin-bottom: 2rem;
   }
 
   .orderList {

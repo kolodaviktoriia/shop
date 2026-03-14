@@ -18,6 +18,8 @@ const ordersSlice = createSlice({
     currentOrder: initialOrder,
     loading: false,
     error: '',
+    totalPages: 1,
+    total: 0,
   },
   reducers: {
     addAddress: (state, action) => {
@@ -44,6 +46,10 @@ const ordersSlice = createSlice({
     setOrderError: (state, action) => {
       state.error = action.payload;
     },
+    setPagination(state, action) {
+      state.totalPages = action.payload.totalPages;
+      state.total = action.payload.total;
+    },
   },
 });
 
@@ -55,17 +61,24 @@ export const {
   setOrders,
   setOrderLoading,
   setOrderError,
+  setPagination
 } = ordersSlice.actions;
 
 export const ordersReducer = ordersSlice.reducer;
 
-export const fetchOrders = () => async (dispatch) => {
+export const fetchOrders = (filter = {}) => async (dispatch) => {
   dispatch(setOrderLoading(true));
   dispatch(setOrderError(null));
 
   try {
-    const data = await getOrdersApi();
-    dispatch(setOrders(data.orders));
+    const data = await getOrdersApi(filter);
+    dispatch(setOrders(data.orders ?? []));
+    dispatch(
+      setPagination({
+        totalPages: data.totalPages,
+        total: data.total,
+      })
+    );
   } catch (err) {
     notify.error(err?.response?.data?.message || err.message);
     dispatch(setOrderError(err?.response.data?.message || err.message));

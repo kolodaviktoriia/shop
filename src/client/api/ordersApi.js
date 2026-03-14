@@ -1,6 +1,6 @@
 import { getData, postData } from './axiosConfig.js';
 
-export const getOrdersApi = () => getData('/api/orders');
+export const getOrdersApi = (filter) => getData('/api/orders', { params: filter });
 
 export const getOrderApi = (id) => getData(`/api/orders/${id}`);
 

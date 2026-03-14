@@ -54,7 +54,6 @@ const productsSlice = createSlice({
       state.favorites = action.payload;
     },
     setPagination(state, action) {
-      state.page = action.payload.page;
       state.totalPages = action.payload.totalPages;
       state.total = action.payload.total;
     },

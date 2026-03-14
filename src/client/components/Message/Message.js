@@ -11,9 +11,10 @@ const Message = ({
   buttonLabel,
   to = '/',
   isLink = true,
+  isPadding = true
 }) => {
   return (
-    <WidthWrapper>
+    <WidthWrapper isPadding={isPadding}>
       <div className={styles.message}>
         <div className={styles.wrapper}>
           <h1 className={styles.title}>{title}</h1>

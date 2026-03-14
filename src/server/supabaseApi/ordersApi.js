@@ -1,18 +1,38 @@
 import { supabase } from './supabaseClient.js';
 
-export const getOrdersApi = async (userId) => {
+export const getOrdersApi = async (userId, filter) => {
+  const { page = 1, limit = 6 } = filter;
+
+  const { count } = await supabase
+    .from('orders')
+    .select('*', { count: 'exact', head: true })
+    .eq('userId', userId);
+
+  const totalPages = Math.ceil(count / limit);
+
+  const safePage = Math.min(Number(page), totalPages || 1);
+  const safeLimit = Number(limit);
+  const from = (safePage - 1) * safeLimit;
+  const to = from + safeLimit - 1;
+
   const { data, error } = await supabase
     .from('orders')
     .select(' id, status, createdAt, totalPrice')
     .eq('userId', userId)
-    .order('createdAt', { ascending: false });
+    .order('createdAt', { ascending: false })
+    .range(from, to);
 
   if (error) {
     if (error.code === 'PGRST116') return [];
     throw error;
   }
 
-  return data;
+  return {
+    orders: data,
+    page: Number(page),
+    total: count,
+    totalPages: Math.ceil(count / limit),
+  };
 };
 
 export const getOrderApi = async (userId, orderId) => {

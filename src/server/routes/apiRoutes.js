@@ -299,9 +299,9 @@ router.get('/orders', async (req, res) => {
 
     const user = await getUserApi(token);
 
-    const orders = await getOrdersApi(user.id);
+    const orders = await getOrdersApi(user.id, req.query);
 
-    res.json({ orders });
+    res.json(orders);
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: 'Failed to load orders.' });
