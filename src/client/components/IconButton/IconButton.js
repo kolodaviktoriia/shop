@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import * as styles from './IconButton.module.scss';
+
 const IconButton = ({ to, Icon, label, className = '', onClick, ...props }) => {
   return to ? (
     <Link to={to} className={`${styles.btn}  ${className}`} {...props}>

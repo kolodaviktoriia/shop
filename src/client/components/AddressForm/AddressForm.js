@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import InputField from '../InputField/InputField.js';
 import Button from '../Button/Button.js';
+import { toUpperCaseFirstSymbol } from '../../helpers/textHelper.js';
 
 import * as styles from './AddressForm.module.scss';
 
@@ -84,16 +85,9 @@ const AddressForm = ({ onSubmit, title, subTitle, isBilling = false }) => {
   const validate = () => {
     const newErrors = {};
 
-    if (!formValues.firstName) newErrors.firstName = 'First name is required';
-    if (!formValues.lastName) newErrors.lastName = 'Last name is required';
-    if (!formValues.street) newErrors.street = 'Street is required';
-    if (!formValues.houseNumber)
-      newErrors.houseNumber = 'House number is required';
-    if (!formValues.postalCode)
-      newErrors.postalCode = 'Postal code is required';
-    if (!formValues.city) newErrors.city = 'City is required';
-    if (!formValues.country) newErrors.country = 'Country is required';
-    if (!formValues.phone) newErrors.phone = 'Phone number is required';
+    Object.entries(formValues).forEach(([key, value]) => {
+      if (!value) newErrors[key] = `${toUpperCaseFirstSymbol(key)} is required`;
+    });
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -117,70 +111,17 @@ const AddressForm = ({ onSubmit, title, subTitle, isBilling = false }) => {
         order. Make sure the address is correct before continuing.`}
       </h2>
       <form className={styles.addressForm} noValidate>
-        <InputField
-          label="First Name"
-          name="firstName"
-          type="text"
-          value={formValues.firstName}
-          error={errors.firstName}
-          onChange={handleChange}
-        />
-        <InputField
-          label="Last Name"
-          name="lastName"
-          type="text"
-          value={formValues.lastName}
-          error={errors.lastName}
-          onChange={handleChange}
-        />
-        <InputField
-          label="Street"
-          name="street"
-          type="text"
-          value={formValues.street}
-          error={errors.street}
-          onChange={handleChange}
-        />
-        <InputField
-          label="House Number"
-          name="houseNumber"
-          type="text"
-          value={formValues.houseNumber}
-          error={errors.houseNumber}
-          onChange={handleChange}
-        />
-        <InputField
-          label="Postal Code"
-          name="postalCode"
-          type="text"
-          value={formValues.postalCode}
-          error={errors.postalCode}
-          onChange={handleChange}
-        />
-        <InputField
-          label="City"
-          name="city"
-          type="text"
-          value={formValues.city}
-          error={errors.city}
-          onChange={handleChange}
-        />
-        <InputField
-          label="Country"
-          name="country"
-          type="text"
-          value={formValues.country}
-          error={errors.country}
-          onChange={handleChange}
-        />
-        <InputField
-          label="Phone"
-          name="phone"
-          type="text"
-          value={formValues.phone}
-          error={errors.phone}
-          onChange={handleChange}
-        />
+        {Object.keys(formValues).map((key) => (
+          <InputField
+            key={key}
+            label={toUpperCaseFirstSymbol(key)}
+            name={key}
+            type="text"
+            value={formValues[key]}
+            error={errors[key]}
+            onChange={handleChange}
+          />
+        ))}
         <Button onClick={handleForm} className={styles.btn}>
           Add Address
         </Button>

@@ -4,6 +4,7 @@ import { notify } from '../components/Toaster/Toaster.js';
 
 const initialOrder = {
   address: null,
+  billingAddress: null,
   totalPrice: null,
   shippingPrice: null,
   itemsPrice: null,
@@ -23,7 +24,8 @@ const ordersSlice = createSlice({
   },
   reducers: {
     addAddress: (state, action) => {
-      state.currentOrder.address = action.payload;
+      state.currentOrder.address = action.payload.address;
+      state.currentOrder.billingAddress = action.payload.billingAddress;
     },
     initCurrentOrder: (state, action) => {
       state.currentOrder.items = action.payload.items;

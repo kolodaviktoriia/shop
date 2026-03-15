@@ -39,7 +39,7 @@ export const getOrderApi = async (userId, orderId) => {
   const { data: order, error: orderError } = await supabase
     .from('orders')
     .select(
-      'id, createdAt, totalPrice, shippingPrice, itemsPrice, items, deliveryAddressId, status'
+      'id, createdAt, totalPrice, shippingPrice, itemsPrice, items, deliveryAddressId,  billingAddressId, status'
     )
     .eq('userId', userId)
     .eq('id', orderId)
@@ -71,6 +71,25 @@ export const getOrderApi = async (userId, orderId) => {
 
   delete order.deliveryAddressId;
 
+  let billingAddress = null;
+  if (order.billingAddressId) {
+    const { data: billingAddr, error: billingAddrError } = await supabase
+      .from('orderBillingAddresses')
+      .select(
+        'firstName, lastName, street, houseNumber, postalCode, city, country, phone'
+      )
+      .eq('id', order.billingAddressId)
+      .single();
+
+    if (billingAddrError && billingAddrError.code !== 'PGRST116')
+      throw billingAddrError;
+    billingAddress = billingAddr || null;
+  }
+
+  order.billingAddress = billingAddress;
+
+  delete order.billingAddressId;
+
   return order;
 };
 
@@ -96,7 +115,7 @@ export const createOrderApi = async (
     return updatedOrder[0].id;
   }
 
-  const { address, ...orderData } = order;
+  const { address, billingAddress, ...orderData } = order;
 
   const {
     firstName,
@@ -159,6 +178,64 @@ export const createOrderApi = async (
     throw addressError;
   }
 
+  const {
+    firstName: billingFirstName,
+    lastName: billingLastName,
+    street: billingStreet,
+    houseNumber: billingHouseNumber,
+    postalCode: billingPostalCode,
+    city: billingCity,
+    country: billingCountry,
+    phone: billingPhone,
+  } = billingAddress;
+
+  const { data: existingBillingAddresses, error: fetchBillingError } =
+    await supabase
+      .from('billingAddresses')
+      .select('*')
+      .eq('userId', userId)
+      .limit(1);
+
+  if (fetchBillingError) throw fetchBillingError;
+
+  if (!existingBillingAddresses || existingBillingAddresses.length === 0) {
+    const { error: addBillingAddressError } = await supabase
+      .from('billingAddresses')
+      .insert([
+        {
+          firstName: billingFirstName,
+          lastName: billingLastName,
+          street: billingStreet,
+          houseNumber: billingHouseNumber,
+          postalCode: billingPostalCode,
+          city: billingCity,
+          country: billingCountry,
+          phone: billingPhone,
+          userId,
+        },
+      ]);
+
+    if (addBillingAddressError) throw addBillingAddressError;
+  }
+
+  const { data: billingAddressData, error: orderBillingError } = await supabase
+    .from('orderBillingAddresses')
+    .insert([
+      {
+        firstName: billingFirstName,
+        lastName: billingLastName,
+        street: billingStreet,
+        houseNumber: billingHouseNumber,
+        postalCode: billingPostalCode,
+        city: billingCity,
+        country: billingCountry,
+        phone: billingPhone,
+      },
+    ])
+    .select();
+
+  if (orderBillingError) throw orderBillingError;
+
   const { data: orderInsertData, error } = await supabase
     .from('orders')
     .insert([
@@ -166,6 +243,7 @@ export const createOrderApi = async (
         ...orderData,
         paypalOrderId,
         deliveryAddressId: data[0].id,
+        billingAddressId: billingAddressData[0].id,
         userId,
         status: 'pending',
         rawPaypalResponse: jsonResponse,

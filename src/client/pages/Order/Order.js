@@ -22,8 +22,15 @@ const Order = () => {
   );
 
   if (loading || !order?.address) return <Spinner />;
-  const { items, totalPrice, itemsPrice, shippingPrice, address, status } =
-    order;
+  const {
+    items,
+    totalPrice,
+    itemsPrice,
+    shippingPrice,
+    address,
+    billingAddress,
+    status,
+  } = order;
 
   const handlePayment = (id) => {
     dispatch(fetchOrder(id));
@@ -35,8 +42,18 @@ const Order = () => {
       <div className={styles.wrapper}>
         <div className={styles.order}>
           <h2 className={styles.subTitle}>Status: {status}</h2>
-          <h2 className={styles.subTitle}>Your shipping details</h2>
-          <DeliveryAddress address={address} />
+          {address && (
+            <>
+              <h2 className={styles.subTitle}>Your shipping details</h2>
+              <DeliveryAddress address={address} />
+            </>
+          )}
+          {billingAddress && (
+            <>
+              <h2 className={styles.subTitle}>Your billing details</h2>
+              <DeliveryAddress address={billingAddress} />
+            </>
+          )}
           <h3 className={styles.subTitle}>Order summary</h3>
           <div className={styles.items}>
             {items?.map((product) => (

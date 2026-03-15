@@ -12,9 +12,9 @@ const DeliveryAddress = ({ address, isDark = false }) => {
     country,
     phone,
   } = address;
-  console.log('isDark', isDark);
+
   const textClasses = `${styles.deliveryText}  ${isDark ? styles.darkText : ''} `;
-  console.log(textClasses);
+
   return (
     <div className={styles.delivery}>
       <p className={textClasses}>

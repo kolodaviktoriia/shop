@@ -1,10 +1,10 @@
 import React from 'react';
-import * as styles from './Address.module.scss';
-import AddressForm from '../../components/AddressForm/AddressForm.js';
-import WidthWrapper from '../../components/WidthWrapper/WidthWrapper.js';
 import { useOutletContext } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addAddress } from '../../slices/ordersSlice.js';
+import AddressOrderForm from '../../components/AddressOrderForm/AddressOrderForm.js';
+import WidthWrapper from '../../components/WidthWrapper/WidthWrapper.js';
+import * as styles from './Address.module.scss';
 
 const Address = () => {
   const { setStep } = useOutletContext();
@@ -17,7 +17,7 @@ const Address = () => {
 
   return (
     <WidthWrapper className={styles.addressWrapper}>
-      <AddressForm onSubmit={handleForm} />
+      <AddressOrderForm onSubmit={handleForm} />
       <div className={styles.details}>
         <div className={styles.row}>
           <span className={styles.icon}>

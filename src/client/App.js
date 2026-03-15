@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import Header from './components/Header/Header.js';
 import Footer from './components/Footer/Footer.js';
 import Spinner from './components/Spinner/Spinner.js';
@@ -10,7 +10,6 @@ import { fetchCurrentUser } from './slices/userSlice.js';
 import * as styles from './App.module.scss';
 
 const App = () => {
-  const { loading } = useSelector((store) => store.user);
   const dispatch = useDispatch();
   const [hydrated, setHydrated] = useState(false);
   const { pathname, search } = useLocation();
@@ -33,7 +32,9 @@ const App = () => {
       <div
         className={`${styles.pageWrapper} ${hydrated ? styles.visible : ''}`}
       >
-        <ErrorBoundary>{loading ? <Spinner /> : <Outlet />}</ErrorBoundary>
+        <ErrorBoundary>
+          <Outlet />
+        </ErrorBoundary>
       </div>
       <Footer />
     </div>

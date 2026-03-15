@@ -7,7 +7,7 @@ import { notify } from '../Toaster/Toaster.js';
 const PayPalComponent = ({ handlePayment, orderId }) => {
   const { currentOrder, selectedOrder } = useSelector((store) => store.orders);
   const order = orderId ? selectedOrder : currentOrder;
-  console.log('paypal', order);
+
   const initialOptions = {
     currency: 'EUR',
     'client-id':

@@ -14,7 +14,7 @@ const Orders = () => {
   const page = usePagination(totalPages);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  console.log(totalPages);
+
   useEffect(() => {
     dispatch(fetchOrders({ page, limit: 6 }));
   }, [dispatch, page]);
