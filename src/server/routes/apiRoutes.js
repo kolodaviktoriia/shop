@@ -250,7 +250,8 @@ router.post('/orders', async (req, res) => {
       user.id,
       req.body.order,
       order.result.id,
-      order.result
+      order.result,
+      req.body.orderId
     );
 
     res.json({ id: order.result.id, orderId });

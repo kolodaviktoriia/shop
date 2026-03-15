@@ -4,9 +4,10 @@ import { useSelector } from 'react-redux';
 import { captureOrderApi, createOrderApi } from '../../api/ordersApi.js';
 import { notify } from '../Toaster/Toaster.js';
 
-const PayPalComponent = ({ handlePayment }) => {
-  const { currentOrder: order } = useSelector((store) => store.orders);
-
+const PayPalComponent = ({ handlePayment, orderId }) => {
+  const { currentOrder, selectedOrder } = useSelector((store) => store.orders);
+  const order = orderId ? selectedOrder : currentOrder;
+  console.log('paypal', order);
   const initialOptions = {
     currency: 'EUR',
     'client-id':
@@ -18,7 +19,7 @@ const PayPalComponent = ({ handlePayment }) => {
 
   const handleCreateOrder = async () => {
     try {
-      const orderData = await createOrderApi(order);
+      const orderData = await createOrderApi(order, orderId);
 
       if (orderData.id) {
         return orderData.id;

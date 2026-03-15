@@ -39,7 +39,7 @@ export const getOrderApi = async (userId, orderId) => {
   const { data: order, error: orderError } = await supabase
     .from('orders')
     .select(
-      'id, createdAt, totalPrice, shippingPrice, itemsPrice, items, deliveryAddressId'
+      'id, createdAt, totalPrice, shippingPrice, itemsPrice, items, deliveryAddressId, status'
     )
     .eq('userId', userId)
     .eq('id', orderId)
@@ -78,8 +78,24 @@ export const createOrderApi = async (
   userId,
   order,
   paypalOrderId,
-  jsonResponse
+  jsonResponse,
+  orderId
 ) => {
+  if (orderId) {
+    const { data: updatedOrder, error: updateError } = await supabase
+      .from('orders')
+      .update({
+        paypalOrderId,
+        rawPaypalResponse: jsonResponse,
+      })
+      .eq('id', orderId)
+      .select();
+
+    if (updateError) throw updateError;
+
+    return updatedOrder[0].id;
+  }
+
   const { address, ...orderData } = order;
 
   const {
@@ -142,6 +158,7 @@ export const createOrderApi = async (
   if (addressError) {
     throw addressError;
   }
+
   const { data: orderInsertData, error } = await supabase
     .from('orders')
     .insert([
