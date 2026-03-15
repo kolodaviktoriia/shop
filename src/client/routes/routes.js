@@ -20,6 +20,7 @@ import Payment from '../pages/Payment/Payment.js';
 import Confirmation from '../pages/Confirmation/Confirmation.js';
 import ProfileDetails from '../pages/ProfileDetails/ProfileDetails.js';
 import EditAddress from '../pages/EditAddress/EditAddress.js';
+import EditBillingAddress from '../pages/EditBillingAddress/EditBillingAddress.js';
 import EditProfile from '../pages/EditProfile/EditProfile.js';
 import Orders from '../pages/Orders/Orders.js';
 import Order from '../pages/Order/Order.js';
@@ -71,6 +72,10 @@ export const routes = [
           {
             element: <EditAddress />,
             path: 'details/edit/address',
+          },
+          {
+            element: <EditBillingAddress />,
+            path: 'details/edit/billingAddress',
           },
           {
             element: <EditProfile />,

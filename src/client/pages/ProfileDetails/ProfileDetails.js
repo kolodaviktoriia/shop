@@ -5,13 +5,17 @@ import { useNavigate } from 'react-router-dom';
 import { formatDateToString } from '../../helpers/dateHelper.js';
 import IconButton from '../../components/IconButton/IconButton.js';
 import * as styles from './ProfileDetails.module.scss';
+import DeliveryAddress from '../../components/DeliveryAddress/DeliveryAddress.js';
 
 const ProfileDetails = () => {
   const { user } = useSelector((store) => store.user);
-  const { address } = user;
+  const { address, billingAddress } = user;
   const navigate = useNavigate();
   const handleEditAddress = () => {
     navigate('/profile/details/edit/address');
+  };
+  const handleEditBillingAddress = () => {
+    navigate('/profile/details/edit/billingAddress');
   };
   const handleEditProfile = () => {
     navigate('/profile/details/edit/profile');
@@ -38,25 +42,18 @@ const ProfileDetails = () => {
           label="Edit"
         />
         <h2 className={styles.subTitle}>My shipping details</h2>
-        {address ? (
-          <>
-            <div>
-              <p className={styles.infoText}>
-                {address.firstName} {address.lastName}
-              </p>
-              <p className={styles.infoText}>
-                {address.street} {address.houseNumber}
-              </p>
-              <p className={styles.infoText}>
-                {address.postalCode} {address.city}
-              </p>
-              <p className={styles.infoText}>{address.country}</p>
-              <p className={styles.infoText}>{address.phone}</p>
-            </div>
-          </>
-        ) : undefined}
+        {address ? <DeliveryAddress address={address} isDark /> : undefined}
         <IconButton
           onClick={handleEditAddress}
+          Icon={PencilIcon}
+          label="Edit"
+        />
+        <h2 className={styles.subTitle}>My billing details</h2>
+        {billingAddress ? (
+          <DeliveryAddress address={billingAddress} isDark />
+        ) : undefined}
+        <IconButton
+          onClick={handleEditBillingAddress}
           Icon={PencilIcon}
           label="Edit"
         />

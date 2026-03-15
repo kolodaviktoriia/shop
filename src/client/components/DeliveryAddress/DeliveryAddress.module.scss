@@ -7,14 +7,18 @@
   @include screen-xs {
     margin-bottom: 1rem;
   }
+}
 
-  .deliveryText {
-    font-family: $text-font-public-sans;
-    color: $text-soft-grey;
-    text-transform: none;
-    font-size: 1.4rem;
-    font-weight: 400;
-    line-height: 20px;
-    letter-spacing: 0.04em;
-  }
+.deliveryText {
+  font-family: $text-font-public-sans;
+  color: $text-soft-grey;
+  text-transform: none;
+  font-size: 1.4rem;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0.04em;
+}
+
+.darkText {
+  color: $text-color;
 }

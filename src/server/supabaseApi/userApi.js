@@ -47,20 +47,18 @@ export const signupApi = async (
 export const getProfileApi = async (userId) => {
   const { data, error } = await supabase
     .from('profiles')
-    .select('*, addresses(*)')
+    .select('*, addresses(*), billingAddresses(*)')
     .eq('id', userId)
     .single();
 
   if (error) throw error;
-
-  const profileWithAddress = {
-    ...data,
-    address: data.addresses || null,
+  const { addresses, billingAddresses, ...rest } = data;
+  const profileData = {
+    ...rest,
+    address: addresses,
+    billingAddress: billingAddresses,
   };
-
-  delete profileWithAddress.addresses;
-
-  return profileWithAddress;
+  return profileData;
 };
 
 export const updateProfileApi = async (profile, userId) => {
@@ -74,7 +72,6 @@ export const updateProfileApi = async (profile, userId) => {
       birthday,
     })
     .eq('id', userId);
-
   if (error) {
     throw error;
   }
@@ -93,6 +90,37 @@ export const updateShippingAddressApi = async (address, userId) => {
   } = address;
 
   const { error } = await supabase.from('addresses').upsert(
+    {
+      firstName,
+      lastName,
+      street,
+      houseNumber,
+      postalCode,
+      city,
+      country,
+      phone,
+      userId,
+    },
+    { onConflict: 'userId' }
+  );
+  if (error) {
+    throw error;
+  }
+};
+
+export const updateBillingAddressApi = async (address, userId) => {
+  const {
+    firstName,
+    lastName,
+    street,
+    houseNumber,
+    postalCode,
+    city,
+    country,
+    phone,
+  } = address;
+
+  const { error } = await supabase.from('billingAddresses').upsert(
     {
       firstName,
       lastName,

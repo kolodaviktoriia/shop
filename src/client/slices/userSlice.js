@@ -6,11 +6,11 @@ import {
   signupApi,
   updateAddressApi,
   updateProfileApi,
+  updateBillingAddressApi,
 } from '../api/usersApi.js';
 import { clearCart, fetchCart } from './cartSlice.js';
 import { notify } from '../components/Toaster/Toaster.js';
 import { fetchFavorites, setFavorites } from './productsSlice.js';
-
 const userSlice = createSlice({
   name: 'user',
   initialState: {
@@ -120,6 +120,18 @@ export const updateAddress = (address) => async (dispatch) => {
   dispatch(setLoading(true));
   try {
     const data = await updateAddressApi(address);
+    dispatch(setUser(data.user || null));
+  } catch (err) {
+    dispatch(setError(err?.response?.data?.message || err.message));
+  } finally {
+    dispatch(setLoading(false));
+  }
+};
+
+export const updateBillingAddress = (address) => async (dispatch) => {
+  dispatch(setLoading(true));
+  try {
+    const data = await updateBillingAddressApi(address);
     dispatch(setUser(data.user || null));
   } catch (err) {
     dispatch(setError(err?.response?.data?.message || err.message));

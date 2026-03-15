@@ -11,3 +11,5 @@ export const signupApi = (userData) => postData('/api/signup', { ...userData });
 
 export const updateProfileApi = (profile) => postData('/api/profile', profile);
 export const updateAddressApi = (address) => postData('/api/address', address);
+export const updateBillingAddressApi = (address) =>
+  postData('/api/billingAddress', address);

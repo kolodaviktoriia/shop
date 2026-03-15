@@ -1,7 +1,7 @@
 import React from 'react';
 import * as styles from './DeliveryAddress.module.scss';
 
-const DeliveryAddress = ({ address }) => {
+const DeliveryAddress = ({ address, isDark = false }) => {
   const {
     firstName,
     lastName,
@@ -12,20 +12,22 @@ const DeliveryAddress = ({ address }) => {
     country,
     phone,
   } = address;
-
+  console.log('isDark', isDark);
+  const textClasses = `${styles.deliveryText}  ${isDark ? styles.darkText : ''} `;
+  console.log(textClasses);
   return (
     <div className={styles.delivery}>
-      <p className={styles.deliveryText}>
+      <p className={textClasses}>
         {firstName} {lastName}
       </p>
-      <p className={styles.deliveryText}>
+      <p className={textClasses}>
         {street} {houseNumber}
       </p>
-      <p className={styles.deliveryText}>
+      <p className={textClasses}>
         {postalCode} {city}
       </p>
-      <p className={styles.deliveryText}>{country}</p>
-      <p className={styles.deliveryText}>{phone}</p>
+      <p className={textClasses}>{country}</p>
+      <p className={textClasses}>{phone}</p>
     </div>
   );
 };

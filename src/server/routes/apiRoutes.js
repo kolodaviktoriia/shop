@@ -13,6 +13,7 @@ import {
   getUserApi,
   loginApi,
   signupApi,
+  updateBillingAddressApi,
   updateProfileApi,
   updateShippingAddressApi,
 } from '../supabaseApi/userApi.js';
@@ -435,5 +436,27 @@ router.post('/address', async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: 'Failed to update address.' });
+  }
+});
+
+router.post('/billingAddress', async (req, res) => {
+  try {
+    const token = await getToken(req, res);
+
+    if (!token) {
+      return res
+        .status(401)
+        .json({ message: 'Please log in to update your billing address.' });
+    }
+
+    const user = await getUserApi(token);
+
+    await updateBillingAddressApi(req.body, user.id);
+    const profile = await getProfileApi(user.id);
+
+    res.json({ user: profile });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Failed to update billing address.' });
   }
 });

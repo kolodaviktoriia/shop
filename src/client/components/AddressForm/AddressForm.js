@@ -16,15 +16,38 @@ const initialState = {
   phone: '',
 };
 
-const AddressForm = ({ onSubmit, title, subTitle }) => {
+const AddressForm = ({ onSubmit, title, subTitle, isBilling = false }) => {
   const { user } = useSelector((store) => store.user);
   const [formValues, setFormValues] = useState(initialState);
   const [errors, setErrors] = useState({});
 
   useEffect(() => {
     if (user) {
-      const { firstName, lastName, address } = user;
-      if (address) {
+      const { firstName, lastName, address, billingAddress } = user;
+      if (isBilling && billingAddress) {
+        const {
+          firstName,
+          lastName,
+          street,
+          houseNumber,
+          postalCode,
+          city,
+          country,
+          phone,
+        } = billingAddress;
+
+        setFormValues({
+          ...initialState,
+          firstName,
+          lastName,
+          street,
+          houseNumber,
+          postalCode,
+          city,
+          country,
+          phone,
+        });
+      } else if (address) {
         const {
           firstName,
           lastName,
@@ -51,7 +74,7 @@ const AddressForm = ({ onSubmit, title, subTitle }) => {
         setFormValues({ ...initialState, firstName, lastName });
       }
     }
-  }, [user]);
+  }, [user, isBilling]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
