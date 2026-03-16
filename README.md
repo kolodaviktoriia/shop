@@ -5,14 +5,18 @@ This is a **demonstration of a server-side rendered (SSR) e-commerce web applica
 
 ## Features
 
-- **SSR React App** for faster load times and SEO.
-- Dynamic **category pages** (skincare, makeup, haircare, wellness, body).
-- **Product pages** with detailed information.
-- Global **state management** with Redux.
-- **Supabase** integration for backend services.
-- **PayPal** integration for secure payments.
-- Fully **responsive design**.
-- Styled with **Sass/SCSS** modules.
+- **Server-Side Rendered (SSR) React App** – fast initial load and SEO-friendly pages.  
+- **Dynamic Category Pages** – skincare, makeup, haircare, wellness, body, with proper routing and SEO.  
+- **Product Pages** – detailed information, reviews, add to favourites, and add to cart functionality.  
+- **Shopping Cart** – add, remove, and update products, view totals, and integrate with checkout.  
+- **User Authentication & Profile Cabinet** – account creation, login, view orders, favourites, and personal data.  
+- **Order Processing & Checkout Flow** – stepper-based checkout with PayPal sandbox integration.  
+- **Global State Management with Redux Toolkit** – normalized state for products, cart, orders, and user data.  
+- **Supabase Backend Integration** – real-time database queries for users, products, and orders.  
+- **Fully Responsive Design** – works seamlessly on desktop, tablet, and mobile devices.  
+- **Loading States & Error Handling** – spinners, error pages, and “Not Found” pages for smooth UX.  
+- **SEO Optimization** – SSR content, meta tags, and proper routing for search engines.  
+- **Styled with Sass/SCSS Modules** – modular and maintainable styling.
 
 ---
 
