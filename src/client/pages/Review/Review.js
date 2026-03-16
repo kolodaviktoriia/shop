@@ -8,6 +8,7 @@ import Button from '../../components/Button/Button.js';
 import { notify } from '../../components/Toaster/Toaster.js';
 import IconButton from '../../components/IconButton/IconButton.js';
 import TextareaField from '../../components/TextareaField/TextareaField.js';
+import { setNeedRefresh } from '../../slices/userSlice.js';
 import * as styles from './Review.module.scss';
 
 const Review = () => {
@@ -39,7 +40,8 @@ const Review = () => {
     }
     try {
       await reviewProductApi({ orderId, productId, rating, comment });
-      navigate(`/product/${productId}`);
+      dispatch(setNeedRefresh(true));
+      navigate(`/profile/orders/${orderId}`);
     } catch (err) {
       notify.error(err?.response?.data?.message || err.message);
     } finally {
@@ -76,7 +78,7 @@ const Review = () => {
         />
 
         <Button onClick={handleSubmit} disabled={loading}>
-          {loading ? 'Submitting...' : 'Leave Review'}
+          {loading ? 'Submitting...' : 'Review'}
         </Button>
       </form>
     </div>

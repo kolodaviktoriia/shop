@@ -11,22 +11,28 @@ import {
 import { clearCart, fetchCart } from './cartSlice.js';
 import { notify } from '../components/Toaster/Toaster.js';
 import { fetchFavorites, setFavorites } from './productsSlice.js';
+
 const userSlice = createSlice({
   name: 'user',
   initialState: {
     user: null,
     loading: false,
     error: null,
+    needRefresh: false,
   },
   reducers: {
     setUser: (state, action) => {
       state.user = action.payload;
+      state.needRefresh = false;
     },
     setLoading: (state, action) => {
       state.loading = action.payload;
     },
     setError: (state, action) => {
       state.error = action.payload;
+    },
+    setNeedRefresh: (state, action) => {
+      state.needRefresh = action.payload;
     },
     clearUser: (state) => {
       state.user = null;
@@ -35,7 +41,8 @@ const userSlice = createSlice({
   },
 });
 
-export const { setUser, setLoading, setError, clearUser } = userSlice.actions;
+export const { setUser, setLoading, setError, setNeedRefresh, clearUser } =
+  userSlice.actions;
 export const userReducer = userSlice.reducer;
 
 export const loginUser =

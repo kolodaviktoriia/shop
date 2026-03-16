@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Outlet } from 'react-router-dom';
-import { logoutUser } from '../../slices/userSlice.js';
+import { fetchCurrentUser, logoutUser } from '../../slices/userSlice.js';
 import Button from '../../components/Button/Button.js';
 import WidthWrapper from '../../components/WidthWrapper/WidthWrapper.js';
 import LoginGrid from '../../components/LoginGrid/LoginGrid.js';
@@ -10,10 +10,15 @@ import Spinner from '../../components/Spinner/Spinner.js';
 import SEO from '../../components/SEO.js';
 
 import * as styles from './Profile.module.scss';
+
 const Profile = () => {
-  const { user, loading } = useSelector((store) => store.user);
+  const { user, loading, needRefresh } = useSelector((store) => store.user);
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (needRefresh) dispatch(fetchCurrentUser());
+  }, [needRefresh, dispatch]);
 
   const handleLogout = () => {
     dispatch(logoutUser());

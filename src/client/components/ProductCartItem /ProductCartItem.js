@@ -55,7 +55,7 @@ const ProductCartItem = ({ product, orderId, isOrder = false }) => {
               to={`/profile/orders/${orderId}/review/${product.id}`}
               className={styles.btn}
             >
-              Leave Review
+              Review
             </ButtonLink>
           ) : (
             ''
