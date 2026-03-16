@@ -10,6 +10,10 @@ import {
 } from '../../slices/productsSlice.js';
 import { addItemAndSync } from '../../slices/cartSlice.js';
 import { displayPrice } from '../../helpers/priceConverters.js';
+import { formatDateToString } from '../../helpers/dateHelper.js';
+import { getReviewsApi } from '../../api/productsApi.js';
+import RatingStars from '../../components/RatingStars/RatingStars.js';
+import PaginationStateWrapper from '../../components/PaginationStateWrapper/PaginationStateWrapper.js';
 import AmountField from '../../components/AmountField/AmountField.js';
 import WidthWrapper from '../../components/WidthWrapper/WidthWrapper.js';
 import Button from '../../components/Button/Button.js';
@@ -21,17 +25,37 @@ import * as styles from './Product.module.scss';
 const Product = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
+  const [quantity, setQuantity] = useState(1);
+  const [reviews, setReviews] = useState([]);
+  const [page, setPage] = useState(0);
+  const [loadingReviews, setLoadingReviews] = useState(false);
   const { product, loading, favorites } = useSelector(
     (state) => state.products
   );
   const { user } = useSelector((state) => state.user);
 
-  const [quantity, setQuantity] = useState(1);
-
   useEffect(() => {
     dispatch(fetchProduct(id));
     return () => dispatch(clearProduct());
   }, [id, dispatch]);
+
+  useEffect(() => {
+    const fetchReviews = async () => {
+      setLoadingReviews(true);
+      try {
+        const { reviews: dataReviews = [] } = await getReviewsApi(id, {
+          page,
+          limit: 6,
+        });
+        setReviews(dataReviews);
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setLoadingReviews(false);
+      }
+    };
+    fetchReviews();
+  }, [id, page]);
 
   const {
     imageUrl = 'https://ikaoenxuuphxuvaiwzex.supabase.co/storage/v1/object/public/images/placeholder.png',
@@ -41,6 +65,8 @@ const Product = () => {
     ingredients = [],
     categories = { name: '\u00A0' },
     collection = null,
+    reviewCount,
+    averageRating,
   } = product || {};
 
   const favoriteId =
@@ -120,6 +146,42 @@ const Product = () => {
                 </Button>
               ))}
           </div>
+          {loadingReviews ? (
+            <Spinner />
+          ) : reviews.length > 0 ? (
+            <div className={styles.reviewsWrapper}>
+              <h1 className={styles.title}>Reviews</h1>
+              <div className={styles.rating}>
+                <RatingStars rating={averageRating} />
+                <span className={styles.ratingTitle}>
+                  {averageRating} ({reviewCount})
+                </span>
+              </div>
+              <PaginationStateWrapper
+                totalPages={Math.ceil(reviewCount / 6)}
+                page={page}
+                setPage={setPage}
+              >
+                <div className={styles.reviews}>
+                  {reviews.map(({ rating, comment, createdAt }) => (
+                    <div className={styles.review}>
+                      <div className={styles.header}>
+                        <div className={styles.rating}>
+                          <RatingStars rating={rating} />
+                        </div>
+                        <span className={styles.date}>
+                          {formatDateToString(createdAt)}
+                        </span>
+                      </div>
+                      {comment && <p className={styles.comment}>{comment}</p>}
+                    </div>
+                  ))}
+                </div>
+              </PaginationStateWrapper>
+            </div>
+          ) : (
+            ''
+          )}
         </WidthWrapper>
       )}
     </div>

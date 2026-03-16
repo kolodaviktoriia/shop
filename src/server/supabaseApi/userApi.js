@@ -52,15 +52,27 @@ export const getProfileApi = async (userId) => {
     .single();
 
   if (error) throw error;
+
   const { addresses, billingAddresses, ...rest } = data;
+
+  const { data: reviewedProducts, error: reviewError } = await supabase
+    .from('reviews')
+    .select('productId')
+    .eq('userId', userId);
+
+  if (reviewError) throw reviewError;
+
+  const reviewedProductIds = reviewedProducts?.map((r) => r.productId) || [];
+
   const profileData = {
     ...rest,
     address: addresses,
     billingAddress: billingAddresses,
+    reviewedProductIds,
   };
+
   return profileData;
 };
-
 export const updateProfileApi = async (profile, userId) => {
   const { firstName, lastName, birthday } = profile;
 

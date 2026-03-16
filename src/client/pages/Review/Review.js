@@ -39,7 +39,7 @@ const Review = () => {
     }
     try {
       await reviewProductApi({ orderId, productId, rating, comment });
-      navigate(`/profile/order/${orderId}`);
+      navigate(`/product/${productId}`);
     } catch (err) {
       notify.error(err?.response?.data?.message || err.message);
     } finally {

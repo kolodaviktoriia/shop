@@ -42,20 +42,32 @@ export const getProductsApi = async (filter = {}) => {
 };
 
 export const getProductApi = async (id) => {
-  const { data, error } = await supabase
+  const { data: product, error: productError } = await supabase
     .from('products')
-    .select(
-      `
-      *,
-      categories(name),
-      collections(name)
-    `
-    )
+    .select('*, categories(name), collections(name)')
     .eq('id', id)
     .single();
 
-  if (error) throw error;
-  return data;
+  if (productError) throw productError;
+
+  const { data: reviews = [], error: reviewsError } = await supabase
+    .from('reviews')
+    .select('rating')
+    .eq('productId', id);
+
+  if (reviewsError) throw reviewsError;
+
+  const reviewCount = reviews.length;
+  const averageRating =
+    reviewCount > 0
+      ? reviews.reduce((sum, r) => sum + r.rating, 0) / reviewCount
+      : 5;
+
+  return {
+    ...product,
+    reviewCount,
+    averageRating,
+  };
 };
 
 export const getCategoriesApi = async () => {
@@ -141,4 +153,24 @@ export const addReviewApi = async (userId, review) => {
   if (error) throw error;
 
   return data;
+};
+
+export const getReviewsApi = async (productId, filter) => {
+  const { page = 1, limit = 10 } = filter;
+  const from = (page - 1) * limit;
+  const to = from + limit - 1;
+
+  const { data, error, count } = await supabase
+    .from('reviews')
+    .select('*', { count: 'exact' })
+    .eq('productId', productId)
+    .order('createdAt', { ascending: false })
+    .range(from, to);
+
+  if (error) throw error;
+
+  return {
+    reviews: data,
+    total: count,
+  };
 };

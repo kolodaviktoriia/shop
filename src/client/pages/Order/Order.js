@@ -20,6 +20,7 @@ const Order = () => {
   const { selectedOrder: order, loading } = useSelector(
     (store) => store.orders
   );
+  const { reviewedProductIds } = useSelector(({ user }) => user.user);
 
   if (loading || !order?.address) return <Spinner />;
   const {
@@ -61,7 +62,9 @@ const Order = () => {
                 key={product.id}
                 product={product}
                 isOrder
-                orderId={id}
+                orderId={
+                  reviewedProductIds.includes(product.id) ? undefined : id
+                }
               />
             ))}
           </div>

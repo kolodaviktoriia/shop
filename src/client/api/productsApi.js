@@ -16,3 +16,6 @@ export const getFavoritesApi = () => getData('/api/favorites');
 export const postFavoritesApi = (id) => postData('/api/favorites', { id });
 
 export const deleteFavoritesApi = (id) => deleteData(`/api/favorites/${id}`);
+
+export const getReviewsApi = (id, filter) =>
+  getData(`/api/reviews/${id}`, { params: filter });

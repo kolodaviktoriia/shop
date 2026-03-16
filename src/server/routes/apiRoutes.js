@@ -8,6 +8,7 @@ import {
   addFavoriteApi,
   deleteFavoriteApi,
   addReviewApi,
+  getReviewsApi,
 } from '../supabaseApi/productsApi.js';
 import {
   getProfileApi,
@@ -477,5 +478,17 @@ router.post('/review', async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: 'Failed to add review.' });
+  }
+});
+
+router.get('/reviews/:id', async (req, res) => {
+  try {
+    const data = await getReviewsApi(req.params.id, req.body);
+    res.json(data);
+  } catch (error) {
+    console.error(error);
+    res
+      .status(500)
+      .json({ message: 'Failed to load reviews. Please try again later.' });
   }
 });
