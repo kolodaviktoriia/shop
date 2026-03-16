@@ -65,6 +65,17 @@
     }
   }
 
+  .btn {
+    margin-left: auto;
+    align-self: self-start;
+    justify-self: end;
+
+    @include screen-xs {
+      margin-left: 0;
+      justify-self: start;
+    }
+  }
+
   .amount {
     margin-left: auto;
     justify-self: end;

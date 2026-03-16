@@ -57,7 +57,12 @@ const Order = () => {
           <h3 className={styles.subTitle}>Order summary</h3>
           <div className={styles.items}>
             {items?.map((product) => (
-              <ProductCartItem key={product.id} product={product} isOrder />
+              <ProductCartItem
+                key={product.id}
+                product={product}
+                isOrder
+                orderId={id}
+              />
             ))}
           </div>
         </div>

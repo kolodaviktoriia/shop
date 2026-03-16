@@ -77,7 +77,7 @@ export const fetchCurrentUser = () => async (dispatch) => {
   try {
     const data = await getCurrentUserApi();
     dispatch(setUser(data.user || null));
-    dispatch(fetchCart());
+    dispatch(fetchCart(false, true));
     dispatch(fetchFavorites());
   } catch (err) {
     dispatch(setError(err?.response?.data?.message || err.message));

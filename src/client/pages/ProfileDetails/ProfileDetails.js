@@ -4,13 +4,14 @@ import { PencilIcon } from '@heroicons/react/24/outline';
 import { useNavigate } from 'react-router-dom';
 import { formatDateToString } from '../../helpers/dateHelper.js';
 import IconButton from '../../components/IconButton/IconButton.js';
-import * as styles from './ProfileDetails.module.scss';
 import DeliveryAddress from '../../components/DeliveryAddress/DeliveryAddress.js';
+import * as styles from './ProfileDetails.module.scss';
 
 const ProfileDetails = () => {
   const { user } = useSelector((store) => store.user);
   const { address, billingAddress } = user;
   const navigate = useNavigate();
+
   const handleEditAddress = () => {
     navigate('/profile/details/edit/address');
   };
@@ -20,6 +21,7 @@ const ProfileDetails = () => {
   const handleEditProfile = () => {
     navigate('/profile/details/edit/profile');
   };
+
   return (
     <div className={styles.profileDetails}>
       <h1 className={styles.title}>

@@ -107,3 +107,38 @@ export const deleteFavoriteApi = async (favoriteId) => {
 
   return data;
 };
+
+export const addReviewApi = async (userId, review) => {
+  const { orderId, productId, rating, comment } = review;
+
+  const { data: order, error: orderError } = await supabase
+    .from('orders')
+    .select('id,  items')
+    .eq('userId', userId)
+    .eq('id', orderId)
+    .single();
+
+  if (orderError) {
+    throw orderError;
+  }
+
+  if (!order) throw 'Could not find order.';
+  const product = order.items?.find((i) => i.id == productId);
+  if (!product) throw 'Product not found in order.';
+
+  const { data, error } = await supabase
+    .from('reviews')
+    .insert({
+      userId,
+      productId,
+      orderId,
+      rating,
+      comment,
+    })
+    .select()
+    .single();
+
+  if (error) throw error;
+
+  return data;
+};

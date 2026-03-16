@@ -5,6 +5,8 @@ export const getProductsApi = (filter) =>
 
 export const getProductApi = (id) => getData(`/api/product/${id}`);
 
+export const reviewProductApi = (review) => postData(`/api/review`, review);
+
 export const getCategoriesApi = () => getData('/api/categories');
 
 export const getCollectionsApi = () => getData('/api/collections');

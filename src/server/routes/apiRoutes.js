@@ -7,6 +7,7 @@ import {
   getFavoritesApi,
   addFavoriteApi,
   deleteFavoriteApi,
+  addReviewApi,
 } from '../supabaseApi/productsApi.js';
 import {
   getProfileApi,
@@ -363,7 +364,7 @@ router.post('/favorites', async (req, res) => {
     const token = await getToken(req, res);
 
     if (!token) {
-      return res.status(401).json({ message: 'Please log in to delete.' });
+      return res.status(401).json({ message: 'Please log in to add.' });
     }
     const user = await getUserApi(token);
     const { id } = req.body;
@@ -458,5 +459,23 @@ router.post('/billingAddress', async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: 'Failed to update billing address.' });
+  }
+});
+
+router.post('/review', async (req, res) => {
+  try {
+    const token = await getToken(req, res);
+
+    if (!token) {
+      return res.status(401).json({ message: 'Please log in to delete.' });
+    }
+    const user = await getUserApi(token);
+
+    await addReviewApi(user.id, req.body);
+
+    res.json({ message: 'Deleted successfully.' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Failed to add review.' });
   }
 });

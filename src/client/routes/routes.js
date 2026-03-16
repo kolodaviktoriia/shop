@@ -29,6 +29,7 @@ import NotFound from '../pages/NotFound/NotFound.js';
 import ErrorHandler from '../pages/ErrorHandler/ErrorHandler.js';
 import Company from '../pages/Company/Company.js';
 import Help from '../pages/Help/Help.js';
+import Review from '../pages/Review/Review.js';
 
 export const routes = [
   {
@@ -92,6 +93,10 @@ export const routes = [
           {
             element: <Orders />,
             path: 'orders',
+          },
+          {
+            element: <Review />,
+            path: 'orders/:id/review/:productId',
           },
           {
             element: <Order />,

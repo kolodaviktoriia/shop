@@ -9,10 +9,10 @@ import {
   removeItemAndSync,
 } from '../../slices/cartSlice.js';
 import { displayPrice } from '../../helpers/priceConverters.js';
-
+import ButtonLink from '../ButtonLink/ButtonLink.js';
 import * as styles from './ProductCartItem.module.scss';
 
-const ProductCartItem = ({ product, isOrder = false }) => {
+const ProductCartItem = ({ product, orderId, isOrder = false }) => {
   const { title, imageUrl, price, id, quantity } = product;
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -50,7 +50,16 @@ const ProductCartItem = ({ product, isOrder = false }) => {
           </span>
         </div>
         {isOrder ? (
-          ''
+          orderId ? (
+            <ButtonLink
+              to={`/profile/orders/${orderId}/review/${product.id}`}
+              className={styles.btn}
+            >
+              Leave Review
+            </ButtonLink>
+          ) : (
+            ''
+          )
         ) : (
           <AmountField
             value={quantity}

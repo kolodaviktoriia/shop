@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Outlet } from 'react-router-dom';
-import { fetchCurrentUser, logoutUser } from '../../slices/userSlice.js';
+import { logoutUser } from '../../slices/userSlice.js';
 import Button from '../../components/Button/Button.js';
 import WidthWrapper from '../../components/WidthWrapper/WidthWrapper.js';
 import LoginGrid from '../../components/LoginGrid/LoginGrid.js';
@@ -14,10 +14,6 @@ const Profile = () => {
   const { user, loading } = useSelector((store) => store.user);
 
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchCurrentUser());
-  }, [dispatch]);
 
   const handleLogout = () => {
     dispatch(logoutUser());

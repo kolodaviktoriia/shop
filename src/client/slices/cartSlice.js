@@ -85,7 +85,7 @@ export const deleteItemAndSync = (payload) => syncCart(deleteItem, payload);
 export const clearCartAndSync = () => syncCart(clearCart);
 
 export const fetchCart =
-  (isCheckout = false) =>
+  (isCheckout = false, isFetch = false) =>
   async (dispatch, getState) => {
     dispatch(setCartLoading(true));
     dispatch(setCartError(null));
@@ -94,6 +94,10 @@ export const fetchCart =
       if (isCheckout) {
         const cart = getState().cart.items;
         await updateCartApi(cart);
+      }
+      if (isFetch) {
+        const { items } = await getCartApi();
+        dispatch(setCart(items));
       } else {
         const { items } = await getCartApi();
         const cart = getState().cart.items;
