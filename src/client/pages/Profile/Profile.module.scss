@@ -3,7 +3,7 @@
 
   .profileWrapper {
     display: grid;
-    grid-template-columns: 0.6fr 1fr;
+    grid-template-columns: 0.4fr 1fr;
     align-items: start;
     gap: 8rem;
 
@@ -17,21 +17,17 @@
       background-color: $soft-pink;
       display: grid;
       grid-template-columns: 1fr;
-      gap: 2rem;
+      gap: 1rem;
       justify-content: flex-start;
       padding: 2rem;
 
       @include screen-s {
         order: 2;
-        grid-template-columns: 1fr 1fr;
-      }
-
-      @include screen-xs {
-        grid-template-columns: 1fr;
       }
     }
 
     .info {
+      position: relative;
       display: flex;
       flex-direction: column;
 

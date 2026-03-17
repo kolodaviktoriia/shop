@@ -8,6 +8,7 @@ import LoginGrid from '../../components/LoginGrid/LoginGrid.js';
 import ButtonLink from '../../components/ButtonLink/ButtonLink.js';
 import Spinner from '../../components/Spinner/Spinner.js';
 import SEO from '../../components/SEO.js';
+import LinkProfile from '../../components/LinkProfile/LinkProfile.js';
 
 import * as styles from './Profile.module.scss';
 
@@ -24,21 +25,19 @@ const Profile = () => {
     dispatch(logoutUser());
   };
 
-  if (loading) return <Spinner />;
+  if (!user && loading) return <Spinner />;
 
   return user ? (
     <div className={styles.profile}>
       <SEO title="Your Profile" />
       <WidthWrapper className={styles.profileWrapper}>
         <div className={styles.navigation}>
-          <ButtonLink to="/profile/details">Profile</ButtonLink>
-          <ButtonLink to="/profile/favorites">Favorites</ButtonLink>
-          <ButtonLink to="/profile/orders">Orders</ButtonLink>
-          <Button onClick={handleLogout}>Log out</Button>
+          <LinkProfile to="/profile/details">Profile</LinkProfile>
+          <LinkProfile to="/profile/favorites">Favorites</LinkProfile>
+          <LinkProfile to="/profile/orders">Orders</LinkProfile>
+          <LinkProfile onClick={handleLogout}>Log out</LinkProfile>
         </div>
-        <div className={styles.info}>
-          <Outlet />
-        </div>
+        <div className={styles.info}>{loading ? <Spinner /> : <Outlet />}</div>
       </WidthWrapper>
     </div>
   ) : (
