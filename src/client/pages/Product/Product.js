@@ -28,6 +28,7 @@ const Product = () => {
   const dispatch = useDispatch();
   const [quantity, setQuantity] = useState(1);
   const [reviews, setReviews] = useState([]);
+  const [totalReviews, setTotalReviews] = useState(0);
   const [page, setPage] = useState(0);
   const [loadingReviews, setLoadingReviews] = useState(false);
   const { product, loading, favorites } = useSelector(
@@ -49,11 +50,12 @@ const Product = () => {
     const fetchReviews = async () => {
       setLoadingReviews(true);
       try {
-        const { reviews: dataReviews = [] } = await getReviewsApi(id, {
+        const { reviews: dataReviews = [], total } = await getReviewsApi(id, {
           page,
           limit: 6,
         });
         setReviews(dataReviews);
+        setTotalReviews(total);
       } catch (err) {
         console.error(err);
       } finally {
@@ -166,11 +168,11 @@ const Product = () => {
               <div className={styles.rating}>
                 <RatingStars rating={averageRating} />
                 <span className={styles.ratingTitle}>
-                  {averageRating} ({reviewCount})
+                  {averageRating} ({totalReviews})
                 </span>
               </div>
               <PaginationStateWrapper
-                totalPages={Math.ceil(reviewCount / 6)}
+                totalPages={Math.ceil(totalReviews / 6)}
                 page={page}
                 setPage={setPage}
               >
