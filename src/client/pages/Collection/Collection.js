@@ -9,6 +9,7 @@ import SEO from '../../components/SEO.js';
 import PageWrapper from '../../components/PageWrapper/PageWrapper.js';
 import { clearProducts, fetchProducts } from '../../slices/productsSlice.js';
 import { usePagination } from '../../hooks/pagination.js';
+import { LIMIT_PER_PAGE } from '../../constants/pagination.js';
 import * as styles from './Collection.module.scss';
 
 export const loadProductsByCollectionData = async (store, params) => {
@@ -19,7 +20,7 @@ export const loadProductsByCollectionData = async (store, params) => {
   const collection = collections?.find((col) => col.name === id);
   const page = Number(params.page || 1);
   await store.dispatch(
-    fetchProducts({ collection: collection?.id, page, limit: 12 })
+    fetchProducts({ collection: collection?.id, page, limit: LIMIT_PER_PAGE })
   );
 };
 
@@ -41,10 +42,16 @@ const Collection = () => {
         filter &&
         filter.collection === collection.id &&
         filter.page === page &&
-        filter.limit === 12
+        filter.limit === LIMIT_PER_PAGE
       )
     ) {
-      dispatch(fetchProducts({ collection: collection.id, page, limit: 12 }));
+      dispatch(
+        fetchProducts({
+          collection: collection.id,
+          page,
+          limit: LIMIT_PER_PAGE,
+        })
+      );
     }
   }, [id, dispatch, page, collection?.id, filter]);
 

@@ -8,6 +8,7 @@ import SectionHeader from '../../components/SectionHeader/SectionHeader.js';
 import SEO from '../../components/SEO.js';
 import PageWrapper from '../../components/PageWrapper/PageWrapper.js';
 import { clearProducts, fetchProducts } from '../../slices/productsSlice.js';
+import { LIMIT_PER_PAGE } from '../../constants/pagination.js';
 import { usePagination } from '../../hooks/pagination.js';
 
 const allCategory = {
@@ -25,7 +26,7 @@ export const loadProductsByCategoryData = async (store, params) => {
   const category = categories?.find((cat) => cat.name === id) ?? allCategory;
   const page = Number(params.page || 1);
   await store.dispatch(
-    fetchProducts({ category: category?.id, page, limit: 12 })
+    fetchProducts({ category: category?.id, page, limit: LIMIT_PER_PAGE })
   );
 };
 
@@ -46,10 +47,12 @@ const Products = () => {
         filter &&
         filter.category === category?.id &&
         filter.page === page &&
-        filter.limit === 12
+        filter.limit === LIMIT_PER_PAGE
       )
     ) {
-      dispatch(fetchProducts({ category: category?.id, page, limit: 12 }));
+      dispatch(
+        fetchProducts({ category: category?.id, page, limit: LIMIT_PER_PAGE })
+      );
     }
   }, [id, page, dispatch, category?.id, filter]);
 

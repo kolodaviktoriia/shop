@@ -9,6 +9,7 @@ import ProductsList from '../../components/ProductsList/ProductsList.js';
 import WidthWrapper from '../../components/WidthWrapper/WidthWrapper.js';
 import PageWrapper from '../../components/PageWrapper/PageWrapper.js';
 import { usePagination } from '../../hooks/pagination.js';
+import { LIMIT_PER_PAGE } from '../../constants/pagination.js';
 
 const searchPageContent = {
   resultsFound: {
@@ -28,20 +29,50 @@ const searchPageContent = {
 const searchImage =
   'https://ikaoenxuuphxuvaiwzex.supabase.co/storage/v1/object/public/images/search.png';
 
+export const loadProductsBySearchData = async (store, params, req) => {
+  const searchParams = req
+    ? new URLSearchParams(req.url.split('?')[1])
+    : new URLSearchParams(window.location.search);
+
+  const query = searchParams.get('q') || '';
+  const page = Number(params.page || 1);
+
+  await store.dispatch(
+    fetchProducts({ search: query, page, limit: LIMIT_PER_PAGE })
+  );
+};
+
 const Search = () => {
   const [searchParams] = useSearchParams();
   const query = searchParams.get('q');
   const dispatch = useDispatch();
-  const { products, loading, totalPages } = useSelector(
+  const { products, loading, totalPages, filter } = useSelector(
     (state) => state.products
   );
   const page = usePagination(totalPages);
 
   useEffect(() => {
-    dispatch(fetchProducts({ search: query, page, limit: 12 }));
-
     return () => dispatch(clearProducts());
   }, [page, dispatch, query]);
+
+  useEffect(() => {
+    if (
+      !(
+        filter &&
+        filter.search === query &&
+        filter.page === page &&
+        filter.limit === LIMIT_PER_PAGE
+      )
+    ) {
+      dispatch(fetchProducts({ search: query, page, limit: LIMIT_PER_PAGE }));
+    }
+  }, [page, dispatch, query, filter]);
+
+  useEffect(() => {
+    return () => {
+      dispatch(clearProducts());
+    };
+  }, [query, dispatch]);
 
   const { noResults, resultsFound } = searchPageContent;
 

@@ -30,7 +30,7 @@ app.get('*', async (req, res) => {
   for (const { route, params } of matches) {
     if (route.loadData) {
       try {
-        await route.loadData(store, params);
+        await route.loadData(store, params, req);
       } catch (err) {
         console.error('SSR loadData error:', err);
       }

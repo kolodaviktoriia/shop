@@ -14,7 +14,7 @@ import Products, {
 import Collection, {
   loadProductsByCollectionData,
 } from '../pages/Collection/Collection.js';
-import Search from '../pages/Search/Search.js';
+import Search, { loadProductsBySearchData } from '../pages/Search/Search.js';
 import Cart from '../pages/Cart/Cart.js';
 import Login from '../pages/Login/Login.js';
 import Profile from '../pages/Profile/Profile.js';
@@ -70,6 +70,7 @@ export const routes = [
       {
         element: <Search />,
         path: '/search',
+        loadData: loadProductsBySearchData,
       },
       {
         element: <Profile />,
