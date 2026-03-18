@@ -91,12 +91,40 @@ const AddressOrderForm = ({ onSubmit }) => {
   };
 
   const handleCheckbox = () => {
-    setBillingSameAsDelivery((prev) => !prev);
-    if (!billingSameAsDelivery) {
-      setBillingValues(initialState);
-    } else {
-      setBillingValues({ ...deliveryValues });
-    }
+    setBillingSameAsDelivery((prev) => {
+      const newValue = !prev;
+
+      if (newValue) {
+        setBillingValues({ ...deliveryValues });
+      } else {
+        if (user?.billingAddress) {
+          const {
+            firstName,
+            lastName,
+            street,
+            houseNumber,
+            postalCode,
+            city,
+            country,
+            phone,
+          } = user.billingAddress;
+          setBillingValues({
+            firstName,
+            lastName,
+            street,
+            houseNumber,
+            postalCode,
+            city,
+            country,
+            phone,
+          });
+        } else {
+          setBillingValues(initialState);
+        }
+      }
+
+      return newValue;
+    });
   };
 
   const validate = () => {
