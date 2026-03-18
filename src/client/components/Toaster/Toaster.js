@@ -34,7 +34,6 @@ const Toaster = () => {
       className={styles.toastContainer}
       toastClassName={styles.toast}
       bodyClassName={styles.body}
-      progressClassName={styles.progress}
     />
   );
 };
