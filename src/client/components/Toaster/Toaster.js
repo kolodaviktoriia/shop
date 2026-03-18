@@ -26,8 +26,8 @@ const Toaster = () => {
   return (
     <ToastContainer
       position="top-right"
-      autoClose={4000}
-      hideProgressBar={false}
+      autoClose={1000}
+      hideProgressBar={true}
       closeOnClick
       pauseOnHover
       newestOnTop

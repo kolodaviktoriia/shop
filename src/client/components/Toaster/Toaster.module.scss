@@ -1,5 +1,9 @@
 .toastContainer {
   font-family: $text-font-public-sans;
+
+  svg {
+    fill: $accent-pink;
+  }
 }
 
 .toast {
@@ -9,24 +13,9 @@
   font-weight: 400;
   letter-spacing: 0.16em;
   color: $text-color;
+  font-family: $text-font-public-sans;
 }
 
 .body {
   color: $white-pink;
-}
-
-.Toastify__toast--success {
-  background-color: $dark-pink;
-}
-
-.Toastify__toast--error {
-  background-color: $accent-pink;
-}
-
-.Toastify__toast--info {
-  background-color: $primary-pink;
-}
-
-.progress {
-  background: $grey;
 }
