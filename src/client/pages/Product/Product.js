@@ -19,6 +19,7 @@ import WidthWrapper from '../../components/WidthWrapper/WidthWrapper.js';
 import Button from '../../components/Button/Button.js';
 import Spinner from '../../components/Spinner/Spinner.js';
 import SEO, { productSchema } from '../../components/SEO.js';
+import BackButton from '../../components/BackButton/BackButton.js';
 
 import * as styles from './Product.module.scss';
 
@@ -112,6 +113,9 @@ const Product = () => {
           price: price / 100,
         })}
       />
+      <WidthWrapper className={styles.backBtnWrapper}>
+        <BackButton />
+      </WidthWrapper>
       {loading && !product ? (
         <WidthWrapper className={styles.skeletonWrapper}>
           <Spinner />
