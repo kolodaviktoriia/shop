@@ -6,6 +6,7 @@ import Footer from './components/Footer/Footer.js';
 import Spinner from './components/Spinner/Spinner.js';
 import Toaster from './components/Toaster/Toaster.js';
 import ErrorBoundary from './components/ErrorBoundary.js';
+import ScrollToTopButton from './components/ScrollToTopButton/ScrollToTopButton.js';
 import { fetchCurrentUser } from './slices/userSlice.js';
 import * as styles from './App.module.scss';
 
@@ -36,6 +37,7 @@ const App = () => {
           <Outlet />
         </ErrorBoundary>
       </div>
+      <ScrollToTopButton />
       <Footer />
     </div>
   );

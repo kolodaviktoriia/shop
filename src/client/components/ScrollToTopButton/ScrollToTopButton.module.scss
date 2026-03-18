@@ -1,0 +1,15 @@
+.scrollToTopButton {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 1000;
+  width: 4rem;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba($color: $accent-pink, $alpha: 0.4);
+  border: none;
+  border-radius: 50%;
+  transition: opacity 0.3s ease;
+}

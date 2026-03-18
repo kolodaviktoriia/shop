@@ -1,6 +1,6 @@
 import React from 'react';
-import * as styles from './SectionHeader.module.scss';
 import WidthWrapper from '../WidthWrapper/WidthWrapper.js';
+import * as styles from './SectionHeader.module.scss';
 
 const SectionHeader = ({ name, imageUrl, description, extra, className }) => {
   return (
