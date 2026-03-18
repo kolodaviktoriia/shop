@@ -7,8 +7,9 @@ import Spinner from '../../components/Spinner/Spinner.js';
 import SectionHeader from '../../components/SectionHeader/SectionHeader.js';
 import SEO from '../../components/SEO.js';
 import PageWrapper from '../../components/PageWrapper/PageWrapper.js';
-import { fetchProducts } from '../../slices/productsSlice.js';
+import { clearProducts, fetchProducts } from '../../slices/productsSlice.js';
 import { usePagination } from '../../hooks/pagination.js';
+
 const allCategory = {
   name: 'Goodies for Your Glow',
   description:
@@ -17,9 +18,20 @@ const allCategory = {
     'https://ikaoenxuuphxuvaiwzex.supabase.co/storage/v1/object/public/images/lipstick.png',
 };
 
+export const loadProductsByCategoryData = async (store, params) => {
+  const state = store.getState();
+  let { categories } = state.products;
+  const id = params.id;
+  const category = categories?.find((cat) => cat.name === id) ?? allCategory;
+  const page = Number(params.page || 1);
+  await store.dispatch(
+    fetchProducts({ category: category?.id, page, limit: 12 })
+  );
+};
+
 const Products = () => {
   const { id } = useParams();
-  const { products, categories, loading, totalPages } = useSelector(
+  const { products, categories, loading, totalPages, filter } = useSelector(
     (state) => state.products
   );
   const page = usePagination(totalPages);
@@ -29,8 +41,23 @@ const Products = () => {
   const category = categories.find((cat) => cat.name === id) ?? allCategory;
 
   useEffect(() => {
-    dispatch(fetchProducts({ category: category.id, page, limit: 12 }));
-  }, [id, page, dispatch, category.id]);
+    if (
+      !(
+        filter &&
+        filter.category === category?.id &&
+        filter.page === page &&
+        filter.limit === 12
+      )
+    ) {
+      dispatch(fetchProducts({ category: category?.id, page, limit: 12 }));
+    }
+  }, [id, page, dispatch, category?.id, filter]);
+
+  useEffect(() => {
+    return () => {
+      dispatch(clearProducts());
+    };
+  }, [id, dispatch]);
 
   return (
     <PageWrapper>

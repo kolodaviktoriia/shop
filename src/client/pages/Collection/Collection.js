@@ -7,14 +7,25 @@ import SectionHeader from '../../components/SectionHeader/SectionHeader.js';
 import Spinner from '../../components/Spinner/Spinner.js';
 import SEO from '../../components/SEO.js';
 import PageWrapper from '../../components/PageWrapper/PageWrapper.js';
-import { fetchProducts } from '../../slices/productsSlice.js';
-
+import { clearProducts, fetchProducts } from '../../slices/productsSlice.js';
 import { usePagination } from '../../hooks/pagination.js';
 import * as styles from './Collection.module.scss';
 
+export const loadProductsByCollectionData = async (store, params) => {
+  const state = store.getState();
+  let { collections } = state.products;
+  const id = params.id;
+
+  const collection = collections?.find((col) => col.name === id);
+  const page = Number(params.page || 1);
+  await store.dispatch(
+    fetchProducts({ collection: collection?.id, page, limit: 12 })
+  );
+};
+
 const Collection = () => {
   const { id } = useParams();
-  const { products, collections, loading, totalPages } = useSelector(
+  const { products, collections, loading, totalPages, filter } = useSelector(
     (state) => state.products
   );
 
@@ -25,8 +36,23 @@ const Collection = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchProducts({ collection: collection.id, page, limit: 12 }));
-  }, [id, dispatch, page, collection?.id]);
+    if (
+      !(
+        filter &&
+        filter.collection === collection.id &&
+        filter.page === page &&
+        filter.limit === 12
+      )
+    ) {
+      dispatch(fetchProducts({ collection: collection.id, page, limit: 12 }));
+    }
+  }, [id, dispatch, page, collection?.id, filter]);
+
+  useEffect(() => {
+    return () => {
+      dispatch(clearProducts());
+    };
+  }, [id, dispatch]);
 
   return (
     <PageWrapper>

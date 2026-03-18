@@ -16,6 +16,7 @@ const productsSlice = createSlice({
     product: undefined,
     categories: [],
     products: [],
+    filter: undefined,
     collections: [],
     loading: false,
     error: null,
@@ -28,13 +29,15 @@ const productsSlice = createSlice({
       state.categories = action.payload;
     },
     setProducts(state, action) {
-      state.products = action.payload;
+      state.products = action.payload.products;
+      state.filter = action.payload.filter;
     },
     setProduct(state, action) {
       state.product = action.payload;
     },
     clearProducts(state) {
       state.products = [];
+      state.filter = undefined;
       state.totalPages = 1;
       state.total = 0;
     },
@@ -130,7 +133,7 @@ export const fetchProducts = (filter) => async (dispatch) => {
   try {
     const data = await getProductsApi(filter);
 
-    dispatch(setProducts(data.products));
+    dispatch(setProducts({ products: data.products, filter }));
 
     dispatch(
       setPagination({

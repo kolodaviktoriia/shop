@@ -8,8 +8,12 @@ import {
   fetchProduct,
 } from '../slices/productsSlice.js';
 import { fetchCurrentUser } from '../slices/userSlice.js';
-import Products from '../pages/Products/Products.js';
-import Collection from '../pages/Collection/Collection.js';
+import Products, {
+  loadProductsByCategoryData,
+} from '../pages/Products/Products.js';
+import Collection, {
+  loadProductsByCollectionData,
+} from '../pages/Collection/Collection.js';
 import Search from '../pages/Search/Search.js';
 import Cart from '../pages/Cart/Cart.js';
 import Login from '../pages/Login/Login.js';
@@ -56,10 +60,12 @@ export const routes = [
       {
         element: <Products />,
         path: '/products/:id',
+        loadData: loadProductsByCategoryData,
       },
       {
         element: <Collection />,
         path: '/collection/:id',
+        loadData: loadProductsByCollectionData,
       },
       {
         element: <Search />,

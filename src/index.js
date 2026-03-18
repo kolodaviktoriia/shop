@@ -20,27 +20,27 @@ app.use(express.static('public'));
 
 app.use('/api', apiRoutes);
 
-app.get('*', (req, res) => {
+app.get('*', async (req, res) => {
   const store = createStore();
 
   setServerCookies(req.headers.cookie || '');
 
   const matches = matchRoutes(routes, req.path) || [];
 
-  const promises = matches.map(({ route, params }) => {
-    return route.loadData
-      ? route.loadData(store, params).catch(() => null)
-      : null;
-  });
+  for (const { route, params } of matches) {
+    if (route.loadData) {
+      try {
+        await route.loadData(store, params);
+      } catch (err) {
+        console.error('SSR loadData error:', err);
+      }
+    }
+  }
 
-  Promise.all(promises)
-    .then(() => {
-      const content = renderer(req, store);
-      res.send(content);
-    })
-    .finally(() => {
-      clearServerCookies();
-    });
+  const content = renderer(req, store);
+  res.send(content);
+
+  clearServerCookies();
 });
 
 app.listen(3000, () => {

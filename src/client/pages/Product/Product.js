@@ -35,9 +35,14 @@ const Product = () => {
   const { user } = useSelector((state) => state.user);
 
   useEffect(() => {
-    dispatch(fetchProduct(id));
+    if (!product || product.id !== id) {
+      dispatch(fetchProduct(id));
+    }
+  }, [id, product, dispatch]);
+
+  useEffect(() => {
     return () => dispatch(clearProduct());
-  }, [id, dispatch]);
+  }, [dispatch]);
 
   useEffect(() => {
     const fetchReviews = async () => {
@@ -107,13 +112,13 @@ const Product = () => {
           price: price / 100,
         })}
       />
-      {loading || !product ? (
+      {loading && !product ? (
         <WidthWrapper className={styles.skeletonWrapper}>
           <Spinner />
         </WidthWrapper>
       ) : (
         <WidthWrapper className={styles.wrapper}>
-          <img src={imageUrl} alt={`${title} product image`} loading="lazy" />
+          <img src={imageUrl} alt={`${title} product image`} />
 
           <div className={styles.infoWrapper}>
             <div className={styles.tags}>
@@ -135,8 +140,8 @@ const Product = () => {
               handlePlus={() => setQuantity((prev) => prev + 1)}
             />
             <Button onClick={handleAddToBag}>Add to Bag</Button>
-            {user &&
-              (favoriteId ? (
+            {user ? (
+              favoriteId ? (
                 <Button secondary onClick={handleRemoveFromFavorite}>
                   Remove from Favorite
                 </Button>
@@ -144,7 +149,10 @@ const Product = () => {
                 <Button secondary onClick={handleAddToFavorite}>
                   Add to Favorite
                 </Button>
-              ))}
+              )
+            ) : (
+              <div className={styles.placeholder} />
+            )}
           </div>
           {loadingReviews ? (
             <Spinner />
@@ -163,8 +171,8 @@ const Product = () => {
                 setPage={setPage}
               >
                 <div className={styles.reviews}>
-                  {reviews.map(({ rating, comment, createdAt }) => (
-                    <div className={styles.review}>
+                  {reviews.map(({ rating, comment, createdAt, id }) => (
+                    <div className={styles.review} key={id}>
                       <div className={styles.header}>
                         <div className={styles.rating}>
                           <RatingStars rating={rating} />
