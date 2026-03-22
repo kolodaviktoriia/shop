@@ -5,10 +5,11 @@ let cookieStore = null;
 const isBrowser = typeof window !== 'undefined';
 
 export const api = axios.create({
-  baseURL: isBrowser ? '' : process.env.BASE_URL || 'http://localhost:3000',
+  baseURL: isBrowser
+    ? '/api'
+    : (process.env.BASE_URL || 'http://localhost:3000') + '/api',
   withCredentials: true,
 });
-
 api.interceptors.request.use((config) => {
   if (!isBrowser && cookieStore) {
     config.headers.cookie = cookieStore;

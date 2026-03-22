@@ -1,15 +1,15 @@
 import { getData, postData } from './axiosConfig.js';
 
-export const getCurrentUserApi = () => getData('/api/user');
+export const getCurrentUserApi = () => getData('/user');
 
-export const logoutApi = () => postData('/api/logout');
+export const logoutApi = () => postData('/logout');
 
 export const loginApi = (email, password) =>
-  postData('/api/login', { email, password });
+  postData('/login', { email, password });
 
-export const signupApi = (userData) => postData('/api/signup', { ...userData });
+export const signupApi = (userData) => postData('/signup', { ...userData });
 
-export const updateProfileApi = (profile) => postData('/api/profile', profile);
-export const updateAddressApi = (address) => postData('/api/address', address);
+export const updateProfileApi = (profile) => postData('/profile', profile);
+export const updateAddressApi = (address) => postData('/address', address);
 export const updateBillingAddressApi = (address) =>
-  postData('/api/billingAddress', address);
+  postData('/billingAddress', address);

@@ -1,12 +1,12 @@
 import { getData, postData } from './axiosConfig.js';
 
 export const getOrdersApi = (filter) =>
-  getData('/api/orders', { params: filter });
+  getData('/orders', { params: filter });
 
-export const getOrderApi = (id) => getData(`/api/orders/${id}`);
+export const getOrderApi = (id) => getData(`/orders/${id}`);
 
 export const createOrderApi = (order, orderId) =>
-  postData('/api/orders', { order, orderId });
+  postData('/orders', { order, orderId });
 
 export const captureOrderApi = (orderId) =>
-  postData(`/api/orders/${orderId}/capture`);
+  postData(`/orders/${orderId}/capture`);
