@@ -66,7 +66,7 @@ const Product = () => {
   }, [id, page]);
 
   const {
-    imageUrl = 'https://ikaoenxuuphxuvaiwzex.supabase.co/storage/v1/object/public/images/placeholder.png',
+    imageProductUrl = 'https://ikaoenxuuphxuvaiwzex.supabase.co/storage/v1/object/public/images/placeholder.png',
     price = 0,
     description = 'No description available',
     title = 'Product',
@@ -107,11 +107,11 @@ const Product = () => {
         type="product"
         title={title}
         description={description}
-        image={imageUrl}
+        image={imageProductUrl}
         schema={productSchema({
           title,
           description,
-          image: imageUrl,
+          image: imageProductUrl,
           price: price / 100,
         })}
       />
@@ -124,7 +124,7 @@ const Product = () => {
         </WidthWrapper>
       ) : (
         <WidthWrapper className={styles.wrapper}>
-          <img src={imageUrl} alt={`${title} product image`} />
+          <img src={imageProductUrl} alt={`${title} product image`} />
 
           <div className={styles.infoWrapper}>
             <div className={styles.tags}>

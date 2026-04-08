@@ -1,3 +1,4 @@
+import { mapProductImages } from '../helpers/mapProductImages.js';
 import { supabase } from './supabaseClient.js';
 
 export const getProductsApi = async (filter = {}) => {
@@ -34,7 +35,7 @@ export const getProductsApi = async (filter = {}) => {
     };
 
   return {
-    products: data,
+    products: (data || []).map(mapProductImages),
     page: Number(page),
     total: count,
     totalPages: Math.ceil(count / limit),
@@ -64,7 +65,7 @@ export const getProductApi = async (id) => {
       : 5;
 
   return {
-    ...product,
+    ...mapProductImages(product),
     reviewCount,
     averageRating,
   };
